@@ -1,0 +1,20 @@
+{
+    "root": true,
+    "extends": [
+        "next/core-web-vitals",
+        "eslint-config-next",
+        "plugin:react-hooks/recommended"
+    ],
+    "plugins": ["prettier", "react-hooks"],
+    "rules": {
+        "prettier/prettier": "error",
+        "react-hooks/rules-of-hooks": "warn",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/no-array-index-key": "error"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}

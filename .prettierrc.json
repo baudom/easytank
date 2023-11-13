@@ -1,0 +1,10 @@
+{
+    "plugins": ["eslint-config-mantine"],
+    "trailingComma": "all",
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": false,
+    "jsxSingleQuote": false,
+    "endOfLine": "auto",
+    "singleAttributePerLine": true
+}

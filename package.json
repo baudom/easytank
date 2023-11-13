@@ -1,0 +1,40 @@
+{
+    "name": "easytank",
+    "version": "0.1.0",
+    "private": true,
+    "author": {
+        "name": "baudom",
+        "url": "https://github.com/baudom"
+    },
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "prettify": "prettier --write ."
+    },
+    "dependencies": {
+        "@mantine/core": "^7.2.1",
+        "@mantine/hooks": "^7.2.1",
+        "next": "14.0.2",
+        "react": "^18",
+        "react-dom": "^18"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "autoprefixer": "^10.0.1",
+        "eslint": "^8",
+        "eslint-config-mantine": "^3.0.0",
+        "eslint-config-next": "14.0.2",
+        "eslint-plugin-prettier": "^5.0.1",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "postcss": "^8.4.31",
+        "postcss-preset-mantine": "^1.9.1",
+        "postcss-simple-vars": "^7.0.1",
+        "prettier": "^3.1.0",
+        "tailwindcss": "^3.3.0",
+        "typescript": "^5"
+    }
+}
