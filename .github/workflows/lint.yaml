@@ -19,6 +19,6 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Install Dependencies
-        run: yarn
+        run: yarn install --production=false
       - name: Code Linting
         run: yarn lint
