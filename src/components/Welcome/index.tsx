@@ -6,8 +6,7 @@ const Welcome: FC = () => {
         <>
             <Title
                 className={""}
-                ta="center"
-                mt={100}
+                ta={"center"}
             >
                 Welcome to{" "}
                 <Text

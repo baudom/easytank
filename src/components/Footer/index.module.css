@@ -1,0 +1,21 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: var(--mantine-spacing-xl);
+    border-top: rem(1px) solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+
+    @media (max-width: $ mantine-breakpoint-xs) {
+        flex-direction: column;
+    }
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    @media (max-width: $ mantine-breakpoint-xs) {
+        margin-top: var(--mantine-spacing-md);
+    }
+}

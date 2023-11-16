@@ -1,15 +1,16 @@
 import Welcome from "@/components/Welcome";
 import ColorSchemeToggle from "@/components/ColorSchemeToggle";
 import { FC } from "react";
-import { Container } from "@mantine/core";
+import Footer from "@/components/Footer";
 
-const Home: FC = () => {
+const Page: FC = () => {
     return (
-        <Container>
+        <>
             <Welcome />
             <ColorSchemeToggle />
-        </Container>
+            <Footer />
+        </>
     );
 };
 
-export default Home;
+export default Page;
