@@ -1,7 +1,6 @@
 "use client";
 
-import { FC, memo, useEffect, useState } from "react";
-import { useDebouncedState } from "@mantine/hooks";
+import { FC, memo, useCallback, useEffect, useRef, useState } from "react";
 import {
     ActionIcon,
     Autocomplete,
@@ -19,37 +18,40 @@ type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;
 const LocationSearch: FC = () => {
     const theme = useMantineTheme();
     const [coords, setCoords] = useState<Coords | undefined>(undefined);
-    const [input, setInput] = useDebouncedState("", 500);
+
+    const inputRef = useRef<HTMLInputElement>(null);
+    const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
+
     const [locations, setLocations] = useState<ComboboxData>();
 
     useEffect(() => {
         console.log("COORDS CHANGED TO ", JSON.stringify(coords));
     }, [coords]);
 
-    useEffect(() => {
+    const onSearchLocations = useCallback(async () => {
         if (!input || !input.trim()) return;
 
         const params = new URLSearchParams({ [PARAM_SEARCH]: input });
         setLoading(true);
+
         try {
-            fetch(`/api/location?${params}`, {})
-                .then((res) => res.json() as Promise<Location[]>)
-                .then((res) => {
-                    if (!res || !res.length) {
-                        setLocations([]);
-                    } else {
-                        setLocations(
-                            res.map((e) => ({
-                                value: JSON.stringify({
-                                    lat: e.lat,
-                                    lon: e.lon,
-                                }),
-                                label: e.display_name,
-                            })),
-                        );
-                    }
-                });
+            inputRef.current?.focus();
+            const response = await fetch(`/api/location?${params}`, {});
+            const res: Location[] = await response.json();
+            if (!res || !res.length) {
+                setLocations([]);
+            } else {
+                setLocations(
+                    res.map((e) => ({
+                        value: JSON.stringify({
+                            lat: e.lat,
+                            lon: e.lon,
+                        }),
+                        label: e.display_name,
+                    })),
+                );
+            }
         } catch (e) {
             console.error(e);
         } finally {
@@ -59,6 +61,7 @@ const LocationSearch: FC = () => {
 
     return (
         <Autocomplete
+            ref={inputRef}
             radius="xl"
             size="md"
             placeholder="PLZ oder Ort"
@@ -76,6 +79,7 @@ const LocationSearch: FC = () => {
                     radius="xl"
                     color={theme.primaryColor}
                     variant="filled"
+                    onClick={onSearchLocations}
                 >
                     <IconSearch
                         style={{ width: rem(18), height: rem(18) }}
@@ -91,6 +95,10 @@ const LocationSearch: FC = () => {
                     latitude: Number(location.lat),
                     longitude: Number(location.lon),
                 });
+            }}
+            onKeyDownCapture={(ev) => {
+                if (ev.key !== "Enter") return;
+                return onSearchLocations();
             }}
         />
     );
