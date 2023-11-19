@@ -1,6 +1,10 @@
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { FC, ReactNode } from "react";
+import { Notifications } from "@mantine/notifications";
+import Footer from "@/components/Footer";
+import { theme } from "@/theme";
 
 export const metadata = {
     title: "My Mantine App",
@@ -17,7 +21,14 @@ const Layout: FC<Props> = ({ children }) => {
                 <ColorSchemeScript />
             </head>
             <body>
-                <MantineProvider>{children}</MantineProvider>
+                <MantineProvider theme={theme}>
+                    <Notifications
+                        position="top-right"
+                        autoClose={4000}
+                    />
+                    {children}
+                    <Footer />
+                </MantineProvider>
             </body>
         </html>
     );
