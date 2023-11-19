@@ -1,10 +1,13 @@
+"use client";
+
 import { Text, Title } from "@mantine/core";
 import { FC } from "react";
 import LocationSearch from "@/components/LocationSerach";
+import StationsContext from "@/context/StationsContext";
 
 const Welcome: FC = () => {
     return (
-        <>
+        <StationsContext>
             <Title ta={"center"}>
                 <Text
                     inherit
@@ -16,7 +19,7 @@ const Welcome: FC = () => {
                 </Text>
                 <LocationSearch />
             </Title>
-        </>
+        </StationsContext>
     );
 };
 

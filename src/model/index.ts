@@ -33,3 +33,5 @@ export type Location = {
     name: string;
     display_name: string;
 };
+
+export type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;
