@@ -8,6 +8,8 @@ export const createGoogleMapsLink = ({ lat, lng }: Station) => {
 
 export const getStationThumb = ({ brand }: Station) => {
     // TODO: copyright?
+    return null;
+
     switch (brand) {
         case "AVIA":
         case "AVIA XPress":
