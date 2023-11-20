@@ -89,6 +89,7 @@ const LocationSearch: FC = () => {
             }
             onChange={setInput}
             data={locations}
+            selectFirstOptionOnChange
             onOptionSubmit={(value) => {
                 const location = JSON.parse(value) as Location;
                 setCoords({
