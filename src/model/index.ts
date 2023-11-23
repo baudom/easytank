@@ -7,12 +7,25 @@ export type StationsResponse = {
     stations: Station[];
 };
 
-type PriceType = boolean | number;
+export type PriceType = boolean | number;
+
+export type StationBrand =
+    | string
+    | "OMV"
+    | "AVIA XPress"
+    | "AVIA"
+    | "ESSO"
+    | "RAN"
+    | "JET"
+    | "ARAL"
+    | "BayWa"
+    | "Shell"
+    | "TotalEnergies";
 
 export type Station = {
     id: string;
     name: string;
-    brand: string;
+    brand: StationBrand;
     street: string;
     place: string;
     houseNumber: string;
@@ -21,6 +34,7 @@ export type Station = {
     lng: number;
     dist: number;
     diesel: PriceType;
+    price?: number;
     e5: PriceType;
     e10: PriceType;
     isOpen: boolean;
@@ -33,3 +47,5 @@ export type Location = {
     name: string;
     display_name: string;
 };
+
+export type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;

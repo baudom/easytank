@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, memo, useCallback, useEffect, useRef, useState } from "react";
+import { FC, memo, useCallback, useMemo, useRef, useState } from "react";
 import {
     ActionIcon,
     Autocomplete,
@@ -12,12 +12,11 @@ import { IconSearch } from "@tabler/icons-react";
 import UserLocation from "@/components/LocationSerach/UserLocation";
 import { PARAM_SEARCH } from "@/model/nominatim";
 import { Location } from "@/model";
-
-type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;
+import { useStationsContext } from "@/context/StationsContext";
 
 const LocationSearch: FC = () => {
-    const theme = useMantineTheme();
-    const [coords, setCoords] = useState<Coords | undefined>(undefined);
+    const { primaryColor } = useMantineTheme();
+    const { setCoords } = useStationsContext();
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [input, setInput] = useState("");
@@ -25,9 +24,16 @@ const LocationSearch: FC = () => {
 
     const [locations, setLocations] = useState<ComboboxData>();
 
-    useEffect(() => {
-        console.log("COORDS CHANGED TO ", JSON.stringify(coords));
-    }, [coords]);
+    const userLocation = useMemo(
+        () => (
+            <UserLocation
+                onLocationFound={({ latitude, longitude }) =>
+                    setCoords({ latitude, longitude })
+                }
+            />
+        ),
+        [setCoords],
+    );
 
     const onSearchLocations = useCallback(async () => {
         if (!input || !input.trim()) return;
@@ -61,23 +67,18 @@ const LocationSearch: FC = () => {
 
     return (
         <Autocomplete
+            autoFocus
             ref={inputRef}
             radius="xl"
             size="md"
             placeholder="PLZ oder Ort"
-            leftSection={
-                <UserLocation
-                    onLocationFound={({ latitude, longitude }) =>
-                        setCoords({ latitude, longitude })
-                    }
-                />
-            }
+            leftSection={userLocation}
             rightSection={
                 <ActionIcon
                     loading={loading}
                     size={32}
                     radius="xl"
-                    color={theme.primaryColor}
+                    color={primaryColor}
                     variant="filled"
                     onClick={onSearchLocations}
                 >
@@ -89,6 +90,7 @@ const LocationSearch: FC = () => {
             }
             onChange={setInput}
             data={locations}
+            selectFirstOptionOnChange
             onOptionSubmit={(value) => {
                 const location = JSON.parse(value) as Location;
                 setCoords({

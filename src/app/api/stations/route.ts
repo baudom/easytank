@@ -59,9 +59,21 @@ export async function GET(request: NextRequest) {
             throw new Error(results.message);
         }
 
-        return createSuccessResponse(results);
+        return createSuccessResponse(postPrepareStations(fuelType, results));
     } catch (e: any) {
         console.error(e?.message || JSON.stringify(e));
         return createErrorResponse("A error occurred.");
     }
 }
+
+const postPrepareStations = (fuelType: FuelType, res: StationsResponse) => {
+    if (fuelType === "all") return res;
+
+    return {
+        ...res,
+        stations: res.stations.map((s) => ({
+            ...s,
+            [fuelType]: s.price,
+        })),
+    };
+};

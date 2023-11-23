@@ -5,7 +5,10 @@ import { Container } from "@mantine/core";
 
 const Page: FC = () => {
     return (
-        <Container pt={25}>
+        <Container
+            pt="xl"
+            size="lg"
+        >
             <Welcome />
             <ColorSchemeToggle />
         </Container>
