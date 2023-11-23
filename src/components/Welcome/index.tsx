@@ -1,6 +1,6 @@
 "use client";
 
-import { Text, Title } from "@mantine/core";
+import { Space, Text, Title } from "@mantine/core";
 import { FC } from "react";
 import LocationSearch from "@/components/LocationSerach";
 import StationsContext from "@/context/StationsContext";
@@ -18,7 +18,9 @@ const Welcome: FC = () => {
                 >
                     {process.env.NEXT_PUBLIC_NAME}
                 </Text>
+                <Space h="md" />
                 <LocationSearch />
+                <Space h="md" />
                 <StationsList />
             </Title>
         </StationsContext>

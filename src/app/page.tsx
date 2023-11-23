@@ -6,7 +6,7 @@ import { Container } from "@mantine/core";
 const Page: FC = () => {
     return (
         <Container
-            pt={25}
+            pt="xl"
             size="lg"
         >
             <Welcome />

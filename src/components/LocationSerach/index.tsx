@@ -67,6 +67,7 @@ const LocationSearch: FC = () => {
 
     return (
         <Autocomplete
+            autoFocus
             ref={inputRef}
             radius="xl"
             size="md"
