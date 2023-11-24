@@ -104,7 +104,7 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                 >
                     <Group>
                         <ActionIcon
-                            size={32}
+                            size="md"
                             color={primaryColor}
                             variant="transparent"
                         >

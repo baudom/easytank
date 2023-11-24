@@ -76,7 +76,7 @@ const LocationSearch: FC = () => {
             rightSection={
                 <ActionIcon
                     loading={loading}
-                    size={32}
+                    size="md"
                     radius="xl"
                     color={primaryColor}
                     variant="filled"
