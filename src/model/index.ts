@@ -1,3 +1,5 @@
+import { FuelType, RadiusType } from "@/model/tankerkoenig";
+
 export type StationsResponse = {
     ok: boolean;
     license: string;
@@ -33,10 +35,10 @@ export type Station = {
     lat: number;
     lng: number;
     dist: number;
-    diesel: PriceType;
+    diesel?: PriceType;
     price?: number;
-    e5: PriceType;
-    e10: PriceType;
+    e5?: PriceType;
+    e10?: PriceType;
     isOpen: boolean;
 };
 
@@ -49,3 +51,8 @@ export type Location = {
 };
 
 export type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;
+
+export type StationConfiguration = {
+    radius: RadiusType;
+    type: FuelType;
+};

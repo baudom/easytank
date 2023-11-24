@@ -9,6 +9,8 @@ import {
     PARAM_LONGITUDE,
     PARAM_RADIUS,
     PARAM_SORT,
+    RadiusType,
+    radiusTypes,
 } from "@/model/tankerkoenig";
 import {
     createErrorResponse,
@@ -22,12 +24,20 @@ export async function GET(request: NextRequest) {
 
     const latitude = params.get(PARAM_LATITUDE);
     const longitude = params.get(PARAM_LONGITUDE);
-    const radius = params.get(PARAM_RADIUS) || "10";
-    const fuelType = (params.get(PARAM_FUEL_TYPE) as FuelType) || "all";
+    const radius =
+        (Number.parseInt(params.get(PARAM_RADIUS) || "") as RadiusType) || 10;
+    const fuelType = (params.get(PARAM_FUEL_TYPE) as FuelType | null) || "all";
 
     if (!fuelTypes.includes(fuelType)) {
         return createErrorResponse(
             `Invalid value for parameter='${PARAM_FUEL_TYPE}'.`,
+            StatusCode.BadRequest,
+        );
+    }
+
+    if (!radiusTypes.includes(radius)) {
+        return createErrorResponse(
+            `Invalid value for parameter='${PARAM_RADIUS}'.`,
             StatusCode.BadRequest,
         );
     }
@@ -42,7 +52,7 @@ export async function GET(request: NextRequest) {
     const url = new URL(BASE_URL);
     url.searchParams.append(PARAM_LATITUDE, latitude);
     url.searchParams.append(PARAM_LONGITUDE, longitude);
-    url.searchParams.append(PARAM_RADIUS, radius);
+    url.searchParams.append(PARAM_RADIUS, `${radius}`);
     url.searchParams.append(PARAM_FUEL_TYPE, fuelType);
     url.searchParams.append(PARAM_SORT, "dist");
     url.searchParams.append(PARAM_API_KEY, process.env.TANKERKOENIG_API_KEY);

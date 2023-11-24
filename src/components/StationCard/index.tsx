@@ -1,4 +1,4 @@
-import { FC, Fragment, memo } from "react";
+import { FC, Fragment, memo, useMemo } from "react";
 import { Station } from "@/model";
 import {
     ActionIcon,
@@ -16,6 +16,7 @@ import { createGoogleMapsLink, getStationThumb } from "@/helper/station";
 import classes from "./index.module.css";
 import PriceSection from "@/components/StationCard/PriceSection";
 import { IconMapSearch } from "@tabler/icons-react";
+import { mapFuelTypeToString } from "@/helper/mappings";
 
 type StationCardProps = {
     station: Station;
@@ -24,11 +25,15 @@ type StationCardProps = {
 const StationCard: FC<StationCardProps> = ({ station }) => {
     const { primaryColor } = useMantineTheme();
 
-    const priceList = [
-        { label: "Diesel", value: station.diesel },
-        { label: "Benzin", value: station.e5 },
-        { label: "Benzin E10", value: station.e10 },
-    ];
+    const priceList = useMemo(
+        () =>
+            [
+                { label: mapFuelTypeToString("diesel"), value: station.diesel },
+                { label: mapFuelTypeToString("e5"), value: station.e5 },
+                { label: mapFuelTypeToString("e10"), value: station.e10 },
+            ].filter((e) => e.value !== undefined),
+        [station.diesel, station.e10, station.e5],
+    );
 
     return (
         <Card
@@ -82,7 +87,7 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                         <Fragment key={e.label}>
                             <PriceSection
                                 label={e.label}
-                                value={e.value}
+                                value={e.value!} // value is either boolean or number here
                             />
                             {i !== self.length - 1 ? (
                                 <Divider orientation="vertical" />
