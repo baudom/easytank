@@ -5,6 +5,7 @@ import { FC } from "react";
 import LocationSearch from "@/components/LocationSerach";
 import StationsContext from "@/context/StationsContext";
 import StationsList from "@/components/StationsList";
+import StationFilter from "@/components/StationFilter";
 
 const Welcome: FC = () => {
     return (
@@ -20,6 +21,8 @@ const Welcome: FC = () => {
                 </Text>
                 <Space h="md" />
                 <LocationSearch />
+                <Space h="md" />
+                <StationFilter />
                 <Space h="md" />
                 <StationsList />
             </Title>

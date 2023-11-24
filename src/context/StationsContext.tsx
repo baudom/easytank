@@ -7,18 +7,35 @@ import {
     useEffect,
     useState,
 } from "react";
-import { Coords, Station, StationsResponse } from "@/model";
-import { PARAM_LATITUDE, PARAM_LONGITUDE } from "@/model/tankerkoenig";
+import {
+    Coords,
+    Station,
+    StationConfiguration,
+    StationsResponse,
+} from "@/model";
+import {
+    PARAM_FUEL_TYPE,
+    PARAM_LATITUDE,
+    PARAM_LONGITUDE,
+    PARAM_RADIUS,
+} from "@/model/tankerkoenig";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { IconCheck, IconCurrentLocationOff } from "@tabler/icons-react";
 import { rem } from "@mantine/core";
 
+const DEFAULT_STATION_CONFIG: StationConfiguration = {
+    radius: 10,
+    type: "all",
+};
+
 type ContextType = {
     loading: boolean;
     coords?: Coords;
     stations: Station[];
+    stationConfig: StationConfiguration;
     setCoords: (coords: Coords) => void;
+    setStationConfig: (config: Partial<StationConfiguration>) => void;
 };
 
 type StationsContextProps = {
@@ -29,7 +46,9 @@ const Context = createContext<ContextType>({
     loading: false,
     coords: undefined,
     stations: [],
+    stationConfig: DEFAULT_STATION_CONFIG,
     setCoords: () => {},
+    setStationConfig: (config: Partial<StationConfiguration>) => {},
 });
 
 const iconStyle = { width: rem(18), height: rem(18) };
@@ -37,16 +56,18 @@ const iconStyle = { width: rem(18), height: rem(18) };
 const StationsContext: FC<StationsContextProps> = ({ children }) => {
     const [coords, setCoords] = useState<Coords | undefined>(undefined);
     const [stations, setStations] = useState<Station[]>([]);
+    const [stationConfig, setStationConfig] = useState<StationConfiguration>(
+        DEFAULT_STATION_CONFIG,
+    );
     const [loading, { open, close }] = useDisclosure(false);
 
-    const handleFetch = useCallback(
-        async (coords: Coords) => {
+    const onFetchStations = useCallback(
+        async (coords: Coords, config: StationConfiguration) => {
             const params = new URLSearchParams();
             params.append(PARAM_LATITUDE, `${coords.latitude}`);
             params.append(PARAM_LONGITUDE, `${coords.longitude}`);
-            // TODO: Append other params
-            // params.append(PARAM_RADIUS, "");
-            // params.append(PARAM_FUEL_TYPE, "");
+            params.append(PARAM_RADIUS, `${config.radius}`);
+            params.append(PARAM_FUEL_TYPE, config.type);
 
             open();
             const notificationId = notifications.show({
@@ -91,13 +112,29 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
         [close, open],
     );
 
+    const setStationConfigOverwrite = useCallback(
+        (config: Partial<StationConfiguration>) => {
+            setStationConfig((prev) => ({ ...prev, ...config }));
+        },
+        [],
+    );
+
     useEffect(() => {
         if (!coords) return;
-        handleFetch(coords);
-    }, [coords, handleFetch]);
+        onFetchStations(coords, stationConfig);
+    }, [coords, onFetchStations, stationConfig]);
 
     return (
-        <Context.Provider value={{ loading, coords, stations, setCoords }}>
+        <Context.Provider
+            value={{
+                loading,
+                coords,
+                stations,
+                stationConfig,
+                setStationConfig: setStationConfigOverwrite,
+                setCoords,
+            }}
+        >
             {children}
         </Context.Provider>
     );
