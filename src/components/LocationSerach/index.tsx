@@ -5,6 +5,7 @@ import {
     ActionIcon,
     Autocomplete,
     ComboboxData,
+    Group,
     rem,
     useMantineTheme,
 } from "@mantine/core";
@@ -13,6 +14,7 @@ import UserLocation from "@/components/LocationSerach/UserLocation";
 import { PARAM_SEARCH } from "@/model/nominatim";
 import { Location } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
+import CarConfiguration from "@/components/CarConfiguration";
 
 const LocationSearch: FC = () => {
     const { primaryColor } = useMantineTheme();
@@ -66,43 +68,47 @@ const LocationSearch: FC = () => {
     }, [input]);
 
     return (
-        <Autocomplete
-            autoFocus
-            ref={inputRef}
-            radius="xl"
-            size="md"
-            placeholder="PLZ oder Ort"
-            leftSection={userLocation}
-            rightSection={
-                <ActionIcon
-                    loading={loading}
-                    size="md"
-                    radius="xl"
-                    color={primaryColor}
-                    variant="filled"
-                    onClick={onSearchLocations}
-                >
-                    <IconSearch
-                        style={{ width: rem(18), height: rem(18) }}
-                        stroke={1.5}
-                    />
-                </ActionIcon>
-            }
-            onChange={setInput}
-            data={locations}
-            selectFirstOptionOnChange
-            onOptionSubmit={(value) => {
-                const location = JSON.parse(value) as Location;
-                setCoords({
-                    latitude: Number(location.lat),
-                    longitude: Number(location.lon),
-                });
-            }}
-            onKeyDownCapture={(ev) => {
-                if (ev.key !== "Enter") return;
-                return onSearchLocations();
-            }}
-        />
+        <Group>
+            <Autocomplete
+                style={{ flex: 1 }}
+                autoFocus
+                ref={inputRef}
+                radius="xl"
+                size="md"
+                placeholder="PLZ oder Ort"
+                leftSection={userLocation}
+                rightSection={
+                    <ActionIcon
+                        loading={loading}
+                        size="md"
+                        radius="xl"
+                        color={primaryColor}
+                        variant="filled"
+                        onClick={onSearchLocations}
+                    >
+                        <IconSearch
+                            style={{ width: rem(18), height: rem(18) }}
+                            stroke={1.5}
+                        />
+                    </ActionIcon>
+                }
+                onChange={setInput}
+                data={locations}
+                selectFirstOptionOnChange
+                onOptionSubmit={(value) => {
+                    const location = JSON.parse(value) as Location;
+                    setCoords({
+                        latitude: Number(location.lat),
+                        longitude: Number(location.lon),
+                    });
+                }}
+                onKeyDownCapture={(ev) => {
+                    if (ev.key !== "Enter") return;
+                    return onSearchLocations();
+                }}
+            />
+            <CarConfiguration />
+        </Group>
     );
 };
 

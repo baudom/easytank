@@ -56,3 +56,10 @@ export type StationConfiguration = {
     radius: RadiusType;
     type: FuelType;
 };
+
+export type CarConfiguration = {
+    averageConsumption100Km: number;
+    totalTankVolume: number;
+    neededTankVolume: number;
+    inclusiveReturnTravel: boolean;
+};

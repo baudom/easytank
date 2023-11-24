@@ -8,6 +8,7 @@ import {
     useState,
 } from "react";
 import {
+    CarConfiguration,
     Coords,
     Station,
     StationConfiguration,
@@ -29,13 +30,17 @@ const DEFAULT_STATION_CONFIG: StationConfiguration = {
     type: "all",
 };
 
+const DEFAULT_CAR_CONFIGURATION = undefined;
+
 type ContextType = {
     loading: boolean;
     coords?: Coords;
     stations: Station[];
     stationConfig: StationConfiguration;
+    carConfig?: CarConfiguration;
     setCoords: (coords: Coords) => void;
     setStationConfig: (config: Partial<StationConfiguration>) => void;
+    setCarConfig: (config: CarConfiguration) => void;
 };
 
 type StationsContextProps = {
@@ -47,8 +52,10 @@ const Context = createContext<ContextType>({
     coords: undefined,
     stations: [],
     stationConfig: DEFAULT_STATION_CONFIG,
+    carConfig: DEFAULT_CAR_CONFIGURATION,
     setCoords: () => {},
     setStationConfig: (config: Partial<StationConfiguration>) => {},
+    setCarConfig: (config: CarConfiguration) => {},
 });
 
 const iconStyle = { width: rem(18), height: rem(18) };
@@ -56,6 +63,9 @@ const iconStyle = { width: rem(18), height: rem(18) };
 const StationsContext: FC<StationsContextProps> = ({ children }) => {
     const [coords, setCoords] = useState<Coords | undefined>(undefined);
     const [stations, setStations] = useState<Station[]>([]);
+    const [carConfig, setCarConfig] = useState<CarConfiguration | undefined>(
+        DEFAULT_CAR_CONFIGURATION,
+    );
     const [stationConfig, setStationConfig] = useState<StationConfiguration>(
         DEFAULT_STATION_CONFIG,
     );
@@ -124,6 +134,10 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
         onFetchStations(coords, stationConfig);
     }, [coords, onFetchStations, stationConfig]);
 
+    useEffect(() => {
+        console.log(carConfig);
+    }, [carConfig]);
+
     return (
         <Context.Provider
             value={{
@@ -131,7 +145,9 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                 coords,
                 stations,
                 stationConfig,
+                carConfig,
                 setStationConfig: setStationConfigOverwrite,
+                setCarConfig,
                 setCoords,
             }}
         >
