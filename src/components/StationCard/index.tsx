@@ -1,5 +1,5 @@
 import { FC, Fragment, memo, useMemo } from "react";
-import { Station } from "@/model";
+import { CalculatedStation } from "@/model";
 import {
     ActionIcon,
     Anchor,
@@ -17,9 +17,10 @@ import classes from "./index.module.css";
 import PriceSection from "@/components/StationCard/PriceSection";
 import { IconMapSearch } from "@tabler/icons-react";
 import { mapFuelTypeToString } from "@/helper/mappings";
+import EfficiencySection from "@/components/StationCard/EfficiencySection";
 
 type StationCardProps = {
-    station: Station;
+    station: CalculatedStation;
 };
 
 const StationCard: FC<StationCardProps> = ({ station }) => {
@@ -74,7 +75,7 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                 ta="left"
                 size="sm"
             >
-                {station.name}
+                {station.name} &#x2022; {station.dist}km
             </Text>
 
             <Card.Section
@@ -83,17 +84,25 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                 py="xs"
             >
                 <Group justify="space-evenly">
-                    {priceList.map((e, i, self) => (
-                        <Fragment key={e.label}>
+                    {priceList.map((price, index, self) => (
+                        <Fragment key={price.label}>
                             <PriceSection
-                                label={e.label}
-                                value={e.value!} // value is either boolean or number here
+                                label={price.label}
+                                value={price.value}
                             />
-                            {i !== self.length - 1 ? (
+                            {index !== self.length - 1 ? (
                                 <Divider orientation="vertical" />
                             ) : null}
                         </Fragment>
                     ))}
+                    {priceList.length === 1 ? (
+                        <>
+                            <Divider orientation="vertical" />
+                            <EfficiencySection
+                                refillPrice={station.refillPrice}
+                            />
+                        </>
+                    ) : null}
                 </Group>
             </Card.Section>
 

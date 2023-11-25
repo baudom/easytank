@@ -40,6 +40,6 @@ export type CarConfiguration = {
     inclusiveReturnTravel: boolean;
 };
 
-export type StationWithEfficiency = Station & {
-    efficiency?: number;
+export type CalculatedStation = Station & {
+    refillPrice?: number;
 };

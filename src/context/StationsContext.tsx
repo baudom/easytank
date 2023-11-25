@@ -10,24 +10,25 @@ import {
 import {
     CarConfiguration,
     Coords,
-    Station,
-    StationConfiguration,
-    StationsResponse,
+    StationFilter,
+    CalculatedStation,
 } from "@/model";
 import {
     PARAM_FUEL_TYPE,
     PARAM_LATITUDE,
     PARAM_LONGITUDE,
     PARAM_RADIUS,
+    Station,
+    StationsResponse,
 } from "@/model/tankerkoenig";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { IconCheck, IconCurrentLocationOff } from "@tabler/icons-react";
 import { rem } from "@mantine/core";
 
-const DEFAULT_STATION_CONFIG: StationConfiguration = {
+const DEFAULT_STATION_CONFIG: StationFilter = {
     radius: 10,
-    type: "all",
+    type: "diesel",
 };
 
 const DEFAULT_CAR_CONFIGURATION = undefined;
@@ -35,11 +36,11 @@ const DEFAULT_CAR_CONFIGURATION = undefined;
 type ContextType = {
     loading: boolean;
     coords?: Coords;
-    stations: Station[];
-    stationConfig: StationConfiguration;
+    stations: CalculatedStation[];
+    stationConfig: StationFilter;
     carConfig?: CarConfiguration;
     setCoords: (coords: Coords) => void;
-    setStationConfig: (config: Partial<StationConfiguration>) => void;
+    setStationConfig: (config: Partial<StationFilter>) => void;
     setCarConfig: (config: CarConfiguration) => void;
 };
 
@@ -54,25 +55,61 @@ const Context = createContext<ContextType>({
     stationConfig: DEFAULT_STATION_CONFIG,
     carConfig: DEFAULT_CAR_CONFIGURATION,
     setCoords: () => {},
-    setStationConfig: (config: Partial<StationConfiguration>) => {},
+    setStationConfig: (config: Partial<StationFilter>) => {},
     setCarConfig: (config: CarConfiguration) => {},
 });
 
 const iconStyle = { width: rem(18), height: rem(18) };
 
 const StationsContext: FC<StationsContextProps> = ({ children }) => {
+    const [loading, { open, close }] = useDisclosure(false);
     const [coords, setCoords] = useState<Coords | undefined>(undefined);
-    const [stations, setStations] = useState<Station[]>([]);
+    const [stations, setStations] = useState<CalculatedStation[]>([]);
     const [carConfig, setCarConfig] = useState<CarConfiguration | undefined>(
         DEFAULT_CAR_CONFIGURATION,
     );
-    const [stationConfig, setStationConfig] = useState<StationConfiguration>(
+    const [stationConfig, setStationConfig] = useState<StationFilter>(
         DEFAULT_STATION_CONFIG,
     );
-    const [loading, { open, close }] = useDisclosure(false);
+
+    const setStationConfigOverwrite = useCallback(
+        (config: Partial<StationFilter>) => {
+            setStationConfig((prev) => ({ ...prev, ...config }));
+        },
+        [],
+    );
+
+    const calculateStationEfficiency = useCallback(
+        (station: Station): CalculatedStation => {
+            if (
+                !carConfig ||
+                carConfig.averageConsumption100Km === undefined ||
+                carConfig.refillVolume === undefined ||
+                carConfig.inclusiveReturnTravel === undefined
+            ) {
+                return station;
+            }
+
+            const fuelPerKm = carConfig.averageConsumption100Km / 100;
+            const fuelConsumptionDistance = fuelPerKm * station.dist;
+            const totalLiter =
+                carConfig.refillVolume +
+                fuelConsumptionDistance *
+                    (carConfig.inclusiveReturnTravel ? 2 : 1);
+
+            return {
+                ...station,
+                refillPrice:
+                    station.price !== undefined
+                        ? Number((totalLiter * station.price).toFixed(2))
+                        : undefined,
+            };
+        },
+        [carConfig],
+    );
 
     const onFetchStations = useCallback(
-        async (coords: Coords, config: StationConfiguration) => {
+        async (coords: Coords, config: StationFilter) => {
             const params = new URLSearchParams();
             params.append(PARAM_LATITUDE, `${coords.latitude}`);
             params.append(PARAM_LONGITUDE, `${coords.longitude}`);
@@ -91,7 +128,11 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
             try {
                 const response = await fetch(`/api/stations?${params}`, {});
                 const res: StationsResponse = await response.json();
-                setStations(res && res.stations.length ? res.stations : []);
+                setStations(
+                    res && res.stations.length
+                        ? res.stations.map(calculateStationEfficiency)
+                        : [],
+                );
 
                 notifications.update({
                     id: notificationId,
@@ -119,14 +160,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                 close();
             }
         },
-        [close, open],
-    );
-
-    const setStationConfigOverwrite = useCallback(
-        (config: Partial<StationConfiguration>) => {
-            setStationConfig((prev) => ({ ...prev, ...config }));
-        },
-        [],
+        [calculateStationEfficiency, close, open],
     );
 
     useEffect(() => {
@@ -135,8 +169,8 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     }, [coords, onFetchStations, stationConfig]);
 
     useEffect(() => {
-        console.log(carConfig);
-    }, [carConfig]);
+        setStations((prev) => prev.map(calculateStationEfficiency));
+    }, [calculateStationEfficiency, carConfig]);
 
     return (
         <Context.Provider
