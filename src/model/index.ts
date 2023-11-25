@@ -35,8 +35,8 @@ export type StationFilter = {
 };
 
 export type CarConfiguration = {
-    averageConsumption100Km: number;
-    refillVolume: number;
+    averageConsumption100Km?: number;
+    refillVolume?: number;
     inclusiveReturnTravel: boolean;
 };
 

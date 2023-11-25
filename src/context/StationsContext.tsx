@@ -1,18 +1,14 @@
 import {
     createContext,
     FC,
+    memo,
     ReactNode,
     useCallback,
     useContext,
     useEffect,
     useState,
 } from "react";
-import {
-    CarConfiguration,
-    Coords,
-    StationFilter,
-    CalculatedStation,
-} from "@/model";
+import { CalculatedStation, Coords, StationFilter } from "@/model";
 import {
     PARAM_FUEL_TYPE,
     PARAM_LATITUDE,
@@ -25,23 +21,20 @@ import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { IconCheck, IconCurrentLocationOff } from "@tabler/icons-react";
 import { rem } from "@mantine/core";
+import { useCarConfiguration } from "@/context/CarConfigurationContext";
 
 const DEFAULT_STATION_CONFIG: StationFilter = {
     radius: 10,
     type: "diesel",
 };
 
-const DEFAULT_CAR_CONFIGURATION = undefined;
-
 type ContextType = {
     loading: boolean;
     coords?: Coords;
     stations: CalculatedStation[];
     stationConfig: StationFilter;
-    carConfig?: CarConfiguration;
     setCoords: (coords: Coords) => void;
     setStationConfig: (config: Partial<StationFilter>) => void;
-    setCarConfig: (config: CarConfiguration) => void;
 };
 
 type StationsContextProps = {
@@ -53,10 +46,8 @@ const Context = createContext<ContextType>({
     coords: undefined,
     stations: [],
     stationConfig: DEFAULT_STATION_CONFIG,
-    carConfig: DEFAULT_CAR_CONFIGURATION,
     setCoords: () => {},
     setStationConfig: (config: Partial<StationFilter>) => {},
-    setCarConfig: (config: CarConfiguration) => {},
 });
 
 const iconStyle = { width: rem(18), height: rem(18) };
@@ -65,9 +56,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     const [loading, { open, close }] = useDisclosure(false);
     const [coords, setCoords] = useState<Coords | undefined>(undefined);
     const [stations, setStations] = useState<CalculatedStation[]>([]);
-    const [carConfig, setCarConfig] = useState<CarConfiguration | undefined>(
-        DEFAULT_CAR_CONFIGURATION,
-    );
+    const { carConfig } = useCarConfiguration();
     const [stationConfig, setStationConfig] = useState<StationFilter>(
         DEFAULT_STATION_CONFIG,
     );
@@ -90,10 +79,10 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                 return station;
             }
 
-            const fuelPerKm = carConfig.averageConsumption100Km / 100;
+            const fuelPerKm = Number(carConfig.averageConsumption100Km) / 100;
             const fuelConsumptionDistance = fuelPerKm * station.dist;
             const totalLiter =
-                carConfig.refillVolume +
+                Number(carConfig.refillVolume) +
                 fuelConsumptionDistance *
                     (carConfig.inclusiveReturnTravel ? 2 : 1);
 
@@ -179,9 +168,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                 coords,
                 stations,
                 stationConfig,
-                carConfig,
                 setStationConfig: setStationConfigOverwrite,
-                setCarConfig,
                 setCoords,
             }}
         >
@@ -192,4 +179,4 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
 
 export const useStationsContext = () => useContext<ContextType>(Context);
 
-export default StationsContext;
+export default memo(StationsContext);

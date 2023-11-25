@@ -2,10 +2,12 @@ import { FC, memo } from "react";
 import { Box, Button, Group, rem, Text, useMantineTheme } from "@mantine/core";
 import { IconReceipt2 } from "@tabler/icons-react";
 import { CalculatedStation } from "@/model";
+import { useCarConfiguration } from "@/context/CarConfigurationContext";
 
 type EfficiencySectionProps = Pick<CalculatedStation, "refillPrice">;
 
 const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
+    const { showModal } = useCarConfiguration();
     const { colors } = useMantineTheme();
 
     return (
@@ -28,7 +30,6 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
                         from: "pink",
                         to: "yellow",
                     }}
-                    fw={400}
                 >
                     Gesamtkosten
                 </Text>
@@ -36,6 +37,7 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
             {refillPrice !== undefined ? (
                 <Text
                     variant="gradient"
+                    size="lg"
                     gradient={{
                         from: "pink",
                         to: "yellow",
@@ -51,8 +53,8 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
                 <Button
                     variant="light"
                     size="xs"
+                    onClick={showModal}
                 >
-                    {/* TODO: Open settings modal */}
                     Auto konfigurieren
                 </Button>
             )}
