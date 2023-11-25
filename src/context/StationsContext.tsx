@@ -22,6 +22,7 @@ import { notifications } from "@mantine/notifications";
 import { IconCheck, IconCurrentLocationOff } from "@tabler/icons-react";
 import { rem } from "@mantine/core";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
+import { sortByNumberAsc } from "@/helper/sortings";
 
 const DEFAULT_STATION_CONFIG: StationFilter = {
     radius: 10,
@@ -119,7 +120,16 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                 const res: StationsResponse = await response.json();
                 setStations(
                     res && res.stations.length
-                        ? res.stations.map(calculateStationEfficiency)
+                        ? res.stations
+                              .map(calculateStationEfficiency)
+                              .sort((a, b) =>
+                                  a.refillPrice && b.refillPrice
+                                      ? sortByNumberAsc(
+                                            a.refillPrice,
+                                            b.refillPrice,
+                                        )
+                                      : 0,
+                              )
                         : [],
                 );
 
@@ -158,7 +168,15 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     }, [coords, onFetchStations, stationConfig]);
 
     useEffect(() => {
-        setStations((prev) => prev.map(calculateStationEfficiency));
+        setStations((prev) =>
+            prev
+                .map(calculateStationEfficiency)
+                .sort((a, b) =>
+                    a.refillPrice && b.refillPrice
+                        ? sortByNumberAsc(a.refillPrice, b.refillPrice)
+                        : 0,
+                ),
+        );
     }, [calculateStationEfficiency, carConfig]);
 
     return (
