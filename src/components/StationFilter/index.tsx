@@ -1,11 +1,6 @@
 import { FC, memo } from "react";
 import { Group, Select } from "@mantine/core";
-import {
-    FuelType,
-    fuelTypes,
-    RadiusType,
-    radiusTypes,
-} from "@/model/tankerkoenig";
+import { FuelType, fuelTypes, RadiusType, radiusTypes } from "@/model";
 import { mapFuelTypeToString } from "@/helper/mappings";
 import { useStationsContext } from "@/context/StationsContext";
 

@@ -1,23 +1,20 @@
 import { NextRequest } from "next/server";
 import {
     BASE_URL,
-    FuelType,
-    fuelTypes,
     PARAM_API_KEY,
     PARAM_FUEL_TYPE,
     PARAM_LATITUDE,
     PARAM_LONGITUDE,
     PARAM_RADIUS,
     PARAM_SORT,
-    RadiusType,
-    radiusTypes,
+    StationsResponse,
 } from "@/model/tankerkoenig";
 import {
     createErrorResponse,
     createSuccessResponse,
     StatusCode,
 } from "@/helper/response";
-import { StationsResponse } from "@/model";
+import { FuelType, fuelTypes, RadiusType, radiusTypes } from "@/model";
 
 export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams;

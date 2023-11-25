@@ -9,7 +9,7 @@ type CarConfigurationFormProps = {
 };
 
 const assertPositiveValue = (value: number) =>
-    value <= 0 ? "Wert muss über 0 sein!" : null;
+    value > 0 ? null : "Wert muss über 0 sein!";
 
 const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
     const { carConfig } = useStationsContext();
@@ -18,8 +18,7 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
         validateInputOnChange: true,
         validate: {
             averageConsumption100Km: assertPositiveValue,
-            totalTankVolume: assertPositiveValue,
-            neededTankVolume: assertPositiveValue,
+            refillVolume: assertPositiveValue,
         },
     });
 
@@ -27,7 +26,7 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
         <form onSubmit={form.onSubmit((v) => onSubmit(v))}>
             <Stack>
                 <NumberInput
-                    label="Verbrauch pro 100km"
+                    label="&#8709; Verbrauch in l/100km"
                     placeholder="5,8"
                     decimalScale={2}
                     allowedDecimalSeparators={[",", "."]}
@@ -36,22 +35,13 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                     {...form.getInputProps("averageConsumption100Km")}
                 />
                 <NumberInput
-                    label="Tankvolumen Gesamt"
-                    placeholder="45"
-                    decimalScale={2}
-                    allowedDecimalSeparators={[",", "."]}
-                    withAsterisk
-                    min={0.01}
-                    {...form.getInputProps("totalTankVolume")}
-                />
-                <NumberInput
-                    label="Benötigtes Tankvolumen"
+                    label="Nachfüllmenge in Liter"
                     placeholder="20"
                     decimalScale={2}
                     allowedDecimalSeparators={[",", "."]}
                     withAsterisk
                     min={0.01}
-                    {...form.getInputProps("neededTankVolume")}
+                    {...form.getInputProps("refillVolume")}
                 />
                 <Checkbox
                     label="Hin -und Rückfahrt berechnen"

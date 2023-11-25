@@ -1,4 +1,4 @@
-import { FuelType } from "@/model/tankerkoenig";
+import { FuelType } from "@/model";
 
 export const mapFuelTypeToString = (type: FuelType): string => {
     switch (type) {
