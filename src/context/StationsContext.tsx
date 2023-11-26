@@ -17,12 +17,13 @@ import {
     Station,
     StationsResponse,
 } from "@/model/tankerkoenig";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { IconCheck, IconCurrentLocationOff } from "@tabler/icons-react";
 import { rem } from "@mantine/core";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
 import { sortByNumberAsc } from "@/helper/sortings";
+import { LS_STATION_CONFIGURATION_KEY } from "@/model/constants";
 
 const DEFAULT_STATION_CONFIG: StationFilter = {
     radius: 10,
@@ -58,15 +59,16 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     const [coords, setCoords] = useState<Coords | undefined>(undefined);
     const [stations, setStations] = useState<CalculatedStation[]>([]);
     const { carConfig } = useCarConfiguration();
-    const [stationConfig, setStationConfig] = useState<StationFilter>(
-        DEFAULT_STATION_CONFIG,
-    );
+    const [stationConfig, setStationConfig] = useLocalStorage({
+        key: LS_STATION_CONFIGURATION_KEY,
+        defaultValue: DEFAULT_STATION_CONFIG,
+    });
 
     const setStationConfigOverwrite = useCallback(
         (config: Partial<StationFilter>) => {
             setStationConfig((prev) => ({ ...prev, ...config }));
         },
-        [],
+        [setStationConfig],
     );
 
     const calculateStationEfficiency = useCallback(
@@ -165,7 +167,9 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     useEffect(() => {
         if (!coords) return;
         onFetchStations(coords, stationConfig);
-    }, [coords, onFetchStations, stationConfig]);
+        // re-render due onFetchStations not needed
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [coords, stationConfig]);
 
     useEffect(() => {
         setStations((prev) =>

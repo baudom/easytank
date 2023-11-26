@@ -1,8 +1,17 @@
 import { FC, memo } from "react";
 import { useForm } from "@mantine/form";
 import { CarConfiguration } from "@/model";
-import { Button, Checkbox, NumberInput, Stack } from "@mantine/core";
+import {
+    Button,
+    Checkbox,
+    Group,
+    NumberInput,
+    rem,
+    Stack,
+    Text,
+} from "@mantine/core";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
+import { IconInfoSquareRounded } from "@tabler/icons-react";
 
 type CarConfigurationFormProps = {
     onSubmit: (value: CarConfiguration) => void;
@@ -12,7 +21,7 @@ const assertPositiveValue = (value: number | undefined) =>
     value !== undefined && value > 0 ? null : "Wert muss über 0 sein!";
 
 const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
-    const { carConfig } = useCarConfiguration();
+    const { carConfig, resetCarConfig, hideModal } = useCarConfiguration();
     const form = useForm<CarConfiguration>({
         initialValues: carConfig,
         validateInputOnChange: true,
@@ -32,6 +41,15 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                 }),
             )}
         >
+            <Group
+                mb="sm"
+                gap="sm"
+            >
+                <IconInfoSquareRounded
+                    style={{ width: rem(18), height: rem(18) }}
+                />
+                <Text size="xs">Nur in Einzelspritsuche verfügbar</Text>
+            </Group>
             <Stack>
                 <NumberInput
                     label="&#8709; Verbrauch in l/100km"
@@ -57,7 +75,19 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                         type: "checkbox",
                     })}
                 />
-                <Button type="submit">Speichern</Button>
+                <Group justify="space-between">
+                    <Button
+                        variant="transparent"
+                        color="red"
+                        onClick={() => {
+                            resetCarConfig();
+                            hideModal();
+                        }}
+                    >
+                        Zurücksetzen
+                    </Button>
+                    <Button type="submit">Speichern</Button>
+                </Group>
             </Stack>
         </form>
     );
