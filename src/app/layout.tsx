@@ -7,6 +7,7 @@ import { FC, ReactNode } from "react";
 import { Notifications } from "@mantine/notifications";
 import Footer from "@/components/Footer";
 import { theme } from "@/theme";
+import ColorSchemeToggle from "@/components/ColorSchemeToggle";
 
 export const metadata = {
     title: "My Mantine App",
@@ -29,14 +30,18 @@ const Layout: FC<Props> = ({ children }) => {
             className={font.variable}
         >
             <head>
-                <ColorSchemeScript />
+                <ColorSchemeScript defaultColorScheme="dark" />
                 <link
                     rel="icon"
                     href="/favicon.ico"
                 />
             </head>
             <body>
-                <MantineProvider theme={theme}>
+                <MantineProvider
+                    theme={theme}
+                    defaultColorScheme="dark"
+                >
+                    <ColorSchemeToggle />
                     <Notifications
                         position="top-right"
                         autoClose={4000}
