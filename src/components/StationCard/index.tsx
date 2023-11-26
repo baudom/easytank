@@ -39,7 +39,6 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
     return (
         <Card
             shadow="sm"
-            radius="md"
             pt={0}
             withBorder
         >

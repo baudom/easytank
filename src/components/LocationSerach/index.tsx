@@ -73,7 +73,6 @@ const LocationSearch: FC = () => {
                 style={{ flex: 1 }}
                 autoFocus
                 ref={inputRef}
-                radius="xl"
                 size="md"
                 placeholder="PLZ oder Ort"
                 leftSection={userLocation}
@@ -81,7 +80,6 @@ const LocationSearch: FC = () => {
                     <ActionIcon
                         loading={loading}
                         size="md"
-                        radius="xl"
                         color={primaryColor}
                         variant="filled"
                         onClick={onSearchLocations}

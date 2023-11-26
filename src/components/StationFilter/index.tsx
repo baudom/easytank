@@ -12,7 +12,6 @@ const StationFilter: FC<StationFilterProps> = () => {
     return (
         <Group wrap="nowrap">
             <Select
-                radius="xl"
                 size="md"
                 data={fuelTypes.map((type) => ({
                     label: mapFuelTypeToString(type),
@@ -24,7 +23,6 @@ const StationFilter: FC<StationFilterProps> = () => {
                 }
             />
             <Select
-                radius="xl"
                 size="md"
                 data={radiusTypes.map((rad) => ({
                     label: `${rad}km`,

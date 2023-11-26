@@ -24,25 +24,13 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
                     }}
                     stroke={1.5}
                 />
-                <Text
-                    variant="gradient"
-                    gradient={{
-                        from: "pink",
-                        to: "yellow",
-                    }}
-                >
-                    Gesamtkosten
-                </Text>
+                <Text variant="gradient">Gesamtkosten</Text>
             </Group>
             {refillPrice !== undefined ? (
                 <Text
                     variant="gradient"
                     size="lg"
                     fw="bold"
-                    gradient={{
-                        from: "pink",
-                        to: "yellow",
-                    }}
                 >
                     {Intl.NumberFormat("de-DE", {
                         currency: "EUR",
