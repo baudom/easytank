@@ -1,13 +1,10 @@
-export type StationsResponse = {
-    ok: boolean;
-    license: string;
-    data: "MTS-K" | "string";
-    status: "ok" | "error" | string;
-    message?: string;
-    stations: Station[];
-};
+import { Station } from "@/model/tankerkoenig";
 
-export type PriceType = boolean | number;
+export const fuelTypes = ["e5", "e10", "diesel", "all"] as const;
+export type FuelType = (typeof fuelTypes)[number];
+
+export const radiusTypes = [1, 5, 10, 15, 25] as const;
+export type RadiusType = (typeof radiusTypes)[number];
 
 export type StationBrand =
     | string
@@ -22,24 +19,6 @@ export type StationBrand =
     | "Shell"
     | "TotalEnergies";
 
-export type Station = {
-    id: string;
-    name: string;
-    brand: StationBrand;
-    street: string;
-    place: string;
-    houseNumber: string;
-    postCode: number;
-    lat: number;
-    lng: number;
-    dist: number;
-    diesel: PriceType;
-    price?: number;
-    e5: PriceType;
-    e10: PriceType;
-    isOpen: boolean;
-};
-
 export type Location = {
     licence: string;
     lat: string;
@@ -49,3 +28,18 @@ export type Location = {
 };
 
 export type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;
+
+export type StationFilter = {
+    radius: RadiusType;
+    type: FuelType;
+};
+
+export type CarConfiguration = {
+    averageConsumption100Km?: number;
+    refillVolume?: number;
+    inclusiveReturnTravel: boolean;
+};
+
+export type CalculatedStation = Station & {
+    refillPrice?: number;
+};

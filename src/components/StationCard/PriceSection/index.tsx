@@ -1,23 +1,20 @@
 import { FC, memo } from "react";
 import { Box, Text } from "@mantine/core";
-import { PriceType } from "@/model";
 
 type PriceSectionProps = {
     label: string;
-    value: PriceType;
+    value: number;
 };
 
 const PriceSection: FC<PriceSectionProps> = ({ label, value }) => (
     <Box>
-        <Text fw={400}>{label}</Text>
-        <Text>
-            {typeof value === "boolean"
-                ? "n. v."
-                : Intl.NumberFormat("de-DE", {
-                      currency: "EUR",
-                      style: "currency",
-                      maximumFractionDigits: 3,
-                  }).format(value)}
+        <Text size="sm">{label}</Text>
+        <Text size="xl">
+            {Intl.NumberFormat("de-DE", {
+                currency: "EUR",
+                style: "currency",
+                maximumFractionDigits: 3,
+            }).format(value)}
         </Text>
     </Box>
 );

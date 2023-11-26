@@ -1,5 +1,5 @@
-import { FC, Fragment, memo } from "react";
-import { Station } from "@/model";
+import { FC, Fragment, memo, useMemo } from "react";
+import { CalculatedStation } from "@/model";
 import {
     ActionIcon,
     Anchor,
@@ -16,19 +16,25 @@ import { createGoogleMapsLink, getStationThumb } from "@/helper/station";
 import classes from "./index.module.css";
 import PriceSection from "@/components/StationCard/PriceSection";
 import { IconMapSearch } from "@tabler/icons-react";
+import { mapFuelTypeToString } from "@/helper/mappings";
+import EfficiencySection from "@/components/StationCard/EfficiencySection";
 
 type StationCardProps = {
-    station: Station;
+    station: CalculatedStation;
 };
 
 const StationCard: FC<StationCardProps> = ({ station }) => {
     const { primaryColor } = useMantineTheme();
 
-    const priceList = [
-        { label: "Diesel", value: station.diesel },
-        { label: "Benzin", value: station.e5 },
-        { label: "Benzin E10", value: station.e10 },
-    ];
+    const priceList = useMemo(
+        () =>
+            [
+                { label: mapFuelTypeToString("diesel"), value: station.diesel },
+                { label: mapFuelTypeToString("e5"), value: station.e5 },
+                { label: mapFuelTypeToString("e10"), value: station.e10 },
+            ].filter((e) => e.value !== undefined),
+        [station.diesel, station.e10, station.e5],
+    );
 
     return (
         <Card
@@ -69,7 +75,7 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                 ta="left"
                 size="sm"
             >
-                {station.name}
+                {station.name} &#x2022; {station.dist}km
             </Text>
 
             <Card.Section
@@ -78,17 +84,25 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                 py="xs"
             >
                 <Group justify="space-evenly">
-                    {priceList.map((e, i, self) => (
-                        <Fragment key={e.label}>
+                    {priceList.map((price, index, self) => (
+                        <Fragment key={price.label}>
                             <PriceSection
-                                label={e.label}
-                                value={e.value}
+                                label={price.label}
+                                value={price.value}
                             />
-                            {i !== self.length - 1 ? (
+                            {index !== self.length - 1 ? (
                                 <Divider orientation="vertical" />
                             ) : null}
                         </Fragment>
                     ))}
+                    {priceList.length === 1 ? (
+                        <>
+                            <Divider orientation="vertical" />
+                            <EfficiencySection
+                                refillPrice={station.refillPrice}
+                            />
+                        </>
+                    ) : null}
                 </Group>
             </Card.Section>
 
@@ -99,7 +113,7 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                 >
                     <Group>
                         <ActionIcon
-                            size={32}
+                            size="md"
                             color={primaryColor}
                             variant="transparent"
                         >

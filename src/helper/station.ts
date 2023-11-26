@@ -1,4 +1,4 @@
-import { Station } from "@/model";
+import { Station } from "@/model/tankerkoenig";
 
 export const createGoogleMapsLink = ({ lat, lng }: Station) => {
     const url = new URL("https://www.google.com/maps/search/?api=1");
