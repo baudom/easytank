@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IconSettings } from "@tabler/icons-react";
+import { IconCar } from "@tabler/icons-react";
 import { ActionIcon, rem, useMantineTheme } from "@mantine/core";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
 
@@ -16,7 +16,7 @@ const CarConfiguration: FC = () => {
             gradient={{ from: "pink", to: "yellow" }}
             onClick={showModal}
         >
-            <IconSettings
+            <IconCar
                 style={{ width: rem(18), height: rem(18) }}
                 stroke={1.5}
             />
