@@ -1,6 +1,6 @@
 "use client";
 
-import { Space, Text, Title } from "@mantine/core";
+import { Box, Stack, Text, Title } from "@mantine/core";
 import { FC } from "react";
 import LocationSearch from "@/components/LocationSerach";
 import StationsContext from "@/context/StationsContext";
@@ -12,22 +12,25 @@ const Welcome: FC = () => {
     return (
         <CarConfigurationContext>
             <StationsContext>
-                <Title ta={"center"}>
-                    <Text
-                        inherit
-                        variant="gradient"
-                        component="span"
-                        gradient={{ from: "pink", to: "yellow" }}
-                    >
-                        {process.env.NEXT_PUBLIC_NAME}
-                    </Text>
-                    <Space h="md" />
+                <Stack>
+                    <Box ta="center">
+                        <Title>
+                            <Text
+                                inherit
+                                component="span"
+                                variant="gradient"
+                            >
+                                {process.env.NEXT_PUBLIC_NAME}
+                            </Text>
+                        </Title>
+                        <Text size="xs">
+                            by {process.env.NEXT_PUBLIC_AUTHOR}
+                        </Text>
+                    </Box>
                     <LocationSearch />
-                    <Space h="md" />
                     <StationFilter />
-                    <Space h="md" />
                     <StationsList />
-                </Title>
+                </Stack>
             </StationsContext>
         </CarConfigurationContext>
     );
