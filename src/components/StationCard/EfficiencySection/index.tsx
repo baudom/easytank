@@ -38,6 +38,7 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
                 <Text
                     variant="gradient"
                     size="lg"
+                    fw="bold"
                     gradient={{
                         from: "pink",
                         to: "yellow",

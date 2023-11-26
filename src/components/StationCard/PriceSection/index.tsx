@@ -9,7 +9,10 @@ type PriceSectionProps = {
 const PriceSection: FC<PriceSectionProps> = ({ label, value }) => (
     <Box>
         <Text size="sm">{label}</Text>
-        <Text size="xl">
+        <Text
+            size="lg"
+            fw="bold"
+        >
             {Intl.NumberFormat("de-DE", {
                 currency: "EUR",
                 style: "currency",
