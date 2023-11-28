@@ -1,5 +1,3 @@
-"use client";
-
 import { Box, Stack, Text, Title } from "@mantine/core";
 import { FC } from "react";
 import LocationSearch from "@/components/LocationSerach";

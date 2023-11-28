@@ -1,3 +1,5 @@
+"use client";
+
 import { CarConfiguration } from "@/model";
 import { createContext, FC, memo, ReactNode, useContext } from "react";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";

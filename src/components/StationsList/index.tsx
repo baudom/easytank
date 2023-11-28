@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, useMemo } from "react";
 import { useStationsContext } from "@/context/StationsContext";
 import { Grid, Loader, Stack, Text } from "@mantine/core";

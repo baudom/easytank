@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, memo } from "react";
 import { Group, Select } from "@mantine/core";
 import { FuelType, fuelTypes, RadiusType, radiusTypes } from "@/model";
