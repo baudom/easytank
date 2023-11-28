@@ -30,7 +30,7 @@ const features: FeatureSectionCardProps[] = [
             <Text size="sm">
                 Du kannst die Suche ebenfalls einschränken, um nur bestimmte
                 Kraftstoffsorten innerhalb eines Gebietes anzuzeigen. <br />
-                Die Berechnung der Gesamtpreises ist nur in der
+                Die Berechnung des Gesamtpreises ist nur in der
                 Einzelkraftstoffsuche verfügbar.
             </Text>
         ),
@@ -48,7 +48,7 @@ const features: FeatureSectionCardProps[] = [
         content: (
             <Text size="sm">
                 Konfiguriere für die Rentabilitätsrechnung einer Tankfahrt dein
-                Auto. Dazu werden lediglich Verbrauch und dein Tankvolumen
+                Auto. Dazu werden lediglich dein Verbrauch und Tankvolumen
                 benötigt.
             </Text>
         ),

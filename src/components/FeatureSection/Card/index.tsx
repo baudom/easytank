@@ -14,7 +14,7 @@ const FeatureSectionCard: FC<FeatureSectionCardProps> = ({
 }) => {
     return (
         <Card
-            shadow="md"
+            shadow="sm"
             padding="xl"
         >
             {icon}

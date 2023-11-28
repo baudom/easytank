@@ -137,11 +137,14 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                         : [],
                 );
 
+                const singleResult = res.stations.length === 1;
                 notifications.update({
                     id: notificationId,
                     color: "green",
                     title: "Suche erfolgreich.",
-                    message: `Es wurden ${res.stations.length} Tankstellen gefunden!`,
+                    message: singleResult
+                        ? "Es wurde eine Tankstelle gefunden!"
+                        : `Es wurden ${res.stations.length} Tankstellen gefunden!`,
                     icon: <IconCheck style={iconStyle} />,
                     loading: false,
                     autoClose: 4000,
