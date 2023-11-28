@@ -27,7 +27,6 @@
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
-        "autoprefixer": "^10.0.1",
         "eslint": "^8",
         "eslint-config-mantine": "^3.0.0",
         "eslint-config-next": "14.0.2",
@@ -37,7 +36,6 @@
         "postcss-preset-mantine": "^1.9.1",
         "postcss-simple-vars": "^7.0.1",
         "prettier": "^3.1.0",
-        "tailwindcss": "^3.3.0",
         "typescript": "^5"
     }
 }

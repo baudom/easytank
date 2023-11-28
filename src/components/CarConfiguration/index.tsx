@@ -10,10 +10,8 @@ const CarConfiguration: FC = () => {
     return (
         <ActionIcon
             size="lg"
-            radius="xl"
             color={primaryColor}
             variant="gradient"
-            gradient={{ from: "pink", to: "yellow" }}
             onClick={showModal}
         >
             <IconCar

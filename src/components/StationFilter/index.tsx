@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, memo } from "react";
 import { Group, Select } from "@mantine/core";
 import { FuelType, fuelTypes, RadiusType, radiusTypes } from "@/model";
@@ -12,7 +14,6 @@ const StationFilter: FC<StationFilterProps> = () => {
     return (
         <Group wrap="nowrap">
             <Select
-                radius="xl"
                 size="md"
                 data={fuelTypes.map((type) => ({
                     label: mapFuelTypeToString(type),
@@ -24,7 +25,6 @@ const StationFilter: FC<StationFilterProps> = () => {
                 }
             />
             <Select
-                radius="xl"
                 size="md"
                 data={radiusTypes.map((rad) => ({
                     label: `${rad}km`,

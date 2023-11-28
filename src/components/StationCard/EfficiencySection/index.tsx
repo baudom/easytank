@@ -11,11 +11,8 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
     const { colors } = useMantineTheme();
 
     return (
-        <Box>
-            <Group
-                gap="sm"
-                justify="center"
-            >
+        <Box ta="center">
+            <Group gap="xs">
                 <IconReceipt2
                     style={{
                         width: rem(18),
@@ -24,24 +21,13 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
                     }}
                     stroke={1.5}
                 />
-                <Text
-                    variant="gradient"
-                    gradient={{
-                        from: "pink",
-                        to: "yellow",
-                    }}
-                >
-                    Gesamtkosten
-                </Text>
+                <Text variant="gradient">Gesamtkosten</Text>
             </Group>
             {refillPrice !== undefined ? (
                 <Text
                     variant="gradient"
                     size="lg"
-                    gradient={{
-                        from: "pink",
-                        to: "yellow",
-                    }}
+                    fw="bold"
                 >
                     {Intl.NumberFormat("de-DE", {
                         currency: "EUR",

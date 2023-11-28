@@ -39,7 +39,6 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
     return (
         <Card
             shadow="sm"
-            radius="md"
             pt={0}
             withBorder
         >
@@ -49,7 +48,7 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                     alt={`${station.name} thumbnail`}
                     size="sm"
                 >
-                    {station.brand.toUpperCase().slice(0, 2)}
+                    {(station.brand || station.name).toUpperCase().slice(0, 2)}
                 </Avatar>
                 <Text
                     className={classes.truncateText}

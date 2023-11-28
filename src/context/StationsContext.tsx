@@ -1,3 +1,5 @@
+"use client";
+
 import {
     createContext,
     FC,
@@ -33,7 +35,7 @@ const DEFAULT_STATION_CONFIG: StationFilter = {
 type ContextType = {
     loading: boolean;
     coords?: Coords;
-    stations: CalculatedStation[];
+    stations?: CalculatedStation[];
     stationConfig: StationFilter;
     setCoords: (coords: Coords) => void;
     setStationConfig: (config: Partial<StationFilter>) => void;
@@ -46,7 +48,7 @@ type StationsContextProps = {
 const Context = createContext<ContextType>({
     loading: false,
     coords: undefined,
-    stations: [],
+    stations: undefined,
     stationConfig: DEFAULT_STATION_CONFIG,
     setCoords: () => {},
     setStationConfig: (config: Partial<StationFilter>) => {},
@@ -57,7 +59,9 @@ const iconStyle = { width: rem(18), height: rem(18) };
 const StationsContext: FC<StationsContextProps> = ({ children }) => {
     const [loading, { open, close }] = useDisclosure(false);
     const [coords, setCoords] = useState<Coords | undefined>(undefined);
-    const [stations, setStations] = useState<CalculatedStation[]>([]);
+    const [stations, setStations] = useState<CalculatedStation[] | undefined>(
+        undefined,
+    );
     const { carConfig } = useCarConfiguration();
     const [stationConfig, setStationConfig] = useLocalStorage({
         key: LS_STATION_CONFIGURATION_KEY,
@@ -135,11 +139,14 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                         : [],
                 );
 
+                const singleResult = res.stations.length === 1;
                 notifications.update({
                     id: notificationId,
                     color: "green",
                     title: "Suche erfolgreich.",
-                    message: `Es wurden ${res.stations.length} Tankstellen gefunden!`,
+                    message: singleResult
+                        ? "Es wurde eine Tankstelle gefunden!"
+                        : `Es wurden ${res.stations.length} Tankstellen gefunden!`,
                     icon: <IconCheck style={iconStyle} />,
                     loading: false,
                     autoClose: 4000,
@@ -174,12 +181,14 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     useEffect(() => {
         setStations((prev) =>
             prev
-                .map(calculateStationEfficiency)
-                .sort((a, b) =>
-                    a.refillPrice && b.refillPrice
-                        ? sortByNumberAsc(a.refillPrice, b.refillPrice)
-                        : 0,
-                ),
+                ? prev
+                      .map(calculateStationEfficiency)
+                      .sort((a, b) =>
+                          a.refillPrice && b.refillPrice
+                              ? sortByNumberAsc(a.refillPrice, b.refillPrice)
+                              : 0,
+                      )
+                : undefined,
         );
     }, [calculateStationEfficiency, carConfig]);
 
