@@ -10,7 +10,8 @@ import { theme } from "@/theme";
 import ColorSchemeToggle from "@/components/ColorSchemeToggle";
 
 export const metadata = {
-    title: "My Mantine App",
+    title: "easytank | baudom",
+    description: "Tankstellensuche powered by Tankerkoenig und OpenStreetMap",
 };
 
 const font = Font({
@@ -34,6 +35,10 @@ const Layout: FC<Props> = ({ children }) => {
                 <link
                     rel="icon"
                     href="/favicon.ico"
+                />
+                <link
+                    rel="apple-touch-icon"
+                    href="/apple-touch-icon.png"
                 />
             </head>
             <body>
