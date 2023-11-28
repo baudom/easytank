@@ -1,18 +1,27 @@
-import { FC, memo } from "react";
+import { FC, useMemo } from "react";
 import { useStationsContext } from "@/context/StationsContext";
-import { Box, Grid, LoadingOverlay } from "@mantine/core";
+import { Grid, Loader, Stack, Text } from "@mantine/core";
+import FeatureSection from "@/components/FeatureSection";
 import StationCard from "@/components/StationCard";
 
 const StationsList: FC = () => {
     const { stations, loading } = useStationsContext();
+    return useMemo(() => {
+        if (loading) {
+            return (
+                <Stack
+                    align="center"
+                    gap="xs"
+                >
+                    <Loader type="dots" />
+                    <Text>Tankstellen werden gesucht...</Text>
+                </Stack>
+            );
+        } else if (!stations) {
+            return <FeatureSection />;
+        }
 
-    return (
-        <Box pos="relative">
-            <LoadingOverlay
-                visible={loading}
-                zIndex={1000}
-                overlayProps={{ radius: "sm", blur: 2 }}
-            />
+        return stations.length ? (
             <Grid>
                 {stations.map((s) => (
                     <Grid.Col
@@ -28,8 +37,15 @@ const StationsList: FC = () => {
                     </Grid.Col>
                 ))}
             </Grid>
-        </Box>
-    );
+        ) : (
+            <Text
+                ta="center"
+                size="lg"
+            >
+                Es wurden keine Tankstellen gefunden!
+            </Text>
+        );
+    }, [loading, stations]);
 };
 
 export default StationsList;
