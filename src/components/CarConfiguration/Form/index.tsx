@@ -48,7 +48,7 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                 <IconInfoSquareRounded
                     style={{ width: rem(18), height: rem(18) }}
                 />
-                <Text size="xs">Nur in Einzelspritsuche verfügbar</Text>
+                <Text size="xs">Nur in Einzelkraftstoffsuche verfügbar</Text>
             </Group>
             <Stack>
                 <NumberInput
