@@ -1,0 +1,26 @@
+name: Generate Release and Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  release:
+    name: Generate Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Code Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install Dependencies
+        run: yarn install
+      - name: Generate Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: yarn semantic-release

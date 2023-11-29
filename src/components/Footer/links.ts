@@ -5,7 +5,7 @@ export type LinkType = {
 
 const links = [
     {
-        link: process.env.NEXT_PUBLIC_AUTHOR_URL,
+        link: process.env.NEXT_PUBLIC_REPOSITORY_URL,
         label: `${process.env.NEXT_PUBLIC_NAME} v${process.env.NEXT_PUBLIC_VERSION} made with ❤️ by ${process.env.NEXT_PUBLIC_AUTHOR}`,
     },
     {
@@ -21,6 +21,7 @@ const links = [
         label: `Locations by OpenStreetMap`,
     },
     { link: "https://status.baudom.de/status/easytank", label: "Status" },
+    { link: process.env.NEXT_PUBLIC_CONTACT_MAIL_URL, label: "Kontakt" },
 ];
 
 export default links;

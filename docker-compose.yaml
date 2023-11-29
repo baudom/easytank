@@ -1,0 +1,23 @@
+networks:
+  proxynet:
+    name: ${PROXY_NAME}
+    external: true
+
+services:
+  app:
+    container_name: easytank
+    image: easytank:0.1.0
+    mem_limit: 1G
+    pull_policy: build
+    restart: always
+    build:
+      context: .
+      tags:
+        - easytank:0.1.0
+        - easytank:latest
+      args:
+        TANKERKOENIG_API_KEY: ${TANKERKOENIG_API_KEY}
+        NOMINATIM_USER_AGENT: ${NOMINATIM_USER_AGENT}
+        NEXT_PUBLIC_CONTACT_MAIL_URL: ${NEXT_PUBLIC_CONTACT_MAIL_URL}
+    networks:
+      - proxynet

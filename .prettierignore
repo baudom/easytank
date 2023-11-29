@@ -9,3 +9,4 @@ build
 *.txt
 *.ico
 *.svg
+docker-compose.template.yaml

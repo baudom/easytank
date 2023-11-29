@@ -40,6 +40,10 @@ const Layout: FC<Props> = ({ children }) => {
                     rel="apple-touch-icon"
                     href="/apple-touch-icon.png"
                 />
+                <meta
+                    name="theme-color"
+                    content="#1864AB"
+                />
             </head>
             <body>
                 <MantineProvider

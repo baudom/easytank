@@ -2,6 +2,7 @@
     "name": "easytank",
     "version": "0.1.0",
     "private": true,
+    "repositoryUrl": "https://github.com/baudom/easytank",
     "author": {
         "name": "baudom",
         "url": "https://github.com/baudom"
@@ -11,7 +12,9 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint --max-warnings=0",
-        "prettify": "prettier --write ."
+        "prettify": "prettier --write .",
+        "gen:docker-compose": "sed -e \"s/{IMAGE_NAME}/$npm_package_name/g\" -e \"s/{IMAGE_VERSION}/$npm_package_version/g\" docker-compose.template.yaml > docker-compose.yaml",
+        "postversion": "yarn gen:docker-compose"
     },
     "dependencies": {
         "@mantine/core": "^7.2.1",
@@ -24,6 +27,12 @@
         "react-dom": "^18"
     },
     "devDependencies": {
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/commit-analyzer": "^11.1.0",
+        "@semantic-release/git": "^10.0.1",
+        "@semantic-release/github": "^9.2.3",
+        "@semantic-release/npm": "^11.0.1",
+        "@semantic-release/release-notes-generator": "^12.1.0",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
@@ -36,6 +45,7 @@
         "postcss-preset-mantine": "^1.9.1",
         "postcss-simple-vars": "^7.0.1",
         "prettier": "^3.1.0",
+        "semantic-release": "^22.0.8",
         "typescript": "^5"
     }
 }

@@ -94,6 +94,7 @@ const LocationSearch: FC = () => {
                 data={locations}
                 selectFirstOptionOnChange
                 onOptionSubmit={(value) => {
+                    inputRef.current?.blur();
                     const location = JSON.parse(value) as Location;
                     setCoords({
                         latitude: Number(location.lat),
