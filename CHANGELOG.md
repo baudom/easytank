@@ -13,5 +13,4 @@
 
 ### Performance Improvements
 
-* **#4:** Semantic release, ci/cd ([411da57](https://github.com/baudom/easytank/commit/411da57c61be309922c805d972b8badd7eef64fa)), closes [#4](https://github.com/baudom/easytank/issues/4)
 * **#6:** Linting pipeline ([#7](https://github.com/baudom/easytank/issues/7)) ([f936c0a](https://github.com/baudom/easytank/commit/f936c0a3fbe9170a63788135b312da53bf4fa786)), closes [#6](https://github.com/baudom/easytank/issues/6)
