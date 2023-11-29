@@ -1,4 +1,4 @@
-import { Box, Stack, Text, Title } from "@mantine/core";
+import { Anchor, Box, Stack, Text, Title } from "@mantine/core";
 import { FC } from "react";
 import LocationSearch from "@/components/LocationSerach";
 import StationsContext from "@/context/StationsContext";
@@ -21,9 +21,14 @@ const Welcome: FC = () => {
                                 {process.env.NEXT_PUBLIC_NAME}
                             </Text>
                         </Title>
-                        <Text size="xs">
+                        <Anchor<"a">
+                            c="dimmed"
+                            href={process.env.NEXT_PUBLIC_AUTHOR_URL}
+                            target="_blank"
+                            size="xs"
+                        >
                             by {process.env.NEXT_PUBLIC_AUTHOR}
-                        </Text>
+                        </Anchor>
                     </Box>
                     <LocationSearch />
                     <StationFilter />
