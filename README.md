@@ -16,7 +16,7 @@ NEXT_PUBLIC_NAME=$npm_package_name
 NEXT_PUBLIC_VERSION=$npm_package_version
 NEXT_PUBLIC_AUTHOR=$npm_package_author_name
 NEXT_PUBLIC_AUTHOR_URL=$npm_package_author_url
-NEXT_PUBLIC_REPOSITORYURL=$npm_package_repositoryUrl
+NEXT_PUBLIC_REPOSITORY_URL=$npm_package_repositoryUrl
 
 # .env.local config
 TANKERKOENIG_API_KEY=your-api-key
