@@ -2,9 +2,7 @@
     "name": "easytank",
     "version": "0.1.0",
     "private": true,
-    "repository": {
-        "url": "https://github.com/baudom/easytank"
-    },
+    "repositoryUrl": "https://github.com/baudom/easytank",
     "author": {
         "name": "baudom",
         "url": "https://github.com/baudom"

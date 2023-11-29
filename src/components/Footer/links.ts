@@ -5,7 +5,7 @@ export type LinkType = {
 
 const links = [
     {
-        link: process.env.NEXT_PUBLIC_REPOSITORY_URL,
+        link: process.env.NEXT_PUBLIC_REPOSITORYURL,
         label: `${process.env.NEXT_PUBLIC_NAME} v${process.env.NEXT_PUBLIC_VERSION} made with ❤️ by ${process.env.NEXT_PUBLIC_AUTHOR}`,
     },
     {
