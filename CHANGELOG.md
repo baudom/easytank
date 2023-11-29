@@ -13,4 +13,5 @@
 
 ### Performance Improvements
 
+* **#4:** Setup semantic-release ([05c9e61](https://github.com/baudom/easytank/commit/05c9e61fe77fb9033071b50aad552e4306de5d84)), closes [#4](https://github.com/baudom/easytank/issues/4)
 * **#6:** Linting pipeline ([#7](https://github.com/baudom/easytank/issues/7)) ([f936c0a](https://github.com/baudom/easytank/commit/f936c0a3fbe9170a63788135b312da53bf4fa786)), closes [#6](https://github.com/baudom/easytank/issues/6)
