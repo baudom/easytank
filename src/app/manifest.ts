@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
         start_url: "/",
         display: "standalone",
         orientation: "portrait",
-        theme_color: "transparent",
+        theme_color: "#1864AB",
         description:
             "Tankstellensuche powered by Tankerkoenig und OpenStreetMap",
         icons: [
