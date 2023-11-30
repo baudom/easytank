@@ -3,6 +3,7 @@ import classes from "./index.module.css";
 import { FC, useMemo } from "react";
 import links from "@/components/Footer/links";
 import Link from "./Link";
+import InstallPWAButton from "@/components/InstallPWAButton";
 
 const Footer: FC = () => {
     const linkList = useMemo(
@@ -17,7 +18,10 @@ const Footer: FC = () => {
     );
     return (
         <footer className={classes.footer}>
-            <Group className={classes.links}>{linkList}</Group>
+            <Group className={classes.links}>
+                {linkList}
+                <InstallPWAButton />
+            </Group>
         </footer>
     );
 };

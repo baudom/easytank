@@ -44,6 +44,14 @@ const Layout: FC<Props> = ({ children }) => {
                     name="theme-color"
                     content="#1864AB"
                 />
+                <meta
+                    name="og:image"
+                    content="/icon-512-maskable.png"
+                />
+                <meta
+                    name="og:image:alt"
+                    content="Tankstellensuche powered by Tankerkoenig und OpenStreetMap"
+                />
             </head>
             <body>
                 <MantineProvider
