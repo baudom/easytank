@@ -1,3 +1,10 @@
+# 1.0.1 (2023-11-30)
+
+
+### Bug Fixes
+
+* **#22:** Fix environment, meta title and general adjustments ([#23](https://github.com/baudom/easytank/issues/23)) ([31e20b3](https://github.com/baudom/easytank/commit/31e20b30a20b6e504710d997933f2a275a116cc5))
+
 # 1.0.0 (2023-11-29)
 
 
