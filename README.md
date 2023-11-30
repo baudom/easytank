@@ -21,7 +21,7 @@ NEXT_PUBLIC_REPOSITORY_URL=$npm_package_repositoryUrl
 # .env.local config
 TANKERKOENIG_API_KEY=your-api-key
 NOMINATIM_USER_AGENT=your-user-agent
-NEXT_PUBLIC_CONTACT_MAIL_URL=mailto:your-contact-mail
+NEXT_PUBLIC_CONTACT_MAIL=your@contact.mail
 ```
 
 ## Getting Started

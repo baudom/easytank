@@ -29,10 +29,11 @@ const StationsList: FC = () => {
                     <Grid.Col
                         key={s.id}
                         span={{
+                            xl: 4,
                             lg: 4,
                             md: 4,
-                            sm: 4,
-                            base: 12,
+                            sm: 6,
+                            xs: 6,
                         }}
                     >
                         <StationCard station={s} />
