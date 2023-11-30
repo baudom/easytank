@@ -21,7 +21,10 @@ const links = [
         label: `Locations by OpenStreetMap`,
     },
     { link: "https://status.baudom.de/status/easytank", label: "Status" },
-    { link: process.env.NEXT_PUBLIC_CONTACT_MAIL_URL, label: "Kontakt" },
+    {
+        link: `mailto:${process.env.NEXT_PUBLIC_CONTACT_MAIL}`,
+        label: "Kontakt",
+    },
 ];
 
 export default links;
