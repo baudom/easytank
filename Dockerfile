@@ -24,6 +24,9 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
+ARG NEXT_PUBLIC_CONTACT_MAIL_URL
+ENV NEXT_PUBLIC_CONTACT_MAIL_URL=$NEXT_PUBLIC_CONTACT_MAIL_URL
+
 RUN yarn build
 
 # If using npm comment out above and use below instead
@@ -42,9 +45,6 @@ ENV TANKERKOENIG_API_KEY=$TANKERKOENIG_API_KEY
 
 ARG NOMINATIM_USER_AGENT
 ENV NOMINATIM_USER_AGENT=$NOMINATIM_USER_AGENT
-
-ARG NEXT_PUBLIC_CONTACT_MAIL_URL
-ENV NEXT_PUBLIC_CONTACT_MAIL_URL=$NEXT_PUBLIC_CONTACT_MAIL_URL
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
