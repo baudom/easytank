@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
     url.searchParams.append(PARAM_LONGITUDE, longitude);
     url.searchParams.append(PARAM_RADIUS, `${radius}`);
     url.searchParams.append(PARAM_FUEL_TYPE, fuelType);
-    url.searchParams.append(PARAM_SORT, "dist");
+    url.searchParams.append(PARAM_SORT, "price");
     url.searchParams.append(PARAM_API_KEY, process.env.TANKERKOENIG_API_KEY);
 
     try {
