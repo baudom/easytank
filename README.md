@@ -24,6 +24,14 @@ NOMINATIM_USER_AGENT=your-user-agent
 NEXT_PUBLIC_CONTACT_MAIL=your@contact.mail
 ```
 
+## CI/CD Environment Configuration
+
+```dotenv
+TOLGEE_URL=https://app.tolgee.io
+TOLGEE_API_KEY=your-tolgee-api-key
+TOLGEE_PID=your-tolgee-project-id
+```
+
 ## Getting Started
 
 First, run the development server:

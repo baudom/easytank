@@ -6,6 +6,9 @@ export type FuelType = (typeof fuelTypes)[number];
 export const radiusTypes = [1, 5, 10, 15, 25] as const;
 export type RadiusType = (typeof radiusTypes)[number];
 
+export const localeTypes = ["de", "en"] as const;
+export type LocaleType = (typeof localeTypes)[number];
+
 export type StationBrand =
     | string
     | "OMV"

@@ -8,5 +8,7 @@ declare namespace NodeJS {
         NEXT_PUBLIC_AUTHOR_URL: string;
         NEXT_PUBLIC_REPOSITORY_URL: string;
         NEXT_PUBLIC_CONTACT_MAIL: string;
+        NEXT_PUBLIC_TOLGEE_API_KEY: string;
+        NEXT_PUBLIC_TOLGEE_API_URL: string;
     }
 }
