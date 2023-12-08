@@ -1,4 +1,4 @@
-# easytank
+# <img src="https://easytank.baudom.de/favicon.ico" align="center"> easytank
 
 _yes, another gas station finder 😆_
 
