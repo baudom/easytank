@@ -9,12 +9,12 @@
     },
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
+        "build": "yarn pull:translations && next build",
         "start": "next start",
         "lint": "next lint --max-warnings=0",
         "prettify": "prettier --write .",
         "gen:docker-compose": "sed -e \"s/{IMAGE_NAME}/$npm_package_name/g\" -e \"s/{IMAGE_VERSION}/$npm_package_version/g\" docker-compose.template.yaml > docker-compose.yaml",
-        "pull:translations": "tolgee login -au $TOLGEE_URL -ak $TOLGEE_API_KEY; tolgee pull -p $TOLGEE_PID -o ./i18n",
+        "pull:translations": "tolgee login $TOLGEE_API_KEY -au $TOLGEE_URL; tolgee pull -p $TOLGEE_PID -o ./i18n",
         "postversion": "yarn gen:docker-compose; yarn pull:translations"
     },
     "dependencies": {
@@ -37,7 +37,7 @@
         "@semantic-release/github": "^9.2.3",
         "@semantic-release/npm": "^11.0.1",
         "@semantic-release/release-notes-generator": "^12.1.0",
-        "@tolgee/cli": "^1.3.2",
+        "@tolgee/cli": "1.3.2",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
