@@ -1,6 +1,6 @@
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
-import "./globals.css";
+import "../globals.css";
 import { Nunito as Font } from "next/font/google";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { FC, ReactNode } from "react";
@@ -8,6 +8,11 @@ import { Notifications } from "@mantine/notifications";
 import Footer from "@/components/Footer";
 import { theme } from "@/theme";
 import ColorSchemeToggle from "@/components/ColorSchemeToggle";
+import { getStaticData } from "@/tolgee/shared";
+import { notFound } from "next/navigation";
+import { TolgeeNextProvider } from "@/tolgee/client";
+import { DEFAULT_LOCALE } from "@/model/constants";
+import { LocaleType, localeTypes } from "@/model";
 
 export const metadata = {
     title: "easytank | baudom",
@@ -22,12 +27,22 @@ const font = Font({
 
 type Props = {
     children: ReactNode;
+    params: { locale?: string };
 };
 
-const Layout: FC<Props> = ({ children }) => {
+const Layout: FC<Props> = async ({
+    children,
+    params: { locale = DEFAULT_LOCALE },
+}) => {
+    if (!localeTypes.includes(locale as LocaleType)) {
+        notFound();
+    }
+
+    const locales = await getStaticData([locale]);
+
     return (
         <html
-            lang="de"
+            lang={locale}
             className={font.variable}
         >
             <head>
@@ -54,18 +69,23 @@ const Layout: FC<Props> = ({ children }) => {
                 />
             </head>
             <body>
-                <MantineProvider
-                    theme={theme}
-                    defaultColorScheme="dark"
+                <TolgeeNextProvider
+                    locale={locale}
+                    locales={locales}
                 >
-                    <ColorSchemeToggle />
-                    <Notifications
-                        position="top-right"
-                        autoClose={4000}
-                    />
-                    {children}
-                    <Footer />
-                </MantineProvider>
+                    <MantineProvider
+                        theme={theme}
+                        defaultColorScheme="dark"
+                    >
+                        <ColorSchemeToggle />
+                        <Notifications
+                            position="top-right"
+                            autoClose={4000}
+                        />
+                        {children}
+                        <Footer />
+                    </MantineProvider>
+                </TolgeeNextProvider>
             </body>
         </html>
     );

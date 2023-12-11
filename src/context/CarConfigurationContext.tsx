@@ -6,6 +6,7 @@ import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { Modal, Text } from "@mantine/core";
 import CarConfigurationForm from "@/components/CarConfiguration/Form";
 import { LS_CAR_CONFIGURATION_KEY } from "@/model/constants";
+import { T } from "@tolgee/react";
 
 type CarConfigurationContextProps = {
     children: ReactNode;
@@ -53,7 +54,11 @@ const CarConfigurationContext: FC<CarConfigurationContextProps> = ({
             <Modal
                 opened={configModalShown}
                 onClose={close}
-                title={<Text size="xl">Auto konfigurieren</Text>}
+                title={
+                    <Text size="xl">
+                        <T keyName="label.configure-car" />
+                    </Text>
+                }
             >
                 <CarConfigurationForm
                     onSubmit={(v) => {

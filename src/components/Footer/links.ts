@@ -24,6 +24,7 @@ const links = [
     {
         link: `mailto:${process.env.NEXT_PUBLIC_CONTACT_MAIL}`,
         label: "Kontakt",
+        labelKey: "label.contact",
     },
 ];
 

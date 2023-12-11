@@ -1,0 +1,49 @@
+{
+  "action" : {
+    "install-app" : "Install as app",
+    "reset" : "Reset",
+    "save" : "Save"
+  },
+  "fuel" : {
+    "diesel" : "Diesel",
+    "e10" : "Petrol E10",
+    "e5" : "Petrol E5"
+  },
+  "label" : {
+    "all" : "All",
+    "average-fuel-consumption" : "∅ Consumption in l/100km",
+    "calculate-return-travel" : "Calculate return travel",
+    "closed" : "Closed",
+    "configure-car" : "Configure car",
+    "contact" : "Contact",
+    "how-it-works" : "How it works",
+    "open" : "Open",
+    "refill-quantity" : "Refill quantity in Liters",
+    "search-placeholder" : "Search for a place...",
+    "total-cost" : "Total cost",
+    "your-car" : "Your car",
+    "your-location" : "Your location",
+    "your-search" : "What are you searching for?"
+  },
+  "notification" : {
+    "coordinates-detail" : "Coordinates: {latitude}, {longitude}",
+    "determine-location-failed" : "Failed to determine location!",
+    "location-determined" : "Location determined!",
+    "location-permission-denied" : "Location permission was denied.",
+    "location-search-in-progress" : "Searching for stations...",
+    "location-unavailable" : "Location unavailable.",
+    "lookup-location-in-progress" : "Location is being determined...",
+    "search-failed" : "Search failed.",
+    "search-successful" : "Search was successfully.",
+    "unknown-error" : "Unknown error."
+  },
+  "text" : {
+    "calculation-availability" : "Only available in single fuel search",
+    "location-search" : "Search for a specific address or use your current location.\n<br></br>Your input will be passed to OpenStreetMap (Nominatim) if you directly search via address.",
+    "n-stations-found" : "{count, plural, =0 {No stations found.} one {One station found.} other {# stations found.}}",
+    "please-retry" : "Please try again!",
+    "short-explanation" : "Find out within a few seconds, which gas station in your area is <b>actually</b> the cheapest.",
+    "your-car" : "Configure your car for the profitability calculation of a tank trip.\n<br></br>You only need to enter your average fuel consumption and tank volume.",
+    "your-filter" : "You can also filter your search to only get specific fuels within a given area.\n<br></br>The calculation of your total cost is only available in single fuel search."
+  }
+}

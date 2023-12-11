@@ -2,6 +2,7 @@ import { Badge, Group, SimpleGrid, Stack, Text } from "@mantine/core";
 import { FC } from "react";
 import FeatureSectionCard from "@/components/FeatureSection/Card";
 import features from "@/components/FeatureSection/features";
+import { T } from "@tolgee/react";
 
 const FeatureSection: FC = () => {
     return (
@@ -11,7 +12,7 @@ const FeatureSection: FC = () => {
                     variant="light"
                     size="lg"
                 >
-                    Wie es funktioniert
+                    <T keyName="label.how-it-works" />
                 </Badge>
             </Group>
 
@@ -19,8 +20,10 @@ const FeatureSection: FC = () => {
                 c="dimmed"
                 ta="center"
             >
-                Erfahre innerhalb weniger Sekunden, welche Tankstelle in deiner
-                Nähe die <b>eigentlich</b> Günstigste ist.
+                <T
+                    keyName="text.short-explanation"
+                    params={{ b: <b /> }}
+                />
             </Text>
 
             <SimpleGrid
@@ -29,7 +32,7 @@ const FeatureSection: FC = () => {
             >
                 {features.map((m) => (
                     <FeatureSectionCard
-                        key={m.title}
+                        key={m.titleKey}
                         {...m}
                     />
                 ))}

@@ -5,6 +5,7 @@ import { useStationsContext } from "@/context/StationsContext";
 import { Grid, Loader, Stack, Text } from "@mantine/core";
 import FeatureSection from "@/components/FeatureSection";
 import StationCard from "@/components/StationCard";
+import { T } from "@tolgee/react";
 
 const StationsList: FC = () => {
     const { stations, loading } = useStationsContext();
@@ -16,7 +17,9 @@ const StationsList: FC = () => {
                     gap="xs"
                 >
                     <Loader type="dots" />
-                    <Text>Tankstellen werden gesucht...</Text>
+                    <Text>
+                        <T keyName="notification.location-search-in-progress" />
+                    </Text>
                 </Stack>
             );
         } else if (!stations) {
@@ -45,7 +48,10 @@ const StationsList: FC = () => {
                 ta="center"
                 size="lg"
             >
-                Es wurden keine Tankstellen gefunden!
+                <T
+                    keyName="text.n-stations-found"
+                    params={{ count: 0 }}
+                />
             </Text>
         );
     }, [loading, stations]);

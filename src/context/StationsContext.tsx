@@ -26,6 +26,7 @@ import { rem } from "@mantine/core";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
 import { sortByNumberAsc } from "@/helper/sortings";
 import { LS_STATION_CONFIGURATION_KEY } from "@/model/constants";
+import { useTranslate } from "@tolgee/react";
 
 const DEFAULT_STATION_CONFIG: StationFilter = {
     radius: 10,
@@ -57,6 +58,7 @@ const Context = createContext<ContextType>({
 const iconStyle = { width: rem(18), height: rem(18) };
 
 const StationsContext: FC<StationsContextProps> = ({ children }) => {
+    const { t } = useTranslate();
     const [loading, { open, close }] = useDisclosure(false);
     const [coords, setCoords] = useState<Coords | undefined>(undefined);
     const [stations, setStations] = useState<CalculatedStation[] | undefined>(
@@ -115,7 +117,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
             open();
             const notificationId = notifications.show({
                 loading: true,
-                title: "Tankstellen werden gesucht...",
+                title: t("notification.location-search-in-progress"),
                 message: undefined,
                 autoClose: false,
                 withCloseButton: false,
@@ -139,14 +141,13 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                         : [],
                 );
 
-                const singleResult = res.stations.length === 1;
                 notifications.update({
                     id: notificationId,
                     color: "green",
-                    title: "Suche erfolgreich.",
-                    message: singleResult
-                        ? "Es wurde eine Tankstelle gefunden!"
-                        : `Es wurden ${res.stations.length} Tankstellen gefunden!`,
+                    title: t("notification.search-successful"),
+                    message: t("text.n-stations-found", {
+                        count: res.stations.length,
+                    }),
                     icon: <IconCheck style={iconStyle} />,
                     loading: false,
                     autoClose: 4000,
@@ -157,8 +158,8 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                 notifications.update({
                     id: notificationId,
                     color: "red",
-                    title: "Suche fehlgeschlagen.",
-                    message: "Bitte versuche es erneut!",
+                    title: t("notification.search-failed"),
+                    message: t("text.please-retry"),
                     icon: <IconCurrentLocationOff style={iconStyle} />,
                     loading: false,
                     autoClose: 4000,

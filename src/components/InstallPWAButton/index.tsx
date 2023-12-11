@@ -2,6 +2,7 @@
 
 import { FC, useEffect, useRef, useState } from "react";
 import { Anchor } from "@mantine/core";
+import { T } from "@tolgee/react";
 
 type BeforeInstallPromptEvent = Event & {
     prompt?: () => void;
@@ -28,7 +29,7 @@ const InstallPWAButton: FC = () => {
             size="xs"
             onClick={() => pwaPromptRef.current?.prompt?.()}
         >
-            App installieren
+            <T keyName="action.install-app" />
         </Anchor>
     ) : null;
 };

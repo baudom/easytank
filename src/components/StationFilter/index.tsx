@@ -2,21 +2,28 @@
 
 import { FC, memo } from "react";
 import { Group, Select } from "@mantine/core";
-import { FuelType, fuelTypes, RadiusType, radiusTypes } from "@/model";
-import { mapFuelTypeToString } from "@/helper/mappings";
+import {
+    FuelType,
+    fuelTypes,
+    fuelTypesWithTranslations,
+    RadiusType,
+    radiusTypes,
+} from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
+import { useTranslate } from "@tolgee/react";
 
 type StationFilterProps = {};
 
 const StationFilter: FC<StationFilterProps> = () => {
     const { stationConfig, setStationConfig } = useStationsContext();
+    const { t } = useTranslate();
 
     return (
         <Group wrap="nowrap">
             <Select
                 size="md"
                 data={fuelTypes.map((type) => ({
-                    label: mapFuelTypeToString(type),
+                    label: t(fuelTypesWithTranslations.get(type)!),
                     value: type,
                 }))}
                 value={stationConfig.type}
