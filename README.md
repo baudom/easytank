@@ -22,6 +22,9 @@ NEXT_PUBLIC_REPOSITORY_URL=$npm_package_repositoryUrl
 TANKERKOENIG_API_KEY=your-api-key
 NOMINATIM_USER_AGENT=your-user-agent
 NEXT_PUBLIC_CONTACT_MAIL=your@contact.mail
+
+NEXT_PUBLIC_TOLGEE_API_URL=https://app.tolgee.io
+NEXT_PUBLIC_TOLGEE_API_KEY=your-tolgee-api-key
 ```
 
 ## CI/CD Environment Configuration
@@ -29,7 +32,6 @@ NEXT_PUBLIC_CONTACT_MAIL=your@contact.mail
 ```dotenv
 TOLGEE_URL=https://app.tolgee.io
 TOLGEE_API_KEY=your-tolgee-api-key
-TOLGEE_PID=your-tolgee-project-id
 ```
 
 ## Getting Started

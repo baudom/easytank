@@ -14,7 +14,7 @@
         "lint": "next lint --max-warnings=0",
         "prettify": "prettier --write .",
         "gen:docker-compose": "sed -e \"s/{IMAGE_NAME}/$npm_package_name/g\" -e \"s/{IMAGE_VERSION}/$npm_package_version/g\" docker-compose.template.yaml > docker-compose.yaml",
-        "pull:translations": "tolgee login $TOLGEE_API_KEY -au $TOLGEE_URL; tolgee pull -p $TOLGEE_PID -o ./i18n",
+        "pull:translations": "tolgee pull --api-url $TOLGEE_URL --api-key $TOLGEE_API_KEY -o ./i18n",
         "postversion": "yarn gen:docker-compose; yarn pull:translations"
     },
     "dependencies": {
