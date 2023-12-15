@@ -1,4 +1,4 @@
-import { Anchor, Box, Space, Stack, Text, Title } from "@mantine/core";
+import { Anchor, Box, Stack, Text, Title } from "@mantine/core";
 import { FC } from "react";
 import LocationSearch from "@/components/LocationSerach";
 import StationsContext from "@/context/StationsContext";
@@ -33,7 +33,6 @@ const Welcome: FC = () => {
                     <LocationSearch />
                     <StationFilter />
                     <StationsList />
-                    <Space h="md" />
                 </Stack>
             </StationsContext>
         </CarConfigurationContext>

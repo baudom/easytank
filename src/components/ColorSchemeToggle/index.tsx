@@ -12,12 +12,7 @@ const ColorSchemeToggle: FC = () => {
     return (
         <ActionIcon
             onClick={toggleColorScheme}
-            style={{
-                cursor: "pointer",
-                position: "absolute",
-                top: "2vw",
-                right: "2vw",
-            }}
+            style={{ cursor: "pointer" }}
             variant="light"
             size="lg"
         >

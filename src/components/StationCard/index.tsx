@@ -18,6 +18,7 @@ import PriceSection from "@/components/StationCard/PriceSection";
 import { IconMapSearch } from "@tabler/icons-react";
 import { mapFuelTypeToString } from "@/helper/mappings";
 import EfficiencySection from "@/components/StationCard/EfficiencySection";
+import { T } from "@tolgee/react";
 
 type StationCardProps = {
     station: CalculatedStation;
@@ -64,7 +65,9 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                     color={station.isOpen ? "green" : "red"}
                     variant="light"
                 >
-                    {station.isOpen ? "Geöffnet" : "Geschlossen"}
+                    <T
+                        keyName={station.isOpen ? "label.open" : "label.closed"}
+                    />
                 </Badge>
             </Group>
 

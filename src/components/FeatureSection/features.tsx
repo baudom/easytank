@@ -1,4 +1,4 @@
-import { rem, Text, ThemeIcon } from "@mantine/core";
+import { rem, ThemeIcon } from "@mantine/core";
 import { IconCar, IconCurrentLocation, IconFilter } from "@tabler/icons-react";
 import { FeatureSectionCardProps } from "@/components/FeatureSection/Card";
 
@@ -6,15 +6,8 @@ const iconStyle = { width: rem(18), height: rem(18) };
 
 const features: FeatureSectionCardProps[] = [
     {
-        title: "Dein Standort",
-        content: (
-            <Text size="sm">
-                Suche nach einer bestimmten Adresse oder nutze deinen aktuellen
-                Standort. <br />
-                Bei der direkten Adresssuche werden deine Daten an OpenStreetMap
-                (Nominatim) weitergegeben.
-            </Text>
-        ),
+        titleKey: "label.your-location",
+        contentKey: "text.location-search",
         icon: (
             <ThemeIcon
                 variant="light"
@@ -25,15 +18,8 @@ const features: FeatureSectionCardProps[] = [
         ),
     },
     {
-        title: "Wonach suchst du?",
-        content: (
-            <Text size="sm">
-                Du kannst die Suche ebenfalls einschränken, um nur bestimmte
-                Kraftstoffsorten innerhalb eines Gebietes anzuzeigen. <br />
-                Die Berechnung des Gesamtpreises ist nur in der
-                Einzelkraftstoffsuche verfügbar.
-            </Text>
-        ),
+        titleKey: "label.your-search",
+        contentKey: "text.your-filter",
         icon: (
             <ThemeIcon
                 variant="light"
@@ -44,14 +30,8 @@ const features: FeatureSectionCardProps[] = [
         ),
     },
     {
-        title: "Dein Auto",
-        content: (
-            <Text size="sm">
-                Konfiguriere für die Rentabilitätsrechnung einer Tankfahrt dein
-                Auto. Dazu werden lediglich dein Verbrauch und Tankvolumen
-                benötigt.
-            </Text>
-        ),
+        titleKey: "label.your-car",
+        contentKey: "text.your-car",
         icon: (
             <ThemeIcon
                 variant="gradient"

@@ -1,25 +1,27 @@
 import { Group } from "@mantine/core";
 import classes from "./index.module.css";
-import { FC, useMemo } from "react";
-import links from "@/components/Footer/links";
+import { FC } from "react";
+import links from "./links";
 import Link from "./Link";
 import InstallPWAButton from "@/components/InstallPWAButton";
+import { getTranslate } from "@/tolgee/server";
 
-const Footer: FC = () => {
-    const linkList = useMemo(
-        () =>
-            links.map((l) => (
-                <Link
-                    key={l.label}
-                    {...l}
-                />
-            )),
-        [],
-    );
+const Footer: FC = async () => {
+    const t = await getTranslate();
+
     return (
         <footer className={classes.footer}>
             <Group className={classes.links}>
-                {linkList}
+                {links.map((l) => {
+                    const label = l.labelKey ? t(l.labelKey) : l.label;
+                    return (
+                        <Link
+                            key={label}
+                            {...l}
+                            label={label}
+                        />
+                    );
+                })}
                 <InstallPWAButton />
             </Group>
         </footer>

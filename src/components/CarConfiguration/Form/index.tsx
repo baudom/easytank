@@ -12,6 +12,7 @@ import {
 } from "@mantine/core";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
 import { IconInfoSquareRounded } from "@tabler/icons-react";
+import { T, useTranslate } from "@tolgee/react";
 
 type CarConfigurationFormProps = {
     onSubmit: (value: CarConfiguration) => void;
@@ -22,6 +23,7 @@ const assertPositiveValue = (value: number | undefined) =>
 
 const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
     const { carConfig, resetCarConfig, hideModal } = useCarConfiguration();
+    const { t } = useTranslate();
     const form = useForm<CarConfiguration>({
         initialValues: carConfig,
         validateInputOnChange: true,
@@ -48,11 +50,13 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                 <IconInfoSquareRounded
                     style={{ width: rem(18), height: rem(18) }}
                 />
-                <Text size="xs">Nur in Einzelkraftstoffsuche verfügbar</Text>
+                <Text size="xs">
+                    <T keyName="text.calculation-availability" />
+                </Text>
             </Group>
             <Stack>
                 <NumberInput
-                    label="&#8709; Verbrauch in l/100km"
+                    label={t("label.average-fuel-consumption")}
                     placeholder="5,8"
                     decimalScale={2}
                     allowedDecimalSeparators={[",", "."]}
@@ -61,7 +65,7 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                     {...form.getInputProps("averageConsumption100Km")}
                 />
                 <NumberInput
-                    label="Nachfüllmenge in Liter"
+                    label={t("label.refill-quantity")}
                     placeholder="20"
                     decimalScale={2}
                     allowedDecimalSeparators={[",", "."]}
@@ -70,7 +74,7 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                     {...form.getInputProps("refillVolume")}
                 />
                 <Checkbox
-                    label="Hin -und Rückfahrt berechnen"
+                    label={t("label.calculate-return-travel")}
                     {...form.getInputProps("inclusiveReturnTravel", {
                         type: "checkbox",
                     })}
@@ -84,9 +88,11 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                             hideModal();
                         }}
                     >
-                        Zurücksetzen
+                        <T keyName="action.reset" />
                     </Button>
-                    <Button type="submit">Speichern</Button>
+                    <Button type="submit">
+                        <T keyName="action.save" />
+                    </Button>
                 </Group>
             </Stack>
         </form>

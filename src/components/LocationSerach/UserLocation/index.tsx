@@ -7,6 +7,7 @@ import {
 import { ActionIcon, rem, useMantineTheme } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import getUserPosition from "@/helper/position";
+import { useTranslate } from "@tolgee/react";
 
 const iconStyle = { width: rem(18), height: rem(18) };
 
@@ -17,6 +18,7 @@ type UserLocationProps = {
 const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
     const { primaryColor } = useMantineTheme();
     const [loading, setLoading] = useState(false);
+    const { t } = useTranslate();
 
     const onLocationRequest = useCallback(async () => {
         if (navigator.geolocation) {
@@ -24,7 +26,7 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
 
             const notificationId = notifications.show({
                 loading: true,
-                title: "Standort wird ermittelt...",
+                title: t("notification.lookup-location-in-progress"),
                 message: undefined,
                 autoClose: false,
                 withCloseButton: false,
@@ -37,8 +39,11 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
                 notifications.update({
                     id: notificationId,
                     color: "green",
-                    title: "Standort wurde ermittelt!",
-                    message: `Koordinaten: ${coords.latitude}, ${coords.longitude}`,
+                    title: t("notification.location-determined"),
+                    message: t("notification.coordinates-detail", {
+                        latitude: coords.latitude,
+                        longitude: coords.longitude,
+                    }),
                     icon: <IconCheck style={iconStyle} />,
                     loading: false,
                     autoClose: 4000,
@@ -46,14 +51,16 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
                 });
             } catch (e: any | PositionErrorCallback) {
                 // https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError/code
-                let message = "Unbekannter Fehler.";
+                let message = t("notification.unknown-error");
                 if (e instanceof GeolocationPositionError) {
                     switch (e.code) {
                         case e.PERMISSION_DENIED:
-                            message = "Berechtigung wurde nicht gewährt.";
+                            message = t(
+                                "notification.location-permission-denied",
+                            );
                             break;
                         case e.POSITION_UNAVAILABLE:
-                            message = "Standort aktuell nicht verfügbar.";
+                            message = t("notification.location-unavailable");
                             break;
                     }
                 }
@@ -61,7 +68,7 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
                 notifications.update({
                     id: notificationId,
                     color: "red",
-                    title: "Standort konnte nicht ermittelt werden!",
+                    title: t("notification.determine-location-failed"),
                     message: message,
                     icon: <IconCurrentLocationOff style={iconStyle} />,
                     loading: false,
@@ -75,12 +82,12 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
             notifications.show({
                 color: "red",
                 icon: <IconCurrentLocationOff style={iconStyle} />,
-                title: "Standort nicht verfügbar!",
-                message: "Dein aktueller Standort ist nicht verfügbar.",
+                title: t("notification.location-unavailable"),
+                message: undefined,
                 withCloseButton: true,
             });
         }
-    }, [onLocationFound]);
+    }, [onLocationFound, t]);
 
     return (
         <>

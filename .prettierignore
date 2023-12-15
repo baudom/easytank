@@ -9,4 +9,10 @@ build
 *.txt
 *.ico
 *.svg
+
 docker-compose.template.yaml
+docker-compose.yaml
+CHANGELOG.md
+
+i18n
+.github

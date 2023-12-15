@@ -18,7 +18,8 @@
         "assets": [
           "CHANGELOG.md",
           "package.json",
-          "docker-compose.yaml"
+          "docker-compose.yaml",
+          "i18n/**.json"
         ]
       }
     ],
