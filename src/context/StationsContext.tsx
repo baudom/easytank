@@ -169,7 +169,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                 close();
             }
         },
-        [calculateStationEfficiency, close, open],
+        [calculateStationEfficiency, close, open, t],
     );
 
     useEffect(() => {
