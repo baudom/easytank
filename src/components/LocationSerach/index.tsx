@@ -15,10 +15,12 @@ import { PARAM_SEARCH } from "@/model/nominatim";
 import { Location } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
 import CarConfiguration from "@/components/CarConfiguration";
+import { useTranslate } from "@tolgee/react";
 
 const LocationSearch: FC = () => {
     const { primaryColor } = useMantineTheme();
     const { setCoords } = useStationsContext();
+    const { t } = useTranslate();
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [input, setInput] = useState("");
@@ -74,7 +76,7 @@ const LocationSearch: FC = () => {
                 autoFocus
                 ref={inputRef}
                 size="md"
-                placeholder="PLZ oder Ort"
+                placeholder={t("label.search-placeholder")}
                 leftSection={userLocation}
                 rightSection={
                     <ActionIcon

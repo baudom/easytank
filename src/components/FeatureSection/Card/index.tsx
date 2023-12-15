@@ -1,16 +1,17 @@
 import { FC, memo, ReactNode } from "react";
 import { Card, Text } from "@mantine/core";
+import { T, TranslationKey } from "@tolgee/react";
 
 export type FeatureSectionCardProps = {
     icon: ReactNode;
-    title: string;
-    content: ReactNode;
+    titleKey: TranslationKey;
+    contentKey: TranslationKey;
 };
 
 const FeatureSectionCard: FC<FeatureSectionCardProps> = ({
     icon,
-    title,
-    content,
+    titleKey,
+    contentKey,
 }) => {
     return (
         <Card
@@ -23,9 +24,14 @@ const FeatureSectionCard: FC<FeatureSectionCardProps> = ({
                 fw="bold"
                 mt="md"
             >
-                {title}
+                <T keyName={titleKey} />
             </Text>
-            {content}
+            <Text size="sm">
+                <T
+                    keyName={contentKey}
+                    params={{ br: <br /> }}
+                />
+            </Text>
         </Card>
     );
 };

@@ -10,7 +10,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock ./
-RUN yarn --frozen-lockfile;
+RUN yarn install
 
 
 # Rebuild the source code only when needed
@@ -26,6 +26,12 @@ COPY . .
 
 ARG NEXT_PUBLIC_CONTACT_MAIL
 ENV NEXT_PUBLIC_CONTACT_MAIL=$NEXT_PUBLIC_CONTACT_MAIL
+
+ARG TOLGEE_API_KEY
+ENV TOLGEE_API_KEY=$TOLGEE_API_KEY
+
+ARG TOLGEE_URL
+ENV TOLGEE_URL=$TOLGEE_URL
 
 RUN yarn build
 

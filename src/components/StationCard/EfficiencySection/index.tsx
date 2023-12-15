@@ -3,6 +3,7 @@ import { Box, Button, Group, rem, Text, useMantineTheme } from "@mantine/core";
 import { IconReceipt2 } from "@tabler/icons-react";
 import { CalculatedStation } from "@/model";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
+import { T } from "@tolgee/react";
 
 type EfficiencySectionProps = Pick<CalculatedStation, "refillPrice">;
 
@@ -21,7 +22,9 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
                     }}
                     stroke={1.5}
                 />
-                <Text variant="gradient">Gesamtkosten</Text>
+                <Text variant="gradient">
+                    <T keyName="label.total-cost" />
+                </Text>
             </Group>
             {refillPrice !== undefined ? (
                 <Text
@@ -41,7 +44,7 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
                     size="xs"
                     onClick={showModal}
                 >
-                    Auto konfigurieren
+                    <T keyName="label.configure-car" />
                 </Button>
             )}
         </Box>
