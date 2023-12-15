@@ -7,12 +7,12 @@ import { FC, ReactNode } from "react";
 import { Notifications } from "@mantine/notifications";
 import Footer from "@/components/Footer";
 import { theme } from "@/theme";
-import ColorSchemeToggle from "@/components/ColorSchemeToggle";
 import { getStaticData } from "@/tolgee/shared";
 import { notFound } from "next/navigation";
 import { TolgeeNextProvider } from "@/tolgee/client";
 import { DEFAULT_LOCALE } from "@/model/constants";
 import { LocaleType, localeTypes } from "@/model";
+import AppSettings from "@/components/AppSettings";
 
 export const metadata = {
     title: "easytank | baudom",
@@ -77,7 +77,7 @@ const Layout: FC<Props> = async ({
                         theme={theme}
                         defaultColorScheme="dark"
                     >
-                        <ColorSchemeToggle />
+                        <AppSettings />
                         <Notifications
                             position="top-right"
                             autoClose={4000}
