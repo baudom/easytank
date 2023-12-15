@@ -19,6 +19,8 @@ export type StationsResponse = {
 };
 // TODO: type with ok = false and req message
 
+export type PriceType = number | null;
+
 export type Station = {
     id: string;
     name: string;
@@ -30,9 +32,9 @@ export type Station = {
     lat: number;
     lng: number;
     dist: number;
-    diesel: number;
     price?: number;
-    e5: number;
-    e10: number;
+    diesel: PriceType;
+    e5: PriceType;
+    e10: PriceType;
     isOpen: boolean;
 };

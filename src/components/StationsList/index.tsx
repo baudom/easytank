@@ -27,7 +27,10 @@ const StationsList: FC = () => {
         }
 
         return stations.length ? (
-            <Grid>
+            <Grid
+                mb={0}
+                pb="lg"
+            >
                 {stations.map((s) => (
                     <Grid.Col
                         key={s.id}
