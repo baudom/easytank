@@ -1,3 +1,21 @@
+# [1.1.0](https://github.com/baudom/easytank/compare/v1.0.1...v1.1.0) (2023-12-18)
+
+
+### Bug Fixes
+
+* Don't pull translations in postversion, adjust docker-compose template ([4c0d08b](https://github.com/baudom/easytank/commit/4c0d08b0d05b1f97308308d18548796f1fe516bf))
+
+
+### Features
+
+* **#27:** Internationalization (de-en) ([#31](https://github.com/baudom/easytank/issues/31)) ([94e4ce9](https://github.com/baudom/easytank/commit/94e4ce9ce7b59f18624dd6e3d4e3799fd8b0fc8b)), closes [#27](https://github.com/baudom/easytank/issues/27)
+* **#30:** Advanced Filter and Sort ([#32](https://github.com/baudom/easytank/issues/32)) ([f697528](https://github.com/baudom/easytank/commit/f6975286667d46838b894df7f7685258a280a931)), closes [#30](https://github.com/baudom/easytank/issues/30)
+
+
+### Performance Improvements
+
+* **#26:** Order stations by price ASC ([#28](https://github.com/baudom/easytank/issues/28)) ([ce009b4](https://github.com/baudom/easytank/commit/ce009b4a9d4b7f685176b55299e0f01a59033230)), closes [#26](https://github.com/baudom/easytank/issues/26)
+
 # 1.0.1 (2023-11-30)
 
 
