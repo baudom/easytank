@@ -38,6 +38,13 @@ const CarConfigurationContext: FC<CarConfigurationContextProps> = ({
     const [carConfig, setCarConfig, resetCarConfig] = useLocalStorage({
         key: LS_CAR_CONFIGURATION_KEY,
         defaultValue: DEFAULT_CAR_CONFIGURATION,
+        deserialize: (v) => {
+            const parsed = v ? JSON.parse(v) : {};
+            return {
+                ...DEFAULT_CAR_CONFIGURATION,
+                ...parsed,
+            } as CarConfiguration;
+        },
     });
     const [configModalShown, { open, close }] = useDisclosure(false);
 

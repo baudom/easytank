@@ -31,6 +31,9 @@ import { useTranslate } from "@tolgee/react";
 const DEFAULT_STATION_CONFIG: StationFilter = {
     radius: 10,
     type: "diesel",
+    brands: [],
+    onlyOpen: true,
+    order: "distance",
 };
 
 type ContextType = {
@@ -68,6 +71,10 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     const [stationConfig, setStationConfig] = useLocalStorage({
         key: LS_STATION_CONFIGURATION_KEY,
         defaultValue: DEFAULT_STATION_CONFIG,
+        deserialize: (v) => {
+            const parsed = v ? JSON.parse(v) : {};
+            return { ...DEFAULT_STATION_CONFIG, ...parsed } as StationFilter;
+        },
     });
 
     const setStationConfigOverwrite = useCallback(
@@ -177,7 +184,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
         onFetchStations(coords, stationConfig);
         // re-render due onFetchStations not needed
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [coords, stationConfig]);
+    }, [coords, stationConfig.type, stationConfig.radius]);
 
     useEffect(() => {
         setStations((prev) =>

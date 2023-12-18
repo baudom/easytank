@@ -16,6 +16,7 @@ import { Location } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
 import CarConfiguration from "@/components/CarConfiguration";
 import { useTranslate } from "@tolgee/react";
+import StationSortButton from "@/components/StationFilter/StationSortButton";
 
 const LocationSearch: FC = () => {
     const { primaryColor } = useMantineTheme();
@@ -108,6 +109,7 @@ const LocationSearch: FC = () => {
                     return onSearchLocations();
                 }}
             />
+            <StationSortButton />
             <CarConfiguration />
         </Group>
     );
