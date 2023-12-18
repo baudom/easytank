@@ -1,0 +1,5 @@
+.mantine-MultiSelect-pillsList {
+    display: block;
+    overflow: scroll;
+    white-space: nowrap;
+}
