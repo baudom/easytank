@@ -6,25 +6,44 @@ import { Box, Grid, Loader, Stack, Text } from "@mantine/core";
 import FeatureSection from "@/components/FeatureSection";
 import StationCard from "@/components/StationCard";
 import { T } from "@tolgee/react";
+import { sortByNumberAsc } from "@/helper/sortings";
 
 const StationsList: FC = () => {
     const { stations, loading, stationConfig } = useStationsContext();
 
     const filteredStations = useMemo(
         () =>
-            stations?.filter((s) => {
-                let result = true;
-                if (stationConfig.onlyOpen) {
-                    result = s.isOpen;
-                }
+            stations
+                ?.filter((s) => {
+                    let result = true;
+                    if (stationConfig.onlyOpen) {
+                        result = s.isOpen;
+                    }
 
-                if (stationConfig.brands?.length) {
-                    result = result && stationConfig.brands.includes(s.brand);
-                }
+                    if (stationConfig.brands?.length) {
+                        result =
+                            result && stationConfig.brands.includes(s.brand);
+                    }
 
-                return result;
-            }),
-        [stationConfig.onlyOpen, stationConfig.brands, stations],
+                    return result;
+                })
+                .sort((a, b) => {
+                    if (!stationConfig.order) return 0;
+
+                    if (stationConfig.order === "price" && a.price && b.price) {
+                        return sortByNumberAsc(a.price, b.price);
+                    } else if (stationConfig.order === "distance") {
+                        return sortByNumberAsc(a.dist, b.dist);
+                    }
+
+                    return 0;
+                }),
+        [
+            stations,
+            stationConfig.onlyOpen,
+            stationConfig.brands,
+            stationConfig.order,
+        ],
     );
 
     return useMemo(() => {

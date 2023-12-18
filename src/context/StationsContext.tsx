@@ -33,6 +33,7 @@ const DEFAULT_STATION_CONFIG: StationFilter = {
     type: "diesel",
     brands: [],
     onlyOpen: true,
+    order: "distance",
 };
 
 type ContextType = {
@@ -70,6 +71,10 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     const [stationConfig, setStationConfig] = useLocalStorage({
         key: LS_STATION_CONFIGURATION_KEY,
         defaultValue: DEFAULT_STATION_CONFIG,
+        deserialize: (v) => {
+            const parsed = v ? JSON.parse(v) : {};
+            return { ...DEFAULT_STATION_CONFIG, ...parsed } as StationFilter;
+        },
     });
 
     const setStationConfigOverwrite = useCallback(

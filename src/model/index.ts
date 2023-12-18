@@ -39,11 +39,15 @@ export type Location = {
 
 export type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;
 
+export const stationOrderTypes = ["price", "distance"] as const;
+export type StationOrderType = (typeof stationOrderTypes)[number];
+
 export type StationFilter = {
     radius: RadiusType;
     type: FuelType;
     brands: string[];
     onlyOpen: boolean;
+    order: StationOrderType;
 };
 
 export type CarConfiguration = {
