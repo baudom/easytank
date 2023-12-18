@@ -42,6 +42,8 @@ export type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;
 export type StationFilter = {
     radius: RadiusType;
     type: FuelType;
+    brands: string[];
+    onlyOpen: boolean;
 };
 
 export type CarConfiguration = {

@@ -31,6 +31,8 @@ import { useTranslate } from "@tolgee/react";
 const DEFAULT_STATION_CONFIG: StationFilter = {
     radius: 10,
     type: "diesel",
+    brands: [],
+    onlyOpen: true,
 };
 
 type ContextType = {
@@ -177,7 +179,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
         onFetchStations(coords, stationConfig);
         // re-render due onFetchStations not needed
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [coords, stationConfig]);
+    }, [coords, stationConfig.type, stationConfig.radius]);
 
     useEffect(() => {
         setStations((prev) =>
