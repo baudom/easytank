@@ -30,7 +30,7 @@ const StationFilter: FC<StationFilterProps> = () => {
     const { t } = useTranslate();
 
     return (
-        <SimpleGrid cols={{ base: 2, md: 4 }}>
+        <SimpleGrid cols={{ base: 2, md: 4, sm: 3 }}>
             <Select
                 size="md"
                 data={fuelTypes.map((type) => ({
