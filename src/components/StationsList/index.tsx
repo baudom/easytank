@@ -55,7 +55,7 @@ const StationsList: FC = () => {
                 >
                     <Loader type="dots" />
                     <Text>
-                        <T keyName="notification.location-search-in-progress" />
+                        <T keyName="notification.station-search-in-progress" />
                     </Text>
                 </Stack>
             );
