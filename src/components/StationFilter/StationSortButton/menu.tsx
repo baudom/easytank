@@ -16,6 +16,11 @@ const menu: MenuType[] = [
         type: "price",
     },
     {
+        key: "label.total-cost",
+        icon: <IconCoinEuro />,
+        type: "refillPrice",
+    },
+    {
         key: "label.distance",
         icon: <IconRoute />,
         type: "distance",
