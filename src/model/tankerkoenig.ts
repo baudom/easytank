@@ -9,15 +9,19 @@ export const PARAM_FUEL_TYPE = "type";
 export const PARAM_SORT = "sort";
 export const PARAM_API_KEY = "apikey";
 
-export type StationsResponse = {
-    ok: boolean;
+export type StationSuccessResponse = {
+    ok: true;
     license: string;
     data: "MTS-K" | string;
-    status: "ok" | "error" | string;
-    message?: string;
     stations: Station[];
 };
-// TODO: type with ok = false and req message
+
+export type StationErrorResponse = {
+    ok: false;
+    message: string;
+};
+
+export type StationsResponse = StationSuccessResponse | StationErrorResponse;
 
 export type PriceType = number | null;
 
