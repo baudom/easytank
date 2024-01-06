@@ -10,6 +10,7 @@ import getUserPosition from "@/helper/position";
 import { useTranslate } from "@tolgee/react";
 import { NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { useHotkeys } from "@mantine/hooks";
+import useTracking from "@/hooks/useTracking";
 
 const iconStyle = { width: rem(18), height: rem(18) };
 
@@ -22,8 +23,10 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
     const [loading, setLoading] = useState(false);
     const { t } = useTranslate();
     useHotkeys([["mod+shift+P", () => onLocationRequest()]], []);
+    const { trackEvent } = useTracking();
 
     const onLocationRequest = useCallback(async () => {
+        void trackEvent("detect-position");
         if (navigator.geolocation) {
             setLoading(true);
 
@@ -90,7 +93,7 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
                 withCloseButton: true,
             });
         }
-    }, [onLocationFound, t]);
+    }, [onLocationFound, t, trackEvent]);
 
     return (
         <Tooltip label={t("label.use-current-location")}>
