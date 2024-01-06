@@ -1,5 +1,7 @@
 declare namespace NodeJS {
     interface ProcessEnv {
+        APTABASE_API_KEY: string;
+        APTABASE_API_HOST: string;
         TANKERKOENIG_API_KEY: string;
         NOMINATIM_USER_AGENT: string;
         NEXT_PUBLIC_NAME: string;

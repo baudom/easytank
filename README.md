@@ -19,6 +19,8 @@ NEXT_PUBLIC_AUTHOR_URL=$npm_package_author_url
 NEXT_PUBLIC_REPOSITORY_URL=$npm_package_repositoryUrl
 
 # .env.local config
+APTABASE_API_KEY=your-api-key
+APTABASE_API_HOST=your-api-host
 TANKERKOENIG_API_KEY=your-api-key
 NOMINATIM_USER_AGENT=your-user-agent
 NEXT_PUBLIC_CONTACT_MAIL=your@contact.mail
