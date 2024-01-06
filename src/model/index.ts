@@ -39,7 +39,7 @@ export type Location = {
 
 export type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;
 
-export const stationOrderTypes = ["price", "distance"] as const;
+export const stationOrderTypes = ["price", "refillPrice", "distance"] as const;
 export type StationOrderType = (typeof stationOrderTypes)[number];
 
 export type StationFilter = {

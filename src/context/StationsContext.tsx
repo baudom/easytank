@@ -33,7 +33,7 @@ const DEFAULT_STATION_CONFIG: StationFilter = {
     type: "diesel",
     brands: [],
     onlyOpen: true,
-    order: "distance",
+    order: "refillPrice",
 };
 
 type ContextType = {

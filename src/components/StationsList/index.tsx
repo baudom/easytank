@@ -32,6 +32,12 @@ const StationsList: FC = () => {
 
                     if (stationConfig.order === "price" && a.price && b.price) {
                         return sortByNumberAsc(a.price, b.price);
+                    } else if (
+                        stationConfig.order === "refillPrice" &&
+                        a.refillPrice &&
+                        b.refillPrice
+                    ) {
+                        return sortByNumberAsc(a.refillPrice, b.refillPrice);
                     } else if (stationConfig.order === "distance") {
                         return sortByNumberAsc(a.dist, b.dist);
                     }
