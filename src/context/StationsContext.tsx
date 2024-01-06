@@ -17,7 +17,7 @@ import {
     PARAM_LONGITUDE,
     PARAM_RADIUS,
     Station,
-    StationsResponse,
+    StationSuccessResponse,
 } from "@/model/tankerkoenig";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
@@ -124,7 +124,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
             open();
             const notificationId = notifications.show({
                 loading: true,
-                title: t("notification.location-search-in-progress"),
+                title: t("notification.station-search-in-progress"),
                 message: undefined,
                 autoClose: false,
                 withCloseButton: false,
@@ -132,7 +132,12 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
 
             try {
                 const response = await fetch(`/api/stations?${params}`, {});
-                const res: StationsResponse = await response.json();
+                if (!response.ok) {
+                    const res: Response = await response.json();
+                    throw new Error(JSON.stringify(res));
+                }
+
+                const res: StationSuccessResponse = await response.json();
                 setStations(
                     res && res.stations.length
                         ? res.stations

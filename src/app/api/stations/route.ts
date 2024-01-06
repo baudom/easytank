@@ -8,6 +8,7 @@ import {
     PARAM_RADIUS,
     PARAM_SORT,
     StationsResponse,
+    StationSuccessResponse,
 } from "@/model/tankerkoenig";
 import {
     createErrorResponse,
@@ -62,7 +63,7 @@ export async function GET(request: NextRequest) {
         });
 
         const results: StationsResponse = await response.json();
-        if (results.status === "error") {
+        if (!results.ok) {
             throw new Error(results.message);
         }
 
@@ -73,7 +74,10 @@ export async function GET(request: NextRequest) {
     }
 }
 
-const postPrepareStations = (fuelType: FuelType, res: StationsResponse) => {
+const postPrepareStations = (
+    fuelType: FuelType,
+    res: StationSuccessResponse,
+) => {
     if (fuelType === "all") return res;
 
     return {
