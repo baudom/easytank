@@ -1,7 +1,9 @@
 "use client";
 
 import { useAptabase } from "@aptabase/react";
-import { FC, useCallback, useEffect } from "react";
+import { useCallback } from "react";
+import { useLocalStorage } from "@mantine/hooks";
+import { LS_ALLOW_TRACKING } from "@/model/constants";
 
 const TRACK_LANGUAGE = "language-selector";
 const TRACK_THEME = "theme-selector";
@@ -14,7 +16,26 @@ export type TrackEventKey =
     | "install-pwa";
 
 const useTracking = () => {
-    const { trackEvent: track } = useAptabase();
+    const client = useAptabase();
+    const [allowTracking, setAllowTracking] = useLocalStorage<
+        boolean | undefined
+    >({
+        key: LS_ALLOW_TRACKING,
+        defaultValue: undefined,
+        deserialize: (v) => v === "true",
+        getInitialValueInEffect: false, // prevent setting default value even if value is present
+    });
+
+    const track = useCallback(
+        (
+            key: TrackEventKey | typeof TRACK_LANGUAGE | typeof TRACK_THEME,
+            props?: Parameters<typeof client.trackEvent>[1],
+        ) => {
+            if (!allowTracking) return;
+            void client.trackEvent(key, props);
+        },
+        [allowTracking, client],
+    );
 
     const trackEvent = useCallback(
         (key: TrackEventKey) => {
@@ -37,17 +58,13 @@ const useTracking = () => {
         [track],
     );
 
-    return { trackEvent, trackLanguageSelect, trackThemeChange };
-};
-
-export const InitialTrack: FC = () => {
-    const { trackEvent } = useTracking();
-
-    useEffect(() => {
-        void trackEvent("page-visit");
-    }, [trackEvent]);
-
-    return null;
+    return {
+        trackEvent,
+        trackLanguageSelect,
+        trackThemeChange,
+        allowTracking,
+        setAllowTracking,
+    };
 };
 
 export default useTracking;

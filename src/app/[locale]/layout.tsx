@@ -14,7 +14,6 @@ import { DEFAULT_LOCALE, NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { LocaleType, localeTypes } from "@/model";
 import AppSettings from "@/components/AppSettings";
 import { AptabaseProvider } from "@aptabase/react";
-import { InitialTrack } from "@/hooks/useTracking";
 
 export const metadata = {
     title: "easytank | baudom",
@@ -86,7 +85,6 @@ const Layout: FC<Props> = async ({
                                 host: process.env.APTABASE_API_HOST,
                             }}
                         >
-                            <InitialTrack />
                             <AppSettings />
                             <Notifications
                                 position="top-right"
