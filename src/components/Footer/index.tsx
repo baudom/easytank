@@ -5,6 +5,7 @@ import links from "./links";
 import Link from "./Link";
 import InstallPWAButton from "@/components/InstallPWAButton";
 import { getTranslate } from "@/tolgee/server";
+import TrackingConfiguration from "@/components/TrackingConfiguration";
 
 const Footer: FC = async () => {
     const t = await getTranslate();
@@ -22,6 +23,7 @@ const Footer: FC = async () => {
                         />
                     );
                 })}
+                <TrackingConfiguration />
                 <InstallPWAButton />
             </Group>
         </footer>
