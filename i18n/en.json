@@ -11,6 +11,7 @@
   },
   "label" : {
     "all" : "All",
+    "allow-anonymous-tracking" : "Allow anonymous tracking",
     "average-fuel-consumption" : "∅ Consumption in l/100km",
     "calculate-return-travel" : "Calculate return travel",
     "closed" : "Closed",
@@ -18,6 +19,7 @@
     "contact" : "Contact",
     "distance" : "Distance",
     "how-it-works" : "How it works",
+    "manage-tracking" : "Manage tracking",
     "no-brand-found" : "No brand found!",
     "only-open-stations" : "Only open stations",
     "open" : "Open",
@@ -52,6 +54,7 @@
     "please-retry" : "Please try again!",
     "short-explanation" : "Find out within a few seconds, which gas station in your area is <b>actually</b> the cheapest.",
     "sorting-order-ascending" : "Order ascending",
+    "tracking-note" : "<b>Note: </b>\n                    Following data can be collected <b>anonymously</b>:\n                    <br></br>\n                    <ul>\n                        <li>Country</li>\n                        <li>Operating System and App-Version</li>\n                        <li>Following Click-Events:</li>\n                        <ul>\n                            <li>Selected Language and Theme</li>\n                            <li>Position search (automatic and manual)</li>\n                            <li>Car configuration</li>\n                            <li>Installation as App</li>\n                        </ul>\n                    </ul>",
     "your-car" : "Configure your car for the profitability calculation of a tank trip.\n<br></br>You only need to enter your average fuel consumption and tank volume.",
     "your-filter" : "You can also filter your search to only get specific fuels within a given area.\n<br></br>The calculation of your total cost is only available in single fuel search."
   }
