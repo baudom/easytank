@@ -11,6 +11,7 @@
   },
   "label" : {
     "all" : "Alle",
+    "allow-anonymous-tracking" : "Anonymes Tracking erlauben",
     "average-fuel-consumption" : "∅ Verbrauch in l/100km",
     "calculate-return-travel" : "Hin -und Rückfahrt berechnen",
     "closed" : "Geschlossen",
@@ -18,6 +19,7 @@
     "contact" : "Kontakt",
     "distance" : "Entfernung",
     "how-it-works" : "Wie es funktioniert",
+    "manage-tracking" : "Tracking verwalten",
     "no-brand-found" : "Keine Marke gefunden!",
     "only-open-stations" : "Nur Geöffnete Tankstellen",
     "open" : "Geöffnet",
@@ -52,6 +54,7 @@
     "please-retry" : "Bitte versuche es erneut!",
     "short-explanation" : "Erfahre innerhalb weniger Sekunden, welche Tankstelle in deiner Nähe die <b>eigentlich</b> Günstigste ist.",
     "sorting-order-ascending" : "Sortierung aufsteigend",
+    "tracking-note" : "<b>Hinweis: </b>\n                    Folgende Daten können <b>anonym</b> erhoben werden:\n                   <br></br>\n                    <ul>\n                        <li>Land</li>\n                        <li>Betriebssystem und App-Version</li>\n                        <li>Folgende Click-Events:</li>\n                        <ul>\n                            <li>Gewählte Sprache und Darstellung</li>\n                            <li>Positionssuche (Automatisch und Manuell)</li>\n                            <li>Konfiguration Auto</li>\n                            <li>Installation als App</li>\n                        </ul>\n                    </ul>",
     "your-car" : "Konfiguriere für die Rentabilitätsrechnung einer Tankfahrt dein Auto.\n<br></br>Dazu werden lediglich dein Durchschnittsverbrauch und Tankvolumen benötigt.",
     "your-filter" : "Du kannst die Suche ebenfalls einschränken, um nur bestimmte Kraftstoffsorten innerhalb eines Gebietes anzuzeigen.\n<br></br>Die Berechnung des Gesamtpreises ist nur in der Einzelkraftstoffsuche verfügbar."
   }
