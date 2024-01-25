@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/baudom/easytank/compare/v1.1.0...v1.1.1) (2024-01-25)
+
+
+### Performance Improvements
+
+* **#33:** Improved Error handling ([#36](https://github.com/baudom/easytank/issues/36)) ([793fee8](https://github.com/baudom/easytank/commit/793fee8a033f8ca36ecc4915f250c4866746730b)), closes [#33](https://github.com/baudom/easytank/issues/33)
+* **#35:** Enhanced sorting ([#37](https://github.com/baudom/easytank/issues/37)) ([e0c94dd](https://github.com/baudom/easytank/commit/e0c94dd2aae7bdb83452f11b0dc53a1819f49f1b)), closes [#35](https://github.com/baudom/easytank/issues/35)
+
 # [1.1.0](https://github.com/baudom/easytank/compare/v1.0.1...v1.1.0) (2023-12-18)
 
 
