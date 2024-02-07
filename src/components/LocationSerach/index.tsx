@@ -118,13 +118,13 @@ const LocationSearch: FC = () => {
                 style={{ flex: 1 }}
                 autoFocus
                 ref={inputRef}
-                size="md"
+                size="lg"
                 placeholder={t("label.search-placeholder")}
                 leftSection={userLocation}
                 rightSection={
                     <ActionIcon
                         loading={loading}
-                        size="md"
+                        size="lg"
                         color={primaryColor}
                         variant="filled"
                         onClick={onSearchLocations}
