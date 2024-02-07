@@ -92,7 +92,7 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
     return (
         <>
             <ActionIcon
-                size="md"
+                size="lg"
                 loading={loading}
                 color={primaryColor}
                 variant="transparent"
