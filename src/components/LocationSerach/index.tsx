@@ -1,6 +1,14 @@
 "use client";
 
-import { FC, memo, useCallback, useMemo, useRef, useState } from "react";
+import {
+    FC,
+    memo,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from "react";
 import {
     ActionIcon,
     Autocomplete,
@@ -22,8 +30,10 @@ import CarConfiguration from "@/components/CarConfiguration";
 import { useTranslate } from "@tolgee/react";
 import StationSortButton from "@/components/StationFilter/StationSortButton";
 import { notifications } from "@mantine/notifications";
+import { useDebouncedValue } from "@mantine/hooks";
 
 const iconStyle = { width: rem(18), height: rem(18) };
+const DEBOUNCE_TIMEOUT = 500;
 
 const LocationSearch: FC = () => {
     const { primaryColor } = useMantineTheme();
@@ -32,6 +42,10 @@ const LocationSearch: FC = () => {
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [input, setInput] = useState("");
+    const [debouncedInput, cancelDebounce] = useDebouncedValue(
+        input,
+        DEBOUNCE_TIMEOUT,
+    );
     const [loading, setLoading] = useState(false);
 
     const [locations, setLocations] = useState<ComboboxData>();
@@ -48,9 +62,9 @@ const LocationSearch: FC = () => {
     );
 
     const onSearchLocations = useCallback(async () => {
-        if (!input || !input.trim()) return;
+        if (!debouncedInput || !debouncedInput.trim()) return;
 
-        const params = new URLSearchParams({ [PARAM_SEARCH]: input });
+        const params = new URLSearchParams({ [PARAM_SEARCH]: debouncedInput });
         setLoading(true);
         const notificationId = notifications.show({
             loading: true,
@@ -110,7 +124,11 @@ const LocationSearch: FC = () => {
         } finally {
             setLoading(false);
         }
-    }, [input, t]);
+    }, [debouncedInput, t]);
+
+    useEffect(() => {
+        void onSearchLocations();
+    }, [debouncedInput, onSearchLocations]);
 
     return (
         <Group>
@@ -118,13 +136,13 @@ const LocationSearch: FC = () => {
                 style={{ flex: 1 }}
                 autoFocus
                 ref={inputRef}
-                size="md"
+                size="lg"
                 placeholder={t("label.search-placeholder")}
                 leftSection={userLocation}
                 rightSection={
                     <ActionIcon
                         loading={loading}
-                        size="md"
+                        size="lg"
                         color={primaryColor}
                         variant="filled"
                         onClick={onSearchLocations}
@@ -145,6 +163,9 @@ const LocationSearch: FC = () => {
                         latitude: Number(location.lat),
                         longitude: Number(location.lon),
                     });
+
+                    // cancel debounce after setting value to input
+                    setTimeout(cancelDebounce, DEBOUNCE_TIMEOUT / 2);
                 }}
                 onKeyDownCapture={(ev) => {
                     if (ev.key !== "Enter") return;

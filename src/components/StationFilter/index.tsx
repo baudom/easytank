@@ -32,7 +32,7 @@ const StationFilter: FC<StationFilterProps> = () => {
     return (
         <SimpleGrid cols={{ base: 2, md: 4, sm: 3 }}>
             <Select
-                size="md"
+                size="lg"
                 data={fuelTypes.map((type) => ({
                     label: t(fuelTypesWithTranslations.get(type)!),
                     value: type,
@@ -43,7 +43,7 @@ const StationFilter: FC<StationFilterProps> = () => {
                 }
             />
             <Select
-                size="md"
+                size="lg"
                 data={radiusTypes.map((rad) => ({
                     label: `${rad}km`,
                     value: `${rad}`,

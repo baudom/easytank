@@ -23,7 +23,7 @@ const StationBrandSelect: FC<StationBrandSelectorProps> = ({ brands }) => {
 
     return (
         <MultiSelect
-            size="md"
+            size="lg"
             data={brands.map((e) => ({ label: e, value: e }))}
             value={stationConfig.brands}
             onChange={onChange}

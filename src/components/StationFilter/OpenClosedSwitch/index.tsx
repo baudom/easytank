@@ -1,5 +1,6 @@
 "use client";
 
+import "./index.css";
 import { ChangeEvent, FC, useCallback } from "react";
 import { Switch } from "@mantine/core";
 import { useTranslate } from "@tolgee/react";

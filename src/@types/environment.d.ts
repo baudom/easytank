@@ -10,5 +10,7 @@ declare namespace NodeJS {
         NEXT_PUBLIC_CONTACT_MAIL: string;
         NEXT_PUBLIC_TOLGEE_API_KEY: string;
         NEXT_PUBLIC_TOLGEE_API_URL: string;
+        NEXT_PUBLIC_PAYPAL_URL: string;
+        NEXT_PUBLIC_STATUS_URL: string;
     }
 }
