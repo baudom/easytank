@@ -9,7 +9,7 @@ const links = [
         label: `${process.env.NEXT_PUBLIC_NAME} v${process.env.NEXT_PUBLIC_VERSION} made with ❤️ by ${process.env.NEXT_PUBLIC_AUTHOR}`,
     },
     {
-        link: "https://www.paypal.com/paypalme/dominikbaurecht",
+        link: process.env.NEXT_PUBLIC_PAYPAL_URL,
         label: `Donate with PayPal`,
     },
     {
@@ -20,7 +20,7 @@ const links = [
         link: "https://openstreetmap.org/copyright",
         label: `Locations by OpenStreetMap`,
     },
-    { link: "https://status.baudom.de/status/easytank", label: "Status" },
+    { link: process.env.NEXT_PUBLIC_STATUS_URL, label: "Status" },
     {
         link: `mailto:${process.env.NEXT_PUBLIC_CONTACT_MAIL}`,
         label: "Kontakt",
