@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/baudom/easytank/compare/v1.1.1...v1.2.0) (2024-02-10)
+
+
+### Features
+
+* **#40:** Debounced input, UX and Environment improvements ([#41](https://github.com/baudom/easytank/issues/41)) ([0709d4c](https://github.com/baudom/easytank/commit/0709d4c580426dbb7225d55ce6233d2d6df8c653)), closes [#40](https://github.com/baudom/easytank/issues/40)
+
 ## [1.1.1](https://github.com/baudom/easytank/compare/v1.1.0...v1.1.1) (2024-01-25)
 
 
