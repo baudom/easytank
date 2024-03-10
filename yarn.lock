@@ -791,7 +791,7 @@
   resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.40.0.tgz#96cecc990a03412b88194ce3765280d2e63c1be6"
   integrity sha512-VqKsBSX159cLFTnCzkCmGhZtSPJHNN0lM2sC4xe0HPOfPUnjiex7rDHDdut4oe4iKRecDDpwXwM9BcU6xCPlCg==
 
-"@tolgee/cli@^1.3.2":
+"@tolgee/cli@1.3.2":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@tolgee/cli/-/cli-1.3.2.tgz#4ddf07f96612f95f1744dfc15bdeac5c46c61d21"
   integrity sha512-7Vf+BFGmQ9jLfDiRrhsgg+h494k0V8BacSdKVZV83PqhibI6/+H9boJvB1oSA+IEwAO9BoBFxy87Y1LN0NI1Cg==

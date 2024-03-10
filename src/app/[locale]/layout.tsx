@@ -10,7 +10,7 @@ import { theme } from "@/theme";
 import { getStaticData } from "@/tolgee/shared";
 import { notFound } from "next/navigation";
 import { TolgeeNextProvider } from "@/tolgee/client";
-import { DEFAULT_LOCALE } from "@/model/constants";
+import { DEFAULT_LOCALE, NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { LocaleType, localeTypes } from "@/model";
 import AppSettings from "@/components/AppSettings";
 
@@ -80,7 +80,9 @@ const Layout: FC<Props> = async ({
                         <AppSettings />
                         <Notifications
                             position="top-right"
-                            autoClose={4000}
+                            autoClose={NOTIFICATION_TIMEOUT}
+                            limit={2}
+                            transitionDuration={500}
                         />
                         {children}
                         <Footer />

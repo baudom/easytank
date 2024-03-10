@@ -8,6 +8,7 @@ import { ActionIcon, rem, useMantineTheme } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import getUserPosition from "@/helper/position";
 import { useTranslate } from "@tolgee/react";
+import { NOTIFICATION_TIMEOUT } from "@/model/constants";
 
 const iconStyle = { width: rem(18), height: rem(18) };
 
@@ -46,7 +47,7 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
                     }),
                     icon: <IconCheck style={iconStyle} />,
                     loading: false,
-                    autoClose: 4000,
+                    autoClose: NOTIFICATION_TIMEOUT,
                     withCloseButton: true,
                 });
             } catch (e: any | PositionErrorCallback) {
@@ -72,7 +73,7 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
                     message: message,
                     icon: <IconCurrentLocationOff style={iconStyle} />,
                     loading: false,
-                    autoClose: 4000,
+                    autoClose: NOTIFICATION_TIMEOUT,
                     withCloseButton: true,
                 });
             } finally {
