@@ -31,6 +31,7 @@ import { useTranslate } from "@tolgee/react";
 import StationSortButton from "@/components/StationFilter/StationSortButton";
 import { notifications } from "@mantine/notifications";
 import { useDebouncedValue } from "@mantine/hooks";
+import { NOTIFICATION_TIMEOUT } from "@/model/constants";
 
 const iconStyle = { width: rem(18), height: rem(18) };
 const DEBOUNCE_TIMEOUT = 500;
@@ -106,7 +107,7 @@ const LocationSearch: FC = () => {
                 }),
                 icon: <IconCheck style={iconStyle} />,
                 loading: false,
-                autoClose: 4000,
+                autoClose: NOTIFICATION_TIMEOUT,
                 withCloseButton: true,
             });
         } catch (e) {
@@ -118,7 +119,7 @@ const LocationSearch: FC = () => {
                 message: t("text.please-retry"),
                 icon: <IconCurrentLocationOff style={iconStyle} />,
                 loading: false,
-                autoClose: 4000,
+                autoClose: NOTIFICATION_TIMEOUT,
                 withCloseButton: true,
             });
         } finally {

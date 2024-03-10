@@ -25,7 +25,10 @@ import { IconCheck, IconCurrentLocationOff } from "@tabler/icons-react";
 import { rem } from "@mantine/core";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
 import { sortByNumberAsc } from "@/helper/sortings";
-import { LS_STATION_CONFIGURATION_KEY } from "@/model/constants";
+import {
+    LS_STATION_CONFIGURATION_KEY,
+    NOTIFICATION_TIMEOUT,
+} from "@/model/constants";
 import { useTranslate } from "@tolgee/react";
 
 const DEFAULT_STATION_CONFIG: StationFilter = {
@@ -162,7 +165,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                     }),
                     icon: <IconCheck style={iconStyle} />,
                     loading: false,
-                    autoClose: 4000,
+                    autoClose: NOTIFICATION_TIMEOUT,
                     withCloseButton: true,
                 });
             } catch (e) {
@@ -174,7 +177,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                     message: t("text.please-retry"),
                     icon: <IconCurrentLocationOff style={iconStyle} />,
                     loading: false,
-                    autoClose: 4000,
+                    autoClose: NOTIFICATION_TIMEOUT,
                     withCloseButton: true,
                 });
             } finally {
