@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/baudom/easytank/compare/v1.2.0...v1.2.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* **#43:** Limit notifications ([#44](https://github.com/baudom/easytank/issues/44)) ([7e423e3](https://github.com/baudom/easytank/commit/7e423e37bdfacbf34f459550563146593a83987c)), closes [#43](https://github.com/baudom/easytank/issues/43)
+
 # [1.2.0](https://github.com/baudom/easytank/compare/v1.1.1...v1.2.0) (2024-02-10)
 
 
