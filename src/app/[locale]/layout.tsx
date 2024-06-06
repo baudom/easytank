@@ -13,6 +13,7 @@ import { TolgeeNextProvider } from "@/tolgee/client";
 import { DEFAULT_LOCALE, NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { LocaleType, localeTypes } from "@/model";
 import AppSettings from "@/components/AppSettings";
+import { AptabaseProvider } from "@aptabase/react";
 
 export const metadata = {
     title: "easytank | baudom",
@@ -77,15 +78,23 @@ const Layout: FC<Props> = async ({
                         theme={theme}
                         defaultColorScheme="dark"
                     >
-                        <AppSettings />
-                        <Notifications
-                            position="top-right"
-                            autoClose={NOTIFICATION_TIMEOUT}
-                            limit={2}
-                            transitionDuration={500}
-                        />
-                        {children}
-                        <Footer />
+                        <AptabaseProvider
+                            appKey={process.env.APTABASE_API_KEY}
+                            options={{
+                                appVersion: process.env.NEXT_PUBLIC_VERSION,
+                                host: process.env.APTABASE_API_HOST,
+                            }}
+                        >
+                            <AppSettings />
+                            <Notifications
+                                position="top-right"
+                                autoClose={NOTIFICATION_TIMEOUT}
+                                limit={2}
+                                transitionDuration={500}
+                            />
+                            {children}
+                            <Footer />
+                        </AptabaseProvider>
                     </MantineProvider>
                 </TolgeeNextProvider>
             </body>

@@ -3,6 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import { Anchor } from "@mantine/core";
 import { T } from "@tolgee/react";
+import useTracking from "@/hooks/useTracking";
 
 type BeforeInstallPromptEvent = Event & {
     prompt?: () => void;
@@ -13,6 +14,7 @@ type BeforeInstallPromptEvent = Event & {
 let pwaPromptRef: BeforeInstallPromptEvent | null = null;
 
 const InstallPWAButton: FC = () => {
+    const { trackEvent } = useTracking();
     const [supportsPwa, setSupportsPwa] = useState(false);
 
     useEffect(() => {
@@ -30,7 +32,10 @@ const InstallPWAButton: FC = () => {
             variant="gradient"
             fw="bold"
             size="xs"
-            onClick={() => pwaPromptRef?.prompt?.()}
+            onClick={() => {
+                pwaPromptRef?.prompt?.();
+                void trackEvent("install-pwa");
+            }}
         >
             <T keyName="action.install-app" />
         </Anchor>
