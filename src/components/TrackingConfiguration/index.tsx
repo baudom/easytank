@@ -21,6 +21,9 @@ const TrackingConfiguration: FC = () => {
     const onClose = useCallback(() => {
         close();
         setAllowTracking(!!allowTracking);
+        if (!!allowTracking) {
+            location.reload();
+        }
     }, [allowTracking, close, setAllowTracking]);
 
     return (
