@@ -25,9 +25,10 @@
     "open" : "Open",
     "price" : "Price",
     "refill-quantity" : "Refill quantity in Liters",
-    "search-placeholder" : "Search for a place...",
+    "search-placeholder" : "Search for a place... (⌘ or Ctrl + K)",
     "select-brand" : "Select brand",
     "total-cost" : "Total cost",
+    "use-current-location" : "Use current location (⌘ or Ctrl + Shift ⇧ + P)",
     "your-car" : "Your car",
     "your-location" : "Your location",
     "your-search" : "What are you searching for?"

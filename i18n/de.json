@@ -25,9 +25,10 @@
     "open" : "Geöffnet",
     "price" : "Preis",
     "refill-quantity" : "Nachfüllmenge in Liter",
-    "search-placeholder" : "PLZ oder Ort...",
+    "search-placeholder" : "PLZ oder Ort... (⌘ oder Strg + K)",
     "select-brand" : "Marke auswählen",
     "total-cost" : "Gesamtkosten",
+    "use-current-location" : "Aktuellen Standort nutzen (⌘ oder Strg + Umschalt ⇧ + P)",
     "your-car" : "Dein Auto",
     "your-location" : "Dein Standort",
     "your-search" : "Wonach suchst du?"
