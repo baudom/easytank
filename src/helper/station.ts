@@ -10,6 +10,10 @@ export const getStationThumb = ({ brand }: Station) => {
     // TODO: copyright?
     return null;
 
+    if (brand.startsWith("EDEKA")) {
+        return "https://verbund.edeka/verbund/presse/mediathek/edeka_preview-logo.jpg?impolicy=4x3";
+    }
+
     switch (brand) {
         case "AVIA":
         case "AVIA XPress":
