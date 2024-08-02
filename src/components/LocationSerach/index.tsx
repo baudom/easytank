@@ -30,7 +30,7 @@ import CarConfiguration from "@/components/CarConfiguration";
 import { useTranslate } from "@tolgee/react";
 import StationSortButton from "@/components/StationFilter/StationSortButton";
 import { notifications } from "@mantine/notifications";
-import { useDebouncedValue } from "@mantine/hooks";
+import { useDebouncedValue, useHotkeys } from "@mantine/hooks";
 import { NOTIFICATION_TIMEOUT } from "@/model/constants";
 
 const iconStyle = { width: rem(18), height: rem(18) };
@@ -48,6 +48,7 @@ const LocationSearch: FC = () => {
         DEBOUNCE_TIMEOUT,
     );
     const [loading, setLoading] = useState(false);
+    useHotkeys([["mod+K", () => inputRef.current?.focus()]], []);
 
     const [locations, setLocations] = useState<ComboboxData>();
 
