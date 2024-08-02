@@ -4,11 +4,12 @@ import {
     IconCurrentLocation,
     IconCurrentLocationOff,
 } from "@tabler/icons-react";
-import { ActionIcon, rem, useMantineTheme } from "@mantine/core";
+import { ActionIcon, rem, Tooltip, useMantineTheme } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import getUserPosition from "@/helper/position";
 import { useTranslate } from "@tolgee/react";
 import { NOTIFICATION_TIMEOUT } from "@/model/constants";
+import { useHotkeys } from "@mantine/hooks";
 
 const iconStyle = { width: rem(18), height: rem(18) };
 
@@ -20,6 +21,7 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
     const { primaryColor } = useMantineTheme();
     const [loading, setLoading] = useState(false);
     const { t } = useTranslate();
+    useHotkeys([["mod+shift+P", () => onLocationRequest()]], []);
 
     const onLocationRequest = useCallback(async () => {
         if (navigator.geolocation) {
@@ -91,7 +93,7 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
     }, [onLocationFound, t]);
 
     return (
-        <>
+        <Tooltip label={t("label.use-current-location")}>
             <ActionIcon
                 size="lg"
                 loading={loading}
@@ -104,7 +106,7 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
                     stroke={1.5}
                 />
             </ActionIcon>
-        </>
+        </Tooltip>
     );
 };
 
