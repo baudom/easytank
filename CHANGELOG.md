@@ -1,3 +1,16 @@
+# [1.3.0](https://github.com/baudom/easytank/compare/v1.2.1...v1.3.0) (2024-08-02)
+
+
+### Bug Fixes
+
+* **#48:** Fix resetting car configuration form ([#53](https://github.com/baudom/easytank/issues/53)) ([a26fc46](https://github.com/baudom/easytank/commit/a26fc461f6d4c056e13540fddc7b5f05e6be300b))
+* typo in readme ([714065e](https://github.com/baudom/easytank/commit/714065eefb724683d9e05aeeb584b788df24a12c))
+
+
+### Features
+
+* **#51:** Keyboard shortcuts ([#52](https://github.com/baudom/easytank/issues/52)) ([ba69440](https://github.com/baudom/easytank/commit/ba694403665008c1106c16fc944e8b29ad22528f)), closes [#51](https://github.com/baudom/easytank/issues/51)
+
 ## [1.2.1](https://github.com/baudom/easytank/compare/v1.2.0...v1.2.1) (2024-03-19)
 
 
