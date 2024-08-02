@@ -95,7 +95,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                 carConfig.refillVolume === undefined ||
                 carConfig.inclusiveReturnTravel === undefined
             ) {
-                return station;
+                return { ...station, refillPrice: undefined };
             }
 
             const fuelPerKm = Number(carConfig.averageConsumption100Km) / 100;
