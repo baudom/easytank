@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/baudom/easytank/compare/v1.3.0...v1.4.0) (2024-09-28)
+
+
+### Bug Fixes
+
+* **#47:** Rework station brand select ([#56](https://github.com/baudom/easytank/issues/56)) ([1b22443](https://github.com/baudom/easytank/commit/1b22443ed64d7356122bd4f1c5102389ea739b90)), closes [#47](https://github.com/baudom/easytank/issues/47)
+
+
+### Features
+
+* **#34:** Tracking ([#50](https://github.com/baudom/easytank/issues/50)) ([ebb0001](https://github.com/baudom/easytank/commit/ebb0001518816caa459b4f4b847cd95c366d66c4)), closes [#34](https://github.com/baudom/easytank/issues/34)
+
 # [1.3.0](https://github.com/baudom/easytank/compare/v1.2.1...v1.3.0) (2024-08-02)
 
 
