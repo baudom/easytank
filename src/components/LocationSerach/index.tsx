@@ -32,6 +32,7 @@ import StationSortButton from "@/components/StationFilter/StationSortButton";
 import { notifications } from "@mantine/notifications";
 import { useDebouncedValue, useHotkeys } from "@mantine/hooks";
 import { NOTIFICATION_TIMEOUT } from "@/model/constants";
+import useTracking from "@/hooks/useTracking";
 
 const iconStyle = { width: rem(18), height: rem(18) };
 const DEBOUNCE_TIMEOUT = 500;
@@ -40,6 +41,7 @@ const LocationSearch: FC = () => {
     const { primaryColor } = useMantineTheme();
     const { setCoords } = useStationsContext();
     const { t } = useTranslate();
+    const { trackEvent } = useTracking();
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [input, setInput] = useState("");
@@ -66,6 +68,7 @@ const LocationSearch: FC = () => {
     const onSearchLocations = useCallback(async () => {
         if (!debouncedInput || !debouncedInput.trim()) return;
 
+        void trackEvent("manual-search");
         const params = new URLSearchParams({ [PARAM_SEARCH]: debouncedInput });
         setLoading(true);
         const notificationId = notifications.show({
@@ -126,7 +129,7 @@ const LocationSearch: FC = () => {
         } finally {
             setLoading(false);
         }
-    }, [debouncedInput, t]);
+    }, [debouncedInput, t, trackEvent]);
 
     useEffect(() => {
         void onSearchLocations();
