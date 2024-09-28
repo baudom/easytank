@@ -7,6 +7,7 @@ import { Modal, Text } from "@mantine/core";
 import CarConfigurationForm from "@/components/CarConfiguration/Form";
 import { LS_CAR_CONFIGURATION_KEY } from "@/model/constants";
 import { T } from "@tolgee/react";
+import useTracking from "@/hooks/useTracking";
 
 type CarConfigurationContextProps = {
     children: ReactNode;
@@ -35,6 +36,7 @@ const Context = createContext<ContextType>({
 const CarConfigurationContext: FC<CarConfigurationContextProps> = ({
     children,
 }) => {
+    const { trackEvent } = useTracking();
     const [carConfig, setCarConfig, resetCarConfig] = useLocalStorage({
         key: LS_CAR_CONFIGURATION_KEY,
         defaultValue: DEFAULT_CAR_CONFIGURATION,
@@ -54,7 +56,10 @@ const CarConfigurationContext: FC<CarConfigurationContextProps> = ({
                 carConfig,
                 setCarConfig,
                 resetCarConfig,
-                showModal: open,
+                showModal: () => {
+                    open();
+                    void trackEvent("configure-car");
+                },
                 hideModal: close,
             }}
         >
