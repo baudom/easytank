@@ -27,10 +27,9 @@ const StationBrandSelect: FC<StationBrandSelectorProps> = ({ brands }) => {
             data={brands.map((e) => ({ label: e, value: e }))}
             value={stationConfig.brands}
             onChange={onChange}
-            placeholder={t("label.select-brand")}
-            nothingFoundMessage={t("label.no-brand-found")}
+            placeholder={t("label.select-station")}
+            nothingFoundMessage={t("label.no-station-found")}
             clearable
-            searchable
         />
     );
 };
