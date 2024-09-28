@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useCallback, useEffect } from "react";
+import { FC, memo, useCallback, useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import useTracking from "@/hooks/useTracking";
 import { T, useTranslate } from "@tolgee/react";
@@ -14,7 +14,7 @@ const TrackingConfiguration: FC = () => {
     );
 
     useEffect(() => {
-        void trackEvent("page-visit");
+        trackEvent();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -71,4 +71,4 @@ const TrackingConfiguration: FC = () => {
     );
 };
 
-export default TrackingConfiguration;
+export default memo(TrackingConfiguration);

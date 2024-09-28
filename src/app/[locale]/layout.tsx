@@ -13,7 +13,6 @@ import { TolgeeNextProvider } from "@/tolgee/client";
 import { DEFAULT_LOCALE, NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { LocaleType, localeTypes } from "@/model";
 import AppSettings from "@/components/AppSettings";
-import { AptabaseProvider } from "@aptabase/react";
 
 export const metadata = {
     title: "easytank | baudom",
@@ -48,6 +47,12 @@ const Layout: FC<Props> = async ({
         >
             <head>
                 <ColorSchemeScript defaultColorScheme="dark" />
+                <script
+                    defer
+                    src={process.env.TRACKING_API_HOST}
+                    data-website-id={process.env.TRACKING_API_KEY}
+                    data-auto-track="false"
+                />
                 <link
                     rel="icon"
                     href="/favicon.ico"
@@ -78,23 +83,15 @@ const Layout: FC<Props> = async ({
                         theme={theme}
                         defaultColorScheme="dark"
                     >
-                        <AptabaseProvider
-                            appKey={process.env.APTABASE_API_KEY}
-                            options={{
-                                appVersion: process.env.NEXT_PUBLIC_VERSION,
-                                host: process.env.APTABASE_API_HOST,
-                            }}
-                        >
-                            <AppSettings />
-                            <Notifications
-                                position="top-right"
-                                autoClose={NOTIFICATION_TIMEOUT}
-                                limit={2}
-                                transitionDuration={500}
-                            />
-                            {children}
-                            <Footer />
-                        </AptabaseProvider>
+                        <AppSettings />
+                        <Notifications
+                            position="top-right"
+                            autoClose={NOTIFICATION_TIMEOUT}
+                            limit={2}
+                            transitionDuration={500}
+                        />
+                        {children}
+                        <Footer />
                     </MantineProvider>
                 </TolgeeNextProvider>
             </body>
