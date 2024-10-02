@@ -15,17 +15,21 @@ const StationsList: FC = () => {
         () =>
             stations
                 ?.filter((s) => {
-                    let result = true;
+                    const passes = [];
                     if (stationConfig.onlyOpen) {
-                        result = s.isOpen;
+                        passes.push(s.isOpen);
+                    }
+
+                    if (stationConfig.onlyAvailable) {
+                        // @ts-ignore
+                        passes.push(typeof s[stationConfig.type] === "number");
                     }
 
                     if (stationConfig.brands?.length) {
-                        result =
-                            result && stationConfig.brands.includes(s.brand);
+                        passes.push(stationConfig.brands.includes(s.brand));
                     }
 
-                    return result;
+                    return passes.every(Boolean);
                 })
                 .sort((a, b) => {
                     if (!stationConfig.order) return 0;
@@ -47,7 +51,9 @@ const StationsList: FC = () => {
         [
             stations,
             stationConfig.onlyOpen,
+            stationConfig.onlyAvailable,
             stationConfig.brands,
+            stationConfig.type,
             stationConfig.order,
         ],
     );

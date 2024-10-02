@@ -47,6 +47,7 @@ export type StationFilter = {
     type: FuelType;
     brands: string[];
     onlyOpen: boolean;
+    onlyAvailable: boolean;
     order: StationOrderType;
 };
 
