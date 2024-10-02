@@ -3,28 +3,32 @@
 import { FC, memo, useCallback, useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import useTracking from "@/hooks/useTracking";
-import { T, useTranslate } from "@tolgee/react";
-import { Anchor, Modal, Switch, Text } from "@mantine/core";
+import { T } from "@tolgee/react";
+import { Anchor, Button, Group, Modal, Text } from "@mantine/core";
+import { LS_ALLOW_TRACKING_OLD } from "@/model/constants";
 
 const TrackingConfiguration: FC = () => {
-    const { t } = useTranslate();
     const { trackEvent, allowTracking, setAllowTracking } = useTracking();
     const [showModal, { open, close }] = useDisclosure(
         typeof allowTracking !== "boolean",
     );
 
     useEffect(() => {
+        localStorage.removeItem(LS_ALLOW_TRACKING_OLD); // TODO remove in upcoming changes
         trackEvent();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const onClose = useCallback(() => {
-        close();
-        setAllowTracking(!!allowTracking);
-        if (!!allowTracking) {
+    const changeTrackingAgreement = useCallback(
+        (allowed: boolean) => {
+            close();
+            setAllowTracking(allowed);
+
+            if (!allowed) return;
             location.reload();
-        }
-    }, [allowTracking, close, setAllowTracking]);
+        },
+        [close, setAllowTracking],
+    );
 
     return (
         <>
@@ -35,16 +39,8 @@ const TrackingConfiguration: FC = () => {
                     </Text>
                 }
                 opened={showModal}
-                onClose={onClose}
+                onClose={close}
             >
-                <Switch
-                    style={{ display: "flex", alignItems: "center" }}
-                    checked={allowTracking}
-                    onChange={(v) => setAllowTracking(v.target.checked)}
-                    label={t("label.allow-anonymous-tracking")}
-                    size="md"
-                    mb="sm"
-                />
                 <Text
                     size="sm"
                     component="span"
@@ -59,6 +55,20 @@ const TrackingConfiguration: FC = () => {
                         }}
                     />
                 </Text>
+                <Group grow>
+                    <Button
+                        variant="subtle"
+                        onClick={() => changeTrackingAgreement(false)}
+                    >
+                        <T keyName={"label.disallow"} />
+                    </Button>
+                    <Button
+                        variant="gradient"
+                        onClick={() => changeTrackingAgreement(true)}
+                    >
+                        <T keyName={"label.allow"} />
+                    </Button>
+                </Group>
             </Modal>
             <Anchor<"a">
                 c="dimmed"
