@@ -29,7 +29,7 @@ import { Location } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
 import CarConfiguration from "@/components/CarConfiguration";
 import { useTranslate } from "@tolgee/react";
-import StationSortButton from "@/components/StationFilter/StationSortButton";
+import StationSortButton from "@/components/StationFilter/StationFilterButton";
 import { notifications } from "@mantine/notifications";
 import { useDebouncedValue, useHotkeys } from "@mantine/hooks";
 import { NOTIFICATION_TIMEOUT } from "@/model/constants";
@@ -156,7 +156,7 @@ const LocationSearch: FC = () => {
                         loading={loading}
                         size="lg"
                         color={primaryColor}
-                        variant="filled"
+                        variant="transparent"
                         onClick={onSearchLocations}
                     >
                         <IconSearch
