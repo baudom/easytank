@@ -36,6 +36,7 @@ const DEFAULT_STATION_CONFIG: StationFilter = {
     type: "diesel",
     brands: [],
     onlyOpen: true,
+    onlyAvailable: true,
     order: "refillPrice",
 };
 

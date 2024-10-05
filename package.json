@@ -18,10 +18,10 @@
         "postversion": "yarn gen:docker-compose"
     },
     "dependencies": {
-        "@mantine/core": "^7.2.1",
-        "@mantine/form": "^7.2.2",
-        "@mantine/hooks": "^7.2.1",
-        "@mantine/notifications": "^7.2.2",
+        "@mantine/core": "^7.13.2",
+        "@mantine/form": "^7.13.2",
+        "@mantine/hooks": "^7.13.2",
+        "@mantine/notifications": "^7.13.2",
         "@tabler/icons-react": "^2.40.0",
         "@tolgee/format-icu": "5.17.0",
         "@tolgee/react": "5.17.0",
