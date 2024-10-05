@@ -8,7 +8,7 @@ const CarConfiguration: FC = () => {
 
     return (
         <ActionIcon
-            size="lg"
+            size="xl"
             variant="gradient"
             onClick={showModal}
         >
