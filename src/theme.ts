@@ -1,6 +1,6 @@
 "use client";
 
-import { createTheme, darken } from "@mantine/core";
+import { createTheme } from "@mantine/core";
 
 export const theme = createTheme({
     fontFamily: "var(--font-default)",
