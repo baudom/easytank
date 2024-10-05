@@ -74,7 +74,7 @@ const Layout: FC<Props> = async ({
                     content="Tankstellensuche powered by Tankerkoenig und OpenStreetMap"
                 />
             </head>
-            <body>
+            <body style={{ minHeight: "100vh" }}>
                 <TolgeeNextProvider
                     locale={locale}
                     locales={locales}

@@ -4,7 +4,7 @@ import {
     IconCurrentLocation,
     IconCurrentLocationOff,
 } from "@tabler/icons-react";
-import { ActionIcon, rem, Tooltip, useMantineTheme } from "@mantine/core";
+import { ActionIcon, rem, Tooltip, useMatches } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import getUserPosition from "@/helper/position";
 import { useTranslate } from "@tolgee/react";
@@ -19,11 +19,14 @@ type UserLocationProps = {
 };
 
 const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
-    const { primaryColor } = useMantineTheme();
     const [loading, setLoading] = useState(false);
     const { t } = useTranslate();
     useHotkeys([["mod+shift+P", () => onLocationRequest()]], []);
     const { trackEvent } = useTracking();
+    const isSmallDevice = useMatches({
+        base: true,
+        md: false,
+    });
 
     const onLocationRequest = useCallback(async () => {
         void trackEvent("detect-position");
@@ -98,10 +101,9 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound }) => {
     return (
         <Tooltip label={t("label.use-current-location")}>
             <ActionIcon
-                size="lg"
+                size={isSmallDevice ? "lg" : "xl"}
                 loading={loading}
-                color={primaryColor}
-                variant="transparent"
+                variant={isSmallDevice ? "transparent" : "light"}
                 onClick={onLocationRequest}
             >
                 <IconCurrentLocation

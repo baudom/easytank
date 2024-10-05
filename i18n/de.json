@@ -1,5 +1,6 @@
 {
   "action" : {
+    "cancel" : "Abbrechen",
     "install-app" : "Als App installieren",
     "reset" : "Zurücksetzen",
     "save" : "Speichern"
@@ -19,15 +20,18 @@
     "contact" : "Kontakt",
     "disallow" : "Ablehnen",
     "distance" : "Entfernung",
+    "filter" : "Filter",
     "how-it-works" : "Wie es funktioniert",
     "manage-tracking" : "Zustimmung Tracking",
     "no-station-found" : "Keine Tankstelle gefunden!",
-    "only-open-stations" : "Nur Geöffnete Tankstellen",
+    "only-available" : "Nur Tankstellen mit Preisen",
+    "only-open-stations" : "Nur geöffnete Tankstellen",
     "open" : "Geöffnet",
     "price" : "Preis",
     "refill-quantity" : "Nachfüllmenge in Liter",
     "search-placeholder" : "PLZ oder Ort... (⌘ oder Strg + K)",
-    "select-station" : "Tankstelle auswählen",
+    "select-n-stations" : "Tankstelle(n) auswählen",
+    "sort-and-filter" : "Sortierung und Filter",
     "total-cost" : "Gesamtkosten",
     "use-current-location" : "Aktuellen Standort nutzen (⌘ oder Strg + Umschalt ⇧ + P)",
     "your-car" : "Dein Auto",
