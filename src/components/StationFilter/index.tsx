@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, memo, useMemo } from "react";
+import { FC, memo } from "react";
 import { Select, SimpleGrid } from "@mantine/core";
 import {
     FuelType,
@@ -11,26 +11,16 @@ import {
 } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
 import { useTranslate } from "@tolgee/react";
-import StationBrandSelect from "@/components/StationFilter/StationBrandSelect";
-import OpenClosedSwitch from "@/components/StationFilter/OpenClosedSwitch";
 
 type StationFilterProps = {};
 
 const StationFilter: FC<StationFilterProps> = () => {
-    const { stationConfig, setStationConfig, stations } = useStationsContext();
-
-    const brands = useMemo(
-        () =>
-            stations
-                ?.map((s) => s.brand)
-                .filter((s, i, self) => self.indexOf(s) === i),
-        [stations],
-    );
+    const { stationConfig, setStationConfig } = useStationsContext();
 
     const { t } = useTranslate();
 
     return (
-        <SimpleGrid cols={{ base: 2, md: 4, sm: 3 }}>
+        <SimpleGrid cols={{ base: 2, md: 4 }}>
             <Select
                 size="lg"
                 data={fuelTypes.map((type) => ({
@@ -56,8 +46,6 @@ const StationFilter: FC<StationFilterProps> = () => {
                     })
                 }
             />
-            {brands?.length ? <StationBrandSelect brands={brands} /> : null}
-            <OpenClosedSwitch />
         </SimpleGrid>
     );
 };
