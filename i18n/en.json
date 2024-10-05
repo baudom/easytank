@@ -1,5 +1,6 @@
 {
   "action" : {
+    "cancel" : "Cancel",
     "install-app" : "Install as app",
     "reset" : "Reset",
     "save" : "Save"
@@ -19,9 +20,9 @@
     "contact" : "Contact",
     "disallow" : "Disallow",
     "distance" : "Distance",
+    "filter" : "Filter",
     "how-it-works" : "How it works",
     "manage-tracking" : "Consent tracking",
-    "more-filters" : "More filters",
     "no-station-found" : "No station found!",
     "only-available" : "Only stations with price",
     "only-open-stations" : "Only open stations",
@@ -29,7 +30,8 @@
     "price" : "Price",
     "refill-quantity" : "Refill quantity in Liters",
     "search-placeholder" : "Search for a place... (⌘ or Ctrl + K)",
-    "select-station" : "Select station",
+    "select-n-stations" : "Select station(s)",
+    "sort-and-filter" : "Sorting and filterting",
     "total-cost" : "Total cost",
     "use-current-location" : "Use current location (⌘ or Ctrl + Shift ⇧ + P)",
     "your-car" : "Your car",
