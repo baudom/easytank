@@ -16,6 +16,7 @@ import {
     Group,
     rem,
     useMantineTheme,
+    useMatches,
 } from "@mantine/core";
 import {
     IconCheck,
@@ -45,14 +46,19 @@ const LocationSearch: FC = () => {
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [input, setInput] = useState("");
+    const [locations, setLocations] = useState<ComboboxData>();
+    const [loading, setLoading] = useState(false);
+
     const [debouncedInput, cancelDebounce] = useDebouncedValue(
         input,
         DEBOUNCE_TIMEOUT,
     );
-    const [loading, setLoading] = useState(false);
-    useHotkeys([["mod+K", () => inputRef.current?.focus()]], []);
 
-    const [locations, setLocations] = useState<ComboboxData>();
+    useHotkeys([["mod+K", () => inputRef.current?.focus()]], []);
+    const isSmallDevice = useMatches({
+        base: true,
+        md: false,
+    });
 
     const userLocation = useMemo(
         () => (
@@ -137,13 +143,14 @@ const LocationSearch: FC = () => {
 
     return (
         <Group>
+            {!isSmallDevice ? userLocation : null}
             <Autocomplete
                 style={{ flex: 1 }}
                 autoFocus
                 ref={inputRef}
                 size="lg"
                 placeholder={t("label.search-placeholder")}
-                leftSection={userLocation}
+                leftSection={isSmallDevice ? userLocation : null}
                 rightSection={
                     <ActionIcon
                         loading={loading}
