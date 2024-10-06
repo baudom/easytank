@@ -49,6 +49,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
                     <T keyName="text.sorting-order-ascending" />
                 </Text>
                 <SegmentedControl
+                    withItemsBorders={false}
                     data={menu.map((e) => ({ ...e, label: t(e.label) }))}
                     {...form.getInputProps("order", { type: "input" })}
                 />
