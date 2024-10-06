@@ -1,3 +1,16 @@
+## [1.4.1](https://github.com/baudom/easytank/compare/v1.4.0...v1.4.1) (2024-10-06)
+
+
+### Bug Fixes
+
+* **#43:** Rework tracking dialog ([#58](https://github.com/baudom/easytank/issues/58)) ([e6d5263](https://github.com/baudom/easytank/commit/e6d5263095a618a6e0142c40411da7ccabee8774)), closes [#43](https://github.com/baudom/easytank/issues/43)
+
+
+### Performance Improvements
+
+* **#57:** Improve Filtering and Searchbar ([#60](https://github.com/baudom/easytank/issues/60)) ([8946ecc](https://github.com/baudom/easytank/commit/8946ecc7e018792cb8f4774b0b453815450787da)), closes [#57](https://github.com/baudom/easytank/issues/57)
+* **#59:** Ask for tracking permissions after changes ([#62](https://github.com/baudom/easytank/issues/62)) ([5d213cd](https://github.com/baudom/easytank/commit/5d213cdfb16037f3e9c680aff6a1296e5ce661c8)), closes [#59](https://github.com/baudom/easytank/issues/59)
+
 # [1.4.0](https://github.com/baudom/easytank/compare/v1.3.0...v1.4.0) (2024-09-28)
 
 
