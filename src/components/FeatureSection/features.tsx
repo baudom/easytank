@@ -1,5 +1,9 @@
 import { rem, ThemeIcon } from "@mantine/core";
-import { IconCar, IconCurrentLocation, IconFilter } from "@tabler/icons-react";
+import {
+    IconCar,
+    IconCurrentLocation,
+    IconFilterDown,
+} from "@tabler/icons-react";
 import { FeatureSectionCardProps } from "@/components/FeatureSection/Card";
 
 const iconStyle = { width: rem(18), height: rem(18) };
@@ -25,7 +29,7 @@ const features: FeatureSectionCardProps[] = [
                 variant="light"
                 size="lg"
             >
-                <IconFilter style={iconStyle} />
+                <IconFilterDown style={iconStyle} />
             </ThemeIcon>
         ),
     },

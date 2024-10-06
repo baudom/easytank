@@ -20,7 +20,10 @@ const StationsList: FC = () => {
                         passes.push(s.isOpen);
                     }
 
-                    if (stationConfig.onlyAvailable) {
+                    if (
+                        stationConfig.onlyAvailable &&
+                        stationConfig.type !== "all"
+                    ) {
                         // @ts-ignore
                         passes.push(typeof s[stationConfig.type] === "number");
                     }

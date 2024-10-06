@@ -13,6 +13,7 @@ import {
 } from "@mantine/core";
 import { T, useTranslate } from "@tolgee/react";
 import menu from "@/components/StationFilter/StationFilterButton/Form/menu";
+import { sortByStringAsc } from "@/helper/sortings";
 
 export type StationFilterFormFields = Pick<
     StationFilter,
@@ -38,7 +39,10 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
     });
 
     const brands = useMemo(
-        () => Array.from(new Set(stations?.map((s) => s.brand))),
+        () =>
+            Array.from(new Set(stations?.map((s) => s.brand || "n. V."))).sort(
+                sortByStringAsc,
+            ),
         [stations],
     );
 
@@ -71,7 +75,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
                 />
                 <MultiSelect
                     data={brands.map((e) => ({
-                        label: e || "n. V.",
+                        label: e,
                         value: e,
                     }))}
                     placeholder={t("label.select-n-stations")}
