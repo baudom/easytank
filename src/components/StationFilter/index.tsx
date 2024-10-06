@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, memo } from "react";
+import { FC, memo, useCallback } from "react";
 import { Select, SimpleGrid } from "@mantine/core";
 import {
     FuelType,
@@ -11,13 +11,36 @@ import {
 } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
 import { useTranslate } from "@tolgee/react";
+import useTracking from "@/hooks/useTracking";
 
 type StationFilterProps = {};
 
 const StationFilter: FC<StationFilterProps> = () => {
     const { stationConfig, setStationConfig } = useStationsContext();
-
+    const { trackFuelTypeChange, trackRadiusChange } = useTracking();
     const { t } = useTranslate();
+
+    const onFuelTypeChange = useCallback(
+        (fuelType: string | null) => {
+            if (!fuelType) return;
+
+            const value = fuelType as FuelType;
+            setStationConfig({ type: value });
+            trackFuelTypeChange(value);
+        },
+        [setStationConfig, trackFuelTypeChange],
+    );
+
+    const onRadiusChange = useCallback(
+        (radius: string | null) => {
+            if (radius == null) return;
+
+            const value = Number(radius) as RadiusType;
+            setStationConfig({ radius: value });
+            trackRadiusChange(value);
+        },
+        [setStationConfig, trackRadiusChange],
+    );
 
     return (
         <SimpleGrid cols={{ base: 2, md: 4 }}>
@@ -28,9 +51,7 @@ const StationFilter: FC<StationFilterProps> = () => {
                     value: type,
                 }))}
                 value={stationConfig.type}
-                onChange={(type) =>
-                    type && setStationConfig({ type: type as FuelType })
-                }
+                onChange={onFuelTypeChange}
             />
             <Select
                 size="lg"
@@ -39,12 +60,7 @@ const StationFilter: FC<StationFilterProps> = () => {
                     value: `${rad}`,
                 }))}
                 value={`${stationConfig.radius}`}
-                onChange={(radius) =>
-                    radius &&
-                    setStationConfig({
-                        radius: Number(radius) as RadiusType,
-                    })
-                }
+                onChange={onRadiusChange}
             />
         </SimpleGrid>
     );
