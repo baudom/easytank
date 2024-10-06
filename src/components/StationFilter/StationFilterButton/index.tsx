@@ -9,10 +9,12 @@ import { T } from "@tolgee/react";
 import StationFilterForm, {
     StationFilterFormFields,
 } from "@/components/StationFilter/StationFilterButton/Form";
+import useTracking from "@/hooks/useTracking";
 
 const StationFilterButton: FC = () => {
     const { setStationConfig } = useStationsContext();
     const [showModal, { open, close }] = useDisclosure(false);
+    const { trackEvent } = useTracking();
 
     const onSubmit = useCallback(
         (values: StationFilterFormFields) => {
@@ -21,6 +23,11 @@ const StationFilterButton: FC = () => {
         },
         [close, setStationConfig],
     );
+
+    const onOpenFilter = useCallback(() => {
+        open();
+        trackEvent("apply-filter-or-sort");
+    }, [open, trackEvent]);
 
     return (
         <>
@@ -40,7 +47,7 @@ const StationFilterButton: FC = () => {
             </Modal>
             <ActionIcon
                 size="xl"
-                onClick={open}
+                onClick={onOpenFilter}
             >
                 <IconFilterDown
                     style={{ width: rem(18), height: rem(18) }}
