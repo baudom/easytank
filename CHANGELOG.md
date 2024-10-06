@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/baudom/easytank/compare/v1.4.1...v1.4.2) (2024-10-06)
+
+
+### Performance Improvements
+
+* **#63:** UX Improvements and fixes ([#64](https://github.com/baudom/easytank/issues/64)) ([f35b3d7](https://github.com/baudom/easytank/commit/f35b3d7e7bb59e7d167672b32233900b1685941b))
+
 ## [1.4.1](https://github.com/baudom/easytank/compare/v1.4.0...v1.4.1) (2024-10-06)
 
 
