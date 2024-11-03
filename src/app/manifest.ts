@@ -23,15 +23,15 @@ export default function manifest(): MetadataRoute.Manifest {
                 sizes: "192x192",
             },
             {
-                src: "/icon-512.png",
-                type: "image/png",
-                sizes: "512x512",
-            },
-            {
                 src: "/icon-192-maskable.png",
                 type: "image/png",
                 sizes: "192x192",
                 purpose: "maskable",
+            },
+            {
+                src: "/icon-512.png",
+                type: "image/png",
+                sizes: "512x512",
             },
             {
                 src: "/icon-512-maskable.png",
@@ -44,6 +44,44 @@ export default function manifest(): MetadataRoute.Manifest {
                 type: "image/png",
                 sizes: "216x216",
                 purpose: "monochrome",
+            },
+        ],
+        shortcuts: [
+            {
+                name: "Umgebungssuche",
+                short_name: "Umgebungssuche",
+                description: "Suche in der Umgebung mithilfe deines Standortes",
+                url: "/?search-now",
+                icons: [
+                    {
+                        src: "/shortcut-icon/icon-192.png",
+                        type: "image/png",
+                        sizes: "192x192",
+                    },
+                    {
+                        src: "/shortcut-icon/icon-192-maskable.png",
+                        type: "image/png",
+                        sizes: "192x192",
+                        purpose: "maskable",
+                    },
+                    {
+                        src: "/shortcut-icon/icon-512.png",
+                        type: "image/png",
+                        sizes: "512x512",
+                    },
+                    {
+                        src: "/shortcut-icon/icon-512-maskable.png",
+                        type: "image/png",
+                        sizes: "512x512",
+                        purpose: "maskable",
+                    },
+                    {
+                        src: "/shortcut-icon/icon-monochrome.png",
+                        type: "image/png",
+                        sizes: "216x216",
+                        purpose: "monochrome",
+                    },
+                ],
             },
         ],
     };
