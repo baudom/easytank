@@ -40,7 +40,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
 
     const brands = useMemo(
         () =>
-            Array.from(new Set(stations?.map((s) => s.brand || "n. V."))).sort(
+            Array.from(new Set(stations?.map((s) => s.brand))).sort(
                 sortByStringAsc,
             ),
         [stations],
@@ -75,7 +75,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
                 />
                 <MultiSelect
                     data={brands.map((e) => ({
-                        label: e,
+                        label: e || "n. V.",
                         value: e,
                     }))}
                     placeholder={t("label.select-n-stations")}
