@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
         short_name: "easytank",
         start_url: "/",
         display: "standalone",
-        orientation: "portrait",
+        orientation: "portrait-primary",
         theme_color: "#1864AB",
         background_color: "#1A1B1E",
         description:
@@ -38,6 +38,12 @@ export default function manifest(): MetadataRoute.Manifest {
                 type: "image/png",
                 sizes: "512x512",
                 purpose: "maskable",
+            },
+            {
+                src: "/icon-monochrome.png",
+                type: "image/png",
+                sizes: "216x216",
+                purpose: "monochrome",
             },
         ],
     };
