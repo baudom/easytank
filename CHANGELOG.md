@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/baudom/easytank/compare/v1.5.0...v1.5.1) (2024-11-17)
+
+
+### Bug Fixes
+
+* Update dependencies ([#76](https://github.com/baudom/easytank/issues/76)) ([8312348](https://github.com/baudom/easytank/commit/8312348f30f98e5cca177a391511e01c4a21f94d))
+
 # [1.5.0](https://github.com/baudom/easytank/compare/v1.4.2...v1.5.0) (2024-11-17)
 
 
