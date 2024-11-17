@@ -34,6 +34,7 @@ import { notifications } from "@mantine/notifications";
 import { useDebouncedValue, useHotkeys } from "@mantine/hooks";
 import { NOTIFICATION_TIMEOUT } from "@/model/constants";
 import useTracking from "@/hooks/useTracking";
+import { useSearchParams } from "next/navigation";
 
 const iconStyle = { width: rem(18), height: rem(18) };
 const DEBOUNCE_TIMEOUT = 500;
@@ -43,11 +44,14 @@ const LocationSearch: FC = () => {
     const { setCoords } = useStationsContext();
     const { t } = useTranslate();
     const { trackEvent } = useTracking();
+    const userLocationRef = useRef<HTMLButtonElement>(null);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [input, setInput] = useState("");
     const [locations, setLocations] = useState<ComboboxData>();
     const [loading, setLoading] = useState(false);
+
+    const searchParams = useSearchParams();
 
     const [debouncedInput, cancelDebounce] = useDebouncedValue(
         input,
@@ -63,6 +67,7 @@ const LocationSearch: FC = () => {
     const userLocation = useMemo(
         () => (
             <UserLocation
+                ref={userLocationRef}
                 onLocationFound={({ latitude, longitude }) =>
                     setCoords({ latitude, longitude })
                 }
@@ -140,6 +145,12 @@ const LocationSearch: FC = () => {
     useEffect(() => {
         void onSearchLocations();
     }, [debouncedInput, onSearchLocations]);
+
+    useEffect(() => {
+        if (!searchParams.has("search-now")) return;
+
+        userLocationRef?.current?.click?.();
+    }, [searchParams]);
 
     return (
         <Group>
