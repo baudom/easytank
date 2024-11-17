@@ -13,11 +13,33 @@ import { TolgeeNextProvider } from "@/tolgee/client";
 import { DEFAULT_LOCALE, NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { LocaleType, localeTypes } from "@/model";
 import AppSettings from "@/components/AppSettings";
+import { Metadata } from "next";
 
-export const metadata = {
-    title: "easytank | baudom",
-    description: "Tankstellensuche powered by Tankerkoenig und OpenStreetMap",
-};
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: `${process.env.NEXT_PUBLIC_NAME} | ${process.env.NEXT_PUBLIC_AUTHOR}`,
+        description:
+            "Smarte Tankstellensuche, unterstützt durch Tankerkoenig und OpenStreetMap",
+        authors: [
+            {
+                name: process.env.NEXT_PUBLIC_AUTHOR,
+                url: process.env.NEXT_PUBLIC_AUTHOR_URL,
+            },
+        ],
+        openGraph: {
+            locale: "de_DE",
+            type: "website",
+            images: ["https://easytank.baudom.de/icon-512-maskable.png"],
+        },
+        keywords: [
+            "easytank",
+            "baudom",
+            "Tankstellensuche",
+            "Tankstellen",
+            "Tankerkoenig",
+        ],
+    };
+}
 
 const font = Font({
     subsets: ["latin"],
@@ -64,14 +86,6 @@ const Layout: FC<Props> = async ({
                 <meta
                     name="theme-color"
                     content="#1864AB"
-                />
-                <meta
-                    name="og:image"
-                    content="/icon-512-maskable.png"
-                />
-                <meta
-                    name="og:image:alt"
-                    content="Tankstellensuche powered by Tankerkoenig und OpenStreetMap"
                 />
             </head>
             <body style={{ minHeight: "100vh" }}>
