@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/baudom/easytank/compare/v1.4.2...v1.5.0) (2024-11-17)
+
+
+### Features
+
+* **#45:** Improve SEO ([#68](https://github.com/baudom/easytank/issues/68)) ([053e9f0](https://github.com/baudom/easytank/commit/053e9f05618f9deeb38e1a971d45f07fc481a7da)), closes [#45](https://github.com/baudom/easytank/issues/45)
+* **#67:** Shortcuts and Monochrome Icons ([#69](https://github.com/baudom/easytank/issues/69)) ([df7123f](https://github.com/baudom/easytank/commit/df7123fb44ecf3ad7acaf2d89b71fd405390a863)), closes [#67](https://github.com/baudom/easytank/issues/67)
+
 ## [1.4.2](https://github.com/baudom/easytank/compare/v1.4.1...v1.4.2) (2024-10-06)
 
 
