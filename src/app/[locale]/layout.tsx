@@ -17,6 +17,7 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
+        metadataBase: new URL("https://easytank.baudom.de"),
         title: `${process.env.NEXT_PUBLIC_NAME} | ${process.env.NEXT_PUBLIC_AUTHOR}`,
         description:
             "Smarte Tankstellensuche, unterstützt durch Tankerkoenig und OpenStreetMap",
