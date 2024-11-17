@@ -29,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
         openGraph: {
             locale: "de_DE",
             type: "website",
-            images: ["https://easytank.baudom.de/icon-512-maskable.png"],
+            images: ["/icon-512-maskable.png"],
         },
         keywords: [
             "easytank",
