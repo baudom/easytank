@@ -61,7 +61,7 @@ const useTracking = () => {
     const track = useCallback(
         (key?: InternalTrackEventKey, props?: object) => {
             if (!allowTracking) return;
-            void umami.track(key, props);
+            void umami?.track(key, props);
         },
         [allowTracking],
     );
