@@ -90,6 +90,7 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: "/screenshots/desktop-landing.png",
                 type: "image/png",
                 sizes: "2418x1639",
+                // @ts-ignore
                 form_factor: "wide",
                 label: "Desktop Landing",
             },
@@ -97,6 +98,7 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: "/screenshots/desktop-filter.png",
                 type: "image/png",
                 sizes: "2418x1639",
+                // @ts-ignore
                 form_factor: "wide",
                 label: "Desktop Filter",
             },
@@ -104,6 +106,7 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: "/screenshots/desktop-car-config.png",
                 type: "image/png",
                 sizes: "2418x1639",
+                // @ts-ignore
                 form_factor: "wide",
                 label: "Desktop Car Configuration",
             },
@@ -111,6 +114,7 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: "/screenshots/mobile-landing.png",
                 type: "image/png",
                 sizes: "1536x2048",
+                // @ts-ignore
                 form_factor: "narrow",
                 label: "Mobile Landing",
             },
@@ -118,6 +122,7 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: "/screenshots/mobile-filter.png",
                 type: "image/png",
                 sizes: "1536x2048",
+                // @ts-ignore
                 form_factor: "narrow",
                 label: "Mobile Filter",
             },
@@ -125,6 +130,7 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: "/screenshots/mobile-car-config.png",
                 type: "image/png",
                 sizes: "1536x2048",
+                // @ts-ignore
                 form_factor: "narrow",
                 label: "Mobile Car Configuration",
             },
