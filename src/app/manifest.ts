@@ -2,15 +2,16 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: "easytank | baudom",
-        short_name: "easytank",
+        id: "/",
         start_url: "/",
+        name: `${process.env.NEXT_PUBLIC_NAME} | ${process.env.NEXT_PUBLIC_AUTHOR}`,
+        short_name: process.env.NEXT_PUBLIC_NAME,
         display: "standalone",
         orientation: "portrait-primary",
         theme_color: "#1864AB",
         background_color: "#1A1B1E",
         description:
-            "Tankstellensuche powered by Tankerkoenig und OpenStreetMap",
+            "Smarte Tankstellensuche, unterstützt durch Tankerkoenig und OpenStreetMap",
         icons: [
             {
                 src: "/favicon.ico",
@@ -82,6 +83,50 @@ export default function manifest(): MetadataRoute.Manifest {
                         purpose: "monochrome",
                     },
                 ],
+            },
+        ],
+        screenshots: [
+            {
+                src: "/screenshots/desktop-landing.png",
+                type: "image/png",
+                sizes: "2418x1639",
+                form_factor: "wide",
+                label: "Desktop Landing",
+            },
+            {
+                src: "/screenshots/desktop-filter.png",
+                type: "image/png",
+                sizes: "2418x1639",
+                form_factor: "wide",
+                label: "Desktop Filter",
+            },
+            {
+                src: "/screenshots/desktop-car-config.png",
+                type: "image/png",
+                sizes: "2418x1639",
+                form_factor: "wide",
+                label: "Desktop Car Configuration",
+            },
+            {
+                src: "/screenshots/mobile-landing.png",
+                type: "image/png",
+                sizes: "1536x2048",
+                form_factor: "narrow",
+                label: "Mobile Landing",
+            },
+            {
+                src: "/screenshots/mobile-filter.png",
+                type: "image/png",
+                sizes: "1536x2048",
+                form_factor: "narrow",
+                label: "Mobile Filter",
+            },
+            {
+                src: "/screenshots/mobile-car-config.png",
+                type: "image/png",
+                sizes: "1536x2048",
+                form_factor: "narrow",
+                label: "Mobile Car Configuration",
             },
         ],
     };
