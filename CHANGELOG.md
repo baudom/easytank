@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/baudom/easytank/compare/v1.5.1...v1.6.0) (2025-05-28)
+
+
+### Features
+
+* **#77:** Remove PayPal Link ([#78](https://github.com/baudom/easytank/issues/78)) ([6a0fef9](https://github.com/baudom/easytank/commit/6a0fef9d54e8b1a432ed56eb89882616e6691531)), closes [#77](https://github.com/baudom/easytank/issues/77)
+
 ## [1.5.1](https://github.com/baudom/easytank/compare/v1.5.0...v1.5.1) (2024-11-17)
 
 
