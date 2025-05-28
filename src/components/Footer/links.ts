@@ -9,10 +9,6 @@ const links = [
         label: `${process.env.NEXT_PUBLIC_NAME} v${process.env.NEXT_PUBLIC_VERSION} made with ❤️ by ${process.env.NEXT_PUBLIC_AUTHOR}`,
     },
     {
-        link: process.env.NEXT_PUBLIC_PAYPAL_URL,
-        label: `Donate with PayPal`,
-    },
-    {
         link: "https://www.tankerkoenig.de",
         label: `Stations by Tankerkoenig`,
     },

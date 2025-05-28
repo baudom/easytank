@@ -14,6 +14,7 @@ import { DEFAULT_LOCALE, NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { LocaleType, localeTypes } from "@/model";
 import AppSettings from "@/components/AppSettings";
 import { Metadata } from "next";
+import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -70,7 +71,7 @@ const Layout: FC<Props> = async ({
         >
             <head>
                 <ColorSchemeScript defaultColorScheme="dark" />
-                <script
+                <Script
                     defer
                     src={process.env.TRACKING_API_HOST}
                     data-website-id={process.env.TRACKING_API_KEY}
