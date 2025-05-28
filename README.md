@@ -24,7 +24,6 @@ TRACKING_API_HOST=your-api-host
 TANKERKOENIG_API_KEY=your-api-key
 NOMINATIM_USER_AGENT=your-user-agent
 NEXT_PUBLIC_CONTACT_MAIL=your@contact.mail
-NEXT_PUBLIC_PAYPAL_URL=https://paypal.me/your-username
 NEXT_PUBLIC_STATUS_URL=https://status.your.domain
 
 NEXT_PUBLIC_TOLGEE_API_URL=https://app.tolgee.io
