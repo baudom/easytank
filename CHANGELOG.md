@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/baudom/easytank/compare/v1.6.0...v1.6.1) (2025-06-24)
+
+
+### Bug Fixes
+
+* **#80:** Tracking script not being loaded ([#81](https://github.com/baudom/easytank/issues/81)) ([43feba2](https://github.com/baudom/easytank/commit/43feba238baf89af28d43e7fc9f835f32df79c85)), closes [#80](https://github.com/baudom/easytank/issues/80)
+
 # [1.6.0](https://github.com/baudom/easytank/compare/v1.5.1...v1.6.0) (2025-05-28)
 
 
