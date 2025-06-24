@@ -72,7 +72,7 @@ const Layout: FC<Props> = async ({
             <head>
                 <ColorSchemeScript defaultColorScheme="dark" />
                 <Script
-                    defer
+                    async
                     src={process.env.TRACKING_API_HOST}
                     data-website-id={process.env.TRACKING_API_KEY}
                     data-auto-track="false"
