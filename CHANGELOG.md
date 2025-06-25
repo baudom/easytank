@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/baudom/easytank/compare/v1.6.1...v1.6.2) (2025-06-25)
+
+
+### Bug Fixes
+
+* Check for window (SSR) ([3c6188e](https://github.com/baudom/easytank/commit/3c6188ec6693dd0dc139f6a61ae2f0e485f038a7))
+
 ## [1.6.1](https://github.com/baudom/easytank/compare/v1.6.0...v1.6.1) (2025-06-24)
 
 
