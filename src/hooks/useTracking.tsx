@@ -32,7 +32,6 @@ type TrackingAgreement = {
 const LATEST_TRACKING_VERSION = 1;
 
 const useTracking = () => {
-    const umami = typeof window === "undefined" ? undefined : window.umami;
     const [allowTracking, setAllowTracking] = useLocalStorage<
         boolean | undefined
     >({
@@ -61,10 +60,10 @@ const useTracking = () => {
 
     const track = useCallback(
         (key?: InternalTrackEventKey, props?: object) => {
-            if (!allowTracking || !umami) return;
-            void umami.track(key, props);
+            if (!allowTracking) return;
+            void window?.umami?.track(key, props);
         },
-        [allowTracking, umami],
+        [allowTracking],
     );
 
     const trackEvent = useCallback(
