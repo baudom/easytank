@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/baudom/easytank/compare/v1.6.2...v1.7.0) (2025-06-30)
+
+
+### Bug Fixes
+
+* Use previous script element ([f9d3e55](https://github.com/baudom/easytank/commit/f9d3e554718bda87657264ff09903b86aef770f3))
+
+
+### Features
+
+* **#84:** Improve google maps query ([970e46e](https://github.com/baudom/easytank/commit/970e46e2583ebd5fce1507580cb7e501987be5ea)), closes [#84](https://github.com/baudom/easytank/issues/84)
+
 ## [1.6.2](https://github.com/baudom/easytank/compare/v1.6.1...v1.6.2) (2025-06-25)
 
 

@@ -6,14 +6,14 @@ networks:
 services:
   app:
     container_name: easytank
-    image: easytank:1.6.2
+    image: easytank:1.7.0
     mem_limit: 512m
     pull_policy: build
     restart: always
     build:
       context: .
       tags:
-        - easytank:1.6.2
+        - easytank:1.7.0
         - easytank:latest
       args:
         TRACKING_API_KEY: ${TRACKING_API_KEY}
