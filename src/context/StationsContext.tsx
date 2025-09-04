@@ -108,12 +108,13 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                 fuelConsumptionDistance *
                     (carConfig.inclusiveReturnTravel ? 2 : 1);
 
-            const rydDiscount = carConfig.rydFuelDiscount
-                ? calculateDiscount(
-                      carConfig.refillVolume,
-                      carConfig.rydFuelDiscount,
-                  )
-                : 0;
+            const rydDiscount =
+                station.isRydSupportedBrand && carConfig.rydFuelDiscount
+                    ? calculateDiscount(
+                          carConfig.refillVolume,
+                          carConfig.rydFuelDiscount,
+                      )
+                    : 0;
 
             return {
                 ...station,
