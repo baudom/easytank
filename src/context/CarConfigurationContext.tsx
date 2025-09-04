@@ -14,7 +14,7 @@ type CarConfigurationContextProps = {
 };
 
 const DEFAULT_CAR_CONFIGURATION: CarConfiguration = {
-    inclusiveReturnTravel: false,
+    inclusiveReturnTravel: true,
 };
 
 type ContextType = {

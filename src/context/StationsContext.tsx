@@ -106,7 +106,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
             const totalLiter =
                 Number(carConfig.refillVolume) +
                 fuelConsumptionDistance *
-                    (carConfig.inclusiveReturnTravel ? 2 : 1);
+                    (carConfig.inclusiveReturnTravel ? 2 : 0);
 
             const rydDiscount =
                 station.isRydSupportedBrand && carConfig.rydFuelDiscount

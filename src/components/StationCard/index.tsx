@@ -109,9 +109,7 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                     {priceList.length === 1 ? (
                         <>
                             <Divider orientation="vertical" />
-                            <EfficiencySection
-                                refillPrice={station.refillPrice}
-                            />
+                            <EfficiencySection {...station} />
                         </>
                     ) : null}
                 </Group>

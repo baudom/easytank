@@ -1,5 +1,5 @@
-export const isRydSupportedStation = (name?: string): boolean => {
-    if (!name?.trim()) return false;
+export const isRydSupportedBrand = (brand?: string): boolean => {
+    if (!brand?.trim()) return false;
 
     const supportedBrands = [
         "aral",
@@ -27,9 +27,9 @@ export const isRydSupportedStation = (name?: string): boolean => {
     ];
 
     return supportedBrands.some(
-        (brand) =>
-            name?.toLowerCase() === brand ||
-            name?.toLowerCase().startsWith(brand),
+        (s_brand) =>
+            brand?.toLowerCase() === s_brand ||
+            brand?.toLowerCase().startsWith(s_brand),
     );
 };
 

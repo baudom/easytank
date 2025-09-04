@@ -7,9 +7,12 @@ import { T } from "@tolgee/react";
 import { mapPrice } from "@/helper/mappings";
 import RydSection from "@/components/StationCard/RydSection";
 
-type EfficiencySectionProps = Pick<CalculatedStation, "refillPrice">;
+type EfficiencySectionProps = CalculatedStation;
 
-const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
+const EfficiencySection: FC<EfficiencySectionProps> = ({
+    refillPrice,
+    isRydSupportedBrand,
+}) => {
     const { showModal } = useCarConfiguration();
     const { colors } = useMantineTheme();
 
@@ -30,7 +33,9 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
             </Group>
             {refillPrice !== undefined ? (
                 <Group justify="center">
-                    <RydSection refillPrice={refillPrice} />
+                    {isRydSupportedBrand ? (
+                        <RydSection refillPrice={refillPrice} />
+                    ) : null}
                     <Text
                         variant="gradient"
                         size="lg"

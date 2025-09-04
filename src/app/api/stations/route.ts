@@ -16,7 +16,7 @@ import {
     StatusCode,
 } from "@/helper/response";
 import { FuelType, fuelTypes, RadiusType, radiusTypes } from "@/model";
-import { isRydSupportedStation } from "@/model/ryd";
+import { isRydSupportedBrand } from "@/model/ryd";
 
 export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams;
@@ -85,6 +85,6 @@ const postPrepareStations = (
             Object.assign(s, { [fuelType]: s.price });
         }
 
-        return { ...s, isRydSupportedBrand: isRydSupportedStation(s.brand) };
+        return { ...s, isRydSupportedBrand: isRydSupportedBrand(s.brand) };
     }),
 });
