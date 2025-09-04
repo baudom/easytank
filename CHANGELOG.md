@@ -1,3 +1,10 @@
+## [1.8.4](https://github.com/baudom/easytank/compare/v1.8.3...v1.8.4) (2025-09-04)
+
+
+### Bug Fixes
+
+* Change calculation of return travel, adjust translations, hide RydSection for non-supported brands ([779d3bd](https://github.com/baudom/easytank/commit/779d3bd4cd7650095479f727458b9f5127fbcd70))
+
 ## [1.8.3](https://github.com/baudom/easytank/compare/v1.8.2...v1.8.3) (2025-09-04)
 
 
