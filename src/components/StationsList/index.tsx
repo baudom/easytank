@@ -32,6 +32,10 @@ const StationsList: FC = () => {
                         passes.push(stationConfig.brands.includes(s.brand));
                     }
 
+                    if (stationConfig?.onlyRydSupported) {
+                        passes.push(s.isRydSupportedBrand);
+                    }
+
                     return passes.every(Boolean);
                 })
                 .sort((a, b) => {
@@ -55,8 +59,9 @@ const StationsList: FC = () => {
             stations,
             stationConfig.onlyOpen,
             stationConfig.onlyAvailable,
-            stationConfig.brands,
             stationConfig.type,
+            stationConfig.brands,
+            stationConfig?.onlyRydSupported,
             stationConfig.order,
         ],
     );

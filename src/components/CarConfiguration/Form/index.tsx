@@ -18,18 +18,27 @@ type CarConfigurationFormProps = {
     onSubmit: (value: CarConfiguration) => void;
 };
 
-const assertPositiveValue = (value: number | undefined) =>
-    value !== undefined && value > 0 ? null : "Wert muss über 0 sein!";
-
 const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
     const { carConfig, resetCarConfig, hideModal } = useCarConfiguration();
     const { t } = useTranslate();
+
+    const assertPositiveValue = (value: number | undefined) =>
+        !value || value <= 0 ? t("label.value-greater-than-zero") : null;
+
+    const assertPositiveOptionalValue = (
+        value: number | undefined | unknown,
+    ) =>
+        value === undefined || value === "" || value === 0
+            ? null
+            : assertPositiveValue(value as number);
+
     const form = useForm<CarConfiguration>({
         initialValues: carConfig,
         validateInputOnChange: true,
         validate: {
             averageConsumption100Km: assertPositiveValue,
             refillVolume: assertPositiveValue,
+            rydFuelDiscount: assertPositiveOptionalValue,
         },
     });
 
@@ -40,6 +49,9 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                     averageConsumption100Km: Number(v.averageConsumption100Km),
                     refillVolume: Number(v.refillVolume),
                     inclusiveReturnTravel: !!v.inclusiveReturnTravel,
+                    rydFuelDiscount: v.rydFuelDiscount
+                        ? Number(v.rydFuelDiscount)
+                        : undefined,
                 }),
             )}
         >
@@ -72,6 +84,16 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                     withAsterisk
                     min={0.01}
                     {...form.getInputProps("refillVolume")}
+                />
+                <NumberInput
+                    label={t("label.ryd-fuel-discount")}
+                    placeholder="0.03"
+                    decimalScale={2}
+                    allowedDecimalSeparators={[",", "."]}
+                    min={0}
+                    step={0.01}
+                    suffix=" €"
+                    {...form.getInputProps("rydFuelDiscount")}
                 />
                 <Checkbox
                     label={t("label.calculate-return-travel")}

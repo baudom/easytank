@@ -19,6 +19,7 @@ import { IconMapSearch } from "@tabler/icons-react";
 import { mapFuelTypeToString } from "@/helper/mappings";
 import EfficiencySection from "@/components/StationCard/EfficiencySection";
 import { T } from "@tolgee/react";
+import { RYD_COLOR_KEY } from "@/model/constants";
 
 type StationCardProps = {
     station: CalculatedStation;
@@ -69,6 +70,14 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                         keyName={station.isOpen ? "label.open" : "label.closed"}
                     />
                 </Badge>
+                {station.isRydSupportedBrand ? (
+                    <Badge
+                        color={RYD_COLOR_KEY}
+                        variant="light"
+                    >
+                        Ryd
+                    </Badge>
+                ) : null}
             </Group>
 
             <Text

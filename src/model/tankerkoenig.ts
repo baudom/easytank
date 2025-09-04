@@ -41,4 +41,5 @@ export type Station = {
     e5: PriceType;
     e10: PriceType;
     isOpen: boolean;
+    isRydSupportedBrand: boolean;
 };

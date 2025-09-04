@@ -27,9 +27,9 @@ import UserLocation from "@/components/LocationSerach/UserLocation";
 import { PARAM_SEARCH } from "@/model/nominatim";
 import { Location } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
-import CarConfiguration from "@/components/CarConfiguration";
+import CarConfigurationButton from "@/components/CarConfiguration/Button";
 import { useTranslate } from "@tolgee/react";
-import StationSortButton from "@/components/StationFilter/StationFilterButton";
+import StationFilterButton from "@/components/StationFilter/Button";
 import { notifications } from "@mantine/notifications";
 import { useDebouncedValue, useHotkeys } from "@mantine/hooks";
 import { NOTIFICATION_TIMEOUT } from "@/model/constants";
@@ -58,7 +58,15 @@ const LocationSearch: FC = () => {
         DEBOUNCE_TIMEOUT,
     );
 
-    useHotkeys([["mod+K", () => inputRef.current?.focus()]], []);
+    useHotkeys([
+        [
+            "mod+K",
+            () => {
+                inputRef.current?.focus();
+                inputRef.current?.select();
+            },
+        ],
+    ]);
     const isSmallDevice = useMatches({
         base: true,
         md: false,
@@ -195,8 +203,8 @@ const LocationSearch: FC = () => {
                     return onSearchLocations();
                 }}
             />
-            <StationSortButton />
-            <CarConfiguration />
+            <StationFilterButton />
+            <CarConfigurationButton />
         </Group>
     );
 };
