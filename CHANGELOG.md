@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/baudom/easytank/compare/v1.8.0...v1.8.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* bump tabler and next version ([b2d0159](https://github.com/baudom/easytank/commit/b2d01597ec10d3d8ffeaac6128e66d8fefb5a95b))
+
 # [1.8.0](https://github.com/baudom/easytank/compare/v1.7.0...v1.8.0) (2025-09-04)
 
 
