@@ -1,6 +1,7 @@
 import { FC, memo } from "react";
 import { Box, Text } from "@mantine/core";
 import { PriceType } from "@/model/tankerkoenig";
+import { mapPrice } from "@/helper/mappings";
 
 type PriceSectionProps = {
     label: string;
@@ -14,13 +15,7 @@ const PriceSection: FC<PriceSectionProps> = ({ label, value }) => (
             size="lg"
             fw="bold"
         >
-            {value
-                ? Intl.NumberFormat("de-DE", {
-                      currency: "EUR",
-                      style: "currency",
-                      maximumFractionDigits: 3,
-                  }).format(value)
-                : "n. V."}
+            {value ? mapPrice(value) : "n. V."}
         </Text>
     </Box>
 );

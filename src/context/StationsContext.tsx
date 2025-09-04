@@ -30,6 +30,7 @@ import {
     NOTIFICATION_TIMEOUT,
 } from "@/model/constants";
 import { useTranslate } from "@tolgee/react";
+import { calculateDiscount } from "@/model/ryd";
 
 const DEFAULT_STATION_CONFIG: StationFilter = {
     radius: 10,
@@ -37,6 +38,7 @@ const DEFAULT_STATION_CONFIG: StationFilter = {
     brands: [],
     onlyOpen: true,
     onlyAvailable: true,
+    onlyRydSupported: false,
     order: "refillPrice",
 };
 
@@ -106,11 +108,23 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                 fuelConsumptionDistance *
                     (carConfig.inclusiveReturnTravel ? 2 : 1);
 
+            const rydDiscount = carConfig.rydFuelDiscount
+                ? calculateDiscount(
+                      carConfig.refillVolume,
+                      carConfig.rydFuelDiscount,
+                  )
+                : 0;
+
             return {
                 ...station,
                 refillPrice:
                     station.price !== undefined
-                        ? Number((totalLiter * station.price).toFixed(2))
+                        ? Number(
+                              (
+                                  totalLiter * station.price -
+                                  rydDiscount
+                              ).toFixed(2),
+                          )
                         : undefined,
             };
         },

@@ -48,6 +48,7 @@ export type StationFilter = {
     brands: string[];
     onlyOpen: boolean;
     onlyAvailable: boolean;
+    onlyRydSupported: boolean;
     order: StationOrderType;
 };
 
@@ -55,6 +56,7 @@ export type CarConfiguration = {
     averageConsumption100Km?: number;
     refillVolume?: number;
     inclusiveReturnTravel: boolean;
+    rydFuelDiscount?: number;
 };
 
 export type CalculatedStation = Station & {
