@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/baudom/easytank/compare/v1.8.1...v1.8.2) (2025-09-04)
+
+
+### Bug Fixes
+
+* Only subtract discount if brand is supported ([069f7c9](https://github.com/baudom/easytank/commit/069f7c93ed437e2c85b2ff25490bee7f6c32c144))
+
 ## [1.8.1](https://github.com/baudom/easytank/compare/v1.8.0...v1.8.1) (2025-09-04)
 
 
