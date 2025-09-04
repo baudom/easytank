@@ -48,6 +48,7 @@ export type StationFilter = {
     brands: string[];
     onlyOpen: boolean;
     onlyAvailable: boolean;
+    onlyRydSupported: boolean;
     order: StationOrderType;
 };
 
