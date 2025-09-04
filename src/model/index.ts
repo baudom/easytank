@@ -56,6 +56,7 @@ export type CarConfiguration = {
     averageConsumption100Km?: number;
     refillVolume?: number;
     inclusiveReturnTravel: boolean;
+    rydFuelDiscount?: number;
 };
 
 export type CalculatedStation = Station & {

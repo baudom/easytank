@@ -1,17 +1,18 @@
 "use client";
 
 import { FC, memo, useCallback } from "react";
-import { ActionIcon, Modal, rem, Text } from "@mantine/core";
+import { ActionIcon, Modal, rem, Text, Tooltip } from "@mantine/core";
 import { IconFilterDown } from "@tabler/icons-react";
 import { useStationsContext } from "@/context/StationsContext";
 import { useDisclosure } from "@mantine/hooks";
-import { T } from "@tolgee/react";
+import { T, useTranslate } from "@tolgee/react";
 import StationFilterForm, {
     StationFilterFormFields,
-} from "@/components/StationFilter/StationFilterButton/Form";
+} from "@/components/StationFilter/Button/Form";
 import useTracking from "@/hooks/useTracking";
 
 const StationFilterButton: FC = () => {
+    const { t } = useTranslate();
     const { setStationConfig } = useStationsContext();
     const [showModal, { open, close }] = useDisclosure(false);
     const { trackEvent } = useTracking();
@@ -45,15 +46,17 @@ const StationFilterButton: FC = () => {
                     onCancel={close}
                 />
             </Modal>
-            <ActionIcon
-                size="xl"
-                onClick={onOpenFilter}
-            >
-                <IconFilterDown
-                    style={{ width: rem(18), height: rem(18) }}
-                    stroke={1.5}
-                />
-            </ActionIcon>
+            <Tooltip label={t("label.sort-and-filter")}>
+                <ActionIcon
+                    size="xl"
+                    onClick={onOpenFilter}
+                >
+                    <IconFilterDown
+                        style={{ width: rem(18), height: rem(18) }}
+                        stroke={1.5}
+                    />
+                </ActionIcon>
+            </Tooltip>
         </>
     );
 };

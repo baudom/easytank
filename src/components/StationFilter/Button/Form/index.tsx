@@ -12,12 +12,12 @@ import {
     Text,
 } from "@mantine/core";
 import { T, useTranslate } from "@tolgee/react";
-import menu from "@/components/StationFilter/StationFilterButton/Form/menu";
+import menu from "@/components/StationFilter/Button/Form/menu";
 import { sortByStringAsc } from "@/helper/sortings";
 
 export type StationFilterFormFields = Pick<
     StationFilter,
-    "onlyAvailable" | "onlyOpen" | "order" | "brands"
+    "onlyRydSupported" | "onlyAvailable" | "onlyOpen" | "order" | "brands"
 >;
 
 type StationFilterFormProps = {
@@ -31,6 +31,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
     const form = useForm<StationFilterFormFields>({
         initialValues: {
             onlyAvailable: stationConfig.onlyAvailable,
+            onlyRydSupported: stationConfig.onlyRydSupported,
             onlyOpen: stationConfig.onlyOpen,
             order: stationConfig.order,
             brands: stationConfig.brands,
@@ -70,6 +71,12 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
                 <Checkbox
                     label={t("label.only-available")}
                     {...form.getInputProps("onlyAvailable", {
+                        type: "checkbox",
+                    })}
+                />
+                <Checkbox
+                    label={t("label.only-ryd-supported-stations")}
+                    {...form.getInputProps("onlyRydSupported", {
                         type: "checkbox",
                     })}
                 />
