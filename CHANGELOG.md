@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/baudom/easytank/compare/v1.7.0...v1.8.0) (2025-09-04)
+
+
+### Features
+
+* **#86:** Ryd Integration ([#87](https://github.com/baudom/easytank/issues/87)) ([103409b](https://github.com/baudom/easytank/commit/103409b845f3a19438ea4670a960bd90a4bbde0f)), closes [#86](https://github.com/baudom/easytank/issues/86)
+
 # [1.7.0](https://github.com/baudom/easytank/compare/v1.6.2...v1.7.0) (2025-06-30)
 
 
