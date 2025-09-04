@@ -49,7 +49,9 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                     averageConsumption100Km: Number(v.averageConsumption100Km),
                     refillVolume: Number(v.refillVolume),
                     inclusiveReturnTravel: !!v.inclusiveReturnTravel,
-                    rydFuelDiscount: Number(v.rydFuelDiscount),
+                    rydFuelDiscount: v.rydFuelDiscount
+                        ? Number(v.rydFuelDiscount)
+                        : undefined,
                 }),
             )}
         >

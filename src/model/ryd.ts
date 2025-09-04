@@ -28,8 +28,8 @@ export const isRydSupportedStation = (name?: string): boolean => {
 
     return supportedBrands.some(
         (brand) =>
-            brand.includes(name.toLowerCase()) ||
-            name.toLowerCase().includes(brand),
+            name?.toLowerCase() === brand ||
+            name?.toLowerCase().startsWith(brand),
     );
 };
 
