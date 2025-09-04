@@ -12,3 +12,11 @@ export const mapFuelTypeToString = (type: FuelType): string => {
             return "Alle";
     }
 };
+
+export const mapPrice = (price: number): string => {
+    return Intl.NumberFormat("de-DE", {
+        currency: "EUR",
+        style: "currency",
+        maximumFractionDigits: 3,
+    }).format(price);
+};

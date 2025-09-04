@@ -4,6 +4,8 @@ import { IconReceipt2 } from "@tabler/icons-react";
 import { CalculatedStation } from "@/model";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
 import { T } from "@tolgee/react";
+import { mapPrice } from "@/helper/mappings";
+import RydSection from "@/components/StationCard/RydSection";
 
 type EfficiencySectionProps = Pick<CalculatedStation, "refillPrice">;
 
@@ -27,17 +29,16 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({ refillPrice }) => {
                 </Text>
             </Group>
             {refillPrice !== undefined ? (
-                <Text
-                    variant="gradient"
-                    size="lg"
-                    fw="bold"
-                >
-                    {Intl.NumberFormat("de-DE", {
-                        currency: "EUR",
-                        style: "currency",
-                        maximumFractionDigits: 3,
-                    }).format(refillPrice)}
-                </Text>
+                <Group justify="center">
+                    <RydSection refillPrice={refillPrice} />
+                    <Text
+                        variant="gradient"
+                        size="lg"
+                        fw="bold"
+                    >
+                        {mapPrice(refillPrice)}
+                    </Text>
+                </Group>
             ) : (
                 <Button
                     variant="light"
