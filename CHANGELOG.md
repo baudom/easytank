@@ -1,3 +1,10 @@
+## [1.8.3](https://github.com/baudom/easytank/compare/v1.8.2...v1.8.3) (2025-09-04)
+
+
+### Bug Fixes
+
+* Increase docker network timeout ([e948dac](https://github.com/baudom/easytank/commit/e948dac1482d04f2f21f98eb6609cbb36e066d8a))
+
 ## [1.8.2](https://github.com/baudom/easytank/compare/v1.8.1...v1.8.2) (2025-09-04)
 
 
