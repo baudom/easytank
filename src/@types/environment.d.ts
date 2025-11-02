@@ -13,5 +13,6 @@ declare namespace NodeJS {
         NEXT_PUBLIC_TOLGEE_API_KEY: string;
         NEXT_PUBLIC_TOLGEE_API_URL: string;
         NEXT_PUBLIC_STATUS_URL: string;
+        NEXT_PUBLIC_RYD_LINK: string;
     }
 }
