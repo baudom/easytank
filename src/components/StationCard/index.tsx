@@ -20,6 +20,7 @@ import { mapFuelTypeToString } from "@/helper/mappings";
 import EfficiencySection from "@/components/StationCard/EfficiencySection";
 import { T } from "@tolgee/react";
 import { RYD_COLOR_KEY } from "@/model/constants";
+import Link from "next/link";
 
 type StationCardProps = {
     station: CalculatedStation;
@@ -37,6 +38,26 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
             ].filter((e) => e.value !== undefined),
         [station.diesel, station.e10, station.e5],
     );
+
+    const rydBadgeComponent = useMemo(() => {
+        const baseProps = {
+            color: RYD_COLOR_KEY,
+            variant: "light",
+            children: "Ryd",
+        };
+        return process.env.NEXT_PUBLIC_RYD_LINK ? (
+            <Badge
+                {...baseProps}
+                component={Link}
+                href={process.env.NEXT_PUBLIC_RYD_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ cursor: "pointer" }}
+            />
+        ) : (
+            <Badge {...baseProps} />
+        );
+    }, []);
 
     return (
         <Card
@@ -70,14 +91,7 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                         keyName={station.isOpen ? "label.open" : "label.closed"}
                     />
                 </Badge>
-                {station.isRydSupportedBrand ? (
-                    <Badge
-                        color={RYD_COLOR_KEY}
-                        variant="light"
-                    >
-                        Ryd
-                    </Badge>
-                ) : null}
+                {station.isRydSupportedBrand ? rydBadgeComponent : null}
             </Group>
 
             <Text
