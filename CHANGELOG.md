@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/baudom/easytank/compare/v1.8.4...v1.9.0) (2025-11-02)
+
+
+### Features
+
+* **#89:** Add ryd referral link ([#90](https://github.com/baudom/easytank/issues/90)) ([c867ebc](https://github.com/baudom/easytank/commit/c867ebc1721d68437e6bd114af6a04520df50279)), closes [#89](https://github.com/baudom/easytank/issues/89)
+
 ## [1.8.4](https://github.com/baudom/easytank/compare/v1.8.3...v1.8.4) (2025-09-04)
 
 
