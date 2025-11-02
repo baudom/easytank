@@ -51,6 +51,7 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                 component={Link}
                 href={process.env.NEXT_PUBLIC_RYD_LINK}
                 target="_blank"
+                rel="noopener noreferrer"
                 style={{ cursor: "pointer" }}
             />
         ) : (
