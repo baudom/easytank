@@ -4,9 +4,9 @@ _yes, another gas station finder 😆_
 
 **Powered by**
 
--   ⚡ [Next.js][next_home] project bootstrapped with [create-next-app][create-next-link_home] and [mantine][mantine_home]
--   ⛽ [Tankerkoenig API][tankerkoenig_home]
--   🌍 [Nominatim OpenStreetMap][nominatim_home]
+- ⚡ [Next.js][next_home] project bootstrapped with [create-next-app][create-next-link_home] and [mantine][mantine_home]
+- ⛽ [Tankerkoenig API][tankerkoenig_home]
+- 🌍 [Nominatim OpenStreetMap][nominatim_home]
 
 ## Environment configuration
 
@@ -19,8 +19,8 @@ NEXT_PUBLIC_AUTHOR_URL=$npm_package_author_url
 NEXT_PUBLIC_REPOSITORY_URL=$npm_package_repositoryUrl
 
 # .env.local config
-TRACKING_API_KEY=your-api-key
 TRACKING_API_HOST=your-api-host
+TRACKING_API_KEY=your-api-key
 TANKERKOENIG_API_KEY=your-api-key
 NOMINATIM_USER_AGENT=your-user-agent
 NEXT_PUBLIC_CONTACT_MAIL=your@contact.mail
@@ -31,11 +31,17 @@ NEXT_PUBLIC_TOLGEE_API_URL=https://app.tolgee.io
 NEXT_PUBLIC_TOLGEE_API_KEY=your-tolgee-api-key
 ```
 
-## CI/CD Environment Configuration
+## GitHub CI/CD Environment Configuration
+
+The following secrets / variables must be set within github
 
 ```dotenv
-TOLGEE_URL=https://app.tolgee.io
+# secrets
+TOLGEE_HOST=https://app.tolgee.io
 TOLGEE_API_KEY=your-tolgee-api-key
+
+# variables
+NODE_LTS_VERSION=24
 ```
 
 ## Getting Started
@@ -63,17 +69,25 @@ load Nunito, a custom Google Font.
 
 To learn more about Next.js, take a look at the following resources:
 
--   [Next.js Documentation][next_docs] - learn about Next.js features and API.
--   [Learn Next.js][next_learn] - an interactive Next.js tutorial.
+- [Next.js Documentation][next_docs] - learn about Next.js features and API.
+- [Learn Next.js][next_learn] - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository][next_repo] - your feedback and contributions are welcome!
 
 [next_home]: https://nextjs.org
+
 [create-next-link_home]: https://github.com/vercel/next.js/tree/canary/packages/create-next-app
+
 [mantine_home]: https://mantine.dev
+
 [tankerkoenig_home]: https://creativecommons.tankerkoenig.de/
+
 [nominatim_home]: https://nominatim.openstreetmap.org
+
 [next_font]: https://nextjs.org/docs/basic-features/font-optimization
+
 [next_docs]: https://nextjs.org/docs
+
 [next_learn]: https://nextjs.org/learn
+
 [next_repo]: https://github.com/vercel/next.js

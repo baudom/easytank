@@ -12,7 +12,7 @@ jobs:
       - name: Install NodeJS
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: ${{ vars.NODE_LTS_VERSION }}
       - name: Code Checkout
         uses: actions/checkout@v6
         with:

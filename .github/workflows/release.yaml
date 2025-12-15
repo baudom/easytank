@@ -12,7 +12,7 @@ jobs:
       - name: Install NodeJS
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: ${{ vars.NODE_LTS_VERSION }}
       - name: Code Checkout
         uses: actions/checkout@v6
         with:
@@ -20,6 +20,13 @@ jobs:
           persist-credentials: false
       - name: Install Dependencies
         run: yarn install
+      - name: Update i18n files
+        env:
+          TOLGEE_HOST: ${{ secrets.TOLGEE_HOST }}
+          TOLGEE_API_KEY: ${{ secrets.TOLGEE_API_KEY }}
+        run: yarn pull:translations
+      - name: Verify Docker build
+        run: docker build .
       - name: Generate Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

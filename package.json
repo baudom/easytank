@@ -9,12 +9,12 @@
     },
     "scripts": {
         "dev": "next dev",
-        "build": "yarn pull:translations && next build",
+        "build": "next build",
         "start": "next start",
         "lint": "next lint --max-warnings=0",
         "prettify": "prettier --write .",
         "gen:docker-compose": "sed -e \"s/{IMAGE_NAME}/$npm_package_name/g\" -e \"s/{IMAGE_VERSION}/$npm_package_version/g\" docker-compose.template.yaml > docker-compose.yaml",
-        "pull:translations": "tolgee pull --api-url $TOLGEE_URL --api-key $TOLGEE_API_KEY -o ./i18n",
+        "pull:translations": "tolgee pull --path ./i18n --api-url $TOLGEE_HOST --api-key $TOLGEE_API_KEY",
         "postversion": "yarn gen:docker-compose"
     },
     "dependencies": {
