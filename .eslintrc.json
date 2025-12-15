@@ -2,10 +2,9 @@
     "root": true,
     "extends": [
         "next/core-web-vitals",
-        "eslint-config-next",
-        "plugin:react-hooks/recommended"
+        "eslint-config-next"
     ],
-    "plugins": ["prettier", "react-hooks"],
+    "plugins": ["prettier"],
     "rules": {
         "prettier/prettier": "error",
         "react-hooks/rules-of-hooks": "warn",
