@@ -7,8 +7,8 @@
   },
   "fuel": {
     "diesel": "Diesel",
-    "e10": "Benzin E10",
-    "e5": "Benzin E5"
+    "e10": "Super E10",
+    "e5": "Super"
   },
   "label": {
     "all": "Alle",

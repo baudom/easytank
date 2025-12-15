@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/baudom/easytank/compare/v1.9.0...v1.9.1) (2025-12-15)
+
+
+### Bug Fixes
+
+* upgrade dependencies, fix audits ([#93](https://github.com/baudom/easytank/issues/93)) ([da2b213](https://github.com/baudom/easytank/commit/da2b213020a53ad041c8754b0e0a95ffde90534b))
+
 # [1.9.0](https://github.com/baudom/easytank/compare/v1.8.4...v1.9.0) (2025-11-02)
 
 
