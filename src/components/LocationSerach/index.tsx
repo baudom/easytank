@@ -171,7 +171,7 @@ const LocationSearch: FC = () => {
                 }
             }, 250);
         }
-    }, [searchParams, stationConfig.lastSearchTerm]);
+    }, [searchParams, setCoords, stationConfig.lastSearchTerm]);
 
     return (
         <Group>
