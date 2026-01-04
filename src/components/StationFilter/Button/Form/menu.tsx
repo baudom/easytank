@@ -1,8 +1,7 @@
-import { TranslationKey } from "@tolgee/react";
 import { StationOrderType } from "@/model";
 
 type MenuEntry = {
-    label: TranslationKey;
+    label: string;
     value: StationOrderType;
 };
 

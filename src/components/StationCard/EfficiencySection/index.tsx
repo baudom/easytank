@@ -3,7 +3,7 @@ import { Box, Button, Group, rem, Text, useMantineTheme } from "@mantine/core";
 import { IconReceipt2 } from "@tabler/icons-react";
 import { CalculatedStation } from "@/model";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
-import { T } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import { mapPrice } from "@/helper/mappings";
 import RydSection from "@/components/StationCard/RydSection";
 
@@ -13,6 +13,7 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({
     refillPrice,
     isRydSupportedBrand,
 }) => {
+    const t = useTranslations();
     const { showModal } = useCarConfiguration();
     const { colors } = useMantineTheme();
 
@@ -27,9 +28,7 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({
                     }}
                     stroke={1.5}
                 />
-                <Text variant="gradient">
-                    <T keyName="label.total-cost" />
-                </Text>
+                <Text variant="gradient">{t("label.total-cost")}</Text>
             </Group>
             {refillPrice !== undefined ? (
                 <Group justify="center">
@@ -50,7 +49,7 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({
                     size="xs"
                     onClick={showModal}
                 >
-                    <T keyName="label.configure-car" />
+                    {t("label.configure-car")}
                 </Button>
             )}
         </Box>

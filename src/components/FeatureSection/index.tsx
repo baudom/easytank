@@ -2,9 +2,10 @@ import { Badge, Group, SimpleGrid, Stack, Text } from "@mantine/core";
 import { FC } from "react";
 import FeatureSectionCard from "@/components/FeatureSection/Card";
 import features from "@/components/FeatureSection/features";
-import { T } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 
 const FeatureSection: FC = () => {
+    const t = useTranslations();
     return (
         <Stack my="lg">
             <Group justify="center">
@@ -12,7 +13,7 @@ const FeatureSection: FC = () => {
                     variant="light"
                     size="lg"
                 >
-                    <T keyName="label.how-it-works" />
+                    {t("label.how-it-works")}
                 </Badge>
             </Group>
 
@@ -20,10 +21,9 @@ const FeatureSection: FC = () => {
                 c="dimmed"
                 ta="center"
             >
-                <T
-                    keyName="text.short-explanation"
-                    params={{ b: <b /> }}
-                />
+                {t.rich("text.short-explanation", {
+                    b: (chunks) => <b>{chunks}</b>,
+                })}
             </Text>
 
             <SimpleGrid

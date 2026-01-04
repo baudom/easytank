@@ -7,13 +7,13 @@ import { FC, ReactNode } from "react";
 import { Notifications } from "@mantine/notifications";
 import Footer from "@/components/Footer";
 import { theme } from "@/theme";
-import { getStaticData } from "@/tolgee/shared";
 import { notFound } from "next/navigation";
-import { TolgeeNextProvider } from "@/tolgee/client";
 import { DEFAULT_LOCALE, NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { LocaleType, localeTypes } from "@/model";
 import AppSettings from "@/components/AppSettings";
 import { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -61,7 +61,7 @@ const Layout: FC<Props> = async ({
         notFound();
     }
 
-    const locales = await getStaticData([locale]);
+    const messages = await getMessages();
 
     return (
         <html
@@ -90,9 +90,9 @@ const Layout: FC<Props> = async ({
                 />
             </head>
             <body style={{ minHeight: "100vh" }}>
-                <TolgeeNextProvider
+                <NextIntlClientProvider
                     locale={locale}
-                    locales={locales}
+                    messages={messages}
                 >
                     <MantineProvider
                         theme={theme}
@@ -108,7 +108,7 @@ const Layout: FC<Props> = async ({
                         {children}
                         <Footer />
                     </MantineProvider>
-                </TolgeeNextProvider>
+                </NextIntlClientProvider>
             </body>
         </html>
     );

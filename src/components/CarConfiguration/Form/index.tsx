@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
 import { IconInfoSquareRounded } from "@tabler/icons-react";
-import { T, useTranslate } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 
 type CarConfigurationFormProps = {
     onSubmit: (value: CarConfiguration) => void;
@@ -20,7 +20,7 @@ type CarConfigurationFormProps = {
 
 const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
     const { carConfig, resetCarConfig, hideModal } = useCarConfiguration();
-    const { t } = useTranslate();
+    const t = useTranslations();
 
     const assertPositiveValue = (value: number | undefined) =>
         !value || value <= 0 ? t("label.value-greater-than-zero") : null;
@@ -62,9 +62,7 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                 <IconInfoSquareRounded
                     style={{ width: rem(18), height: rem(18) }}
                 />
-                <Text size="xs">
-                    <T keyName="text.calculation-availability" />
-                </Text>
+                <Text size="xs">{t("text.calculation-availability")}</Text>
             </Group>
             <Stack>
                 <NumberInput
@@ -110,11 +108,9 @@ const CarConfigurationForm: FC<CarConfigurationFormProps> = ({ onSubmit }) => {
                             hideModal();
                         }}
                     >
-                        <T keyName="action.reset" />
+                        {t("action.reset")}
                     </Button>
-                    <Button type="submit">
-                        <T keyName="action.save" />
-                    </Button>
+                    <Button type="submit">{t("action.save")}</Button>
                 </Group>
             </Stack>
         </form>

@@ -11,7 +11,7 @@ _yes, another gas station finder 😆_
 ## Environment configuration
 
 ```dotenv
-# values are set by default
+# default values
 NEXT_PUBLIC_NAME=$npm_package_name
 NEXT_PUBLIC_VERSION=$npm_package_version
 NEXT_PUBLIC_AUTHOR=$npm_package_author_name
@@ -26,9 +26,6 @@ NOMINATIM_USER_AGENT=your-user-agent
 NEXT_PUBLIC_CONTACT_MAIL=your@contact.mail
 NEXT_PUBLIC_STATUS_URL=https://status.your.domain
 NEXT_PUBLIC_RYD_LINK=https://ryd.one/your-link
-
-NEXT_PUBLIC_TOLGEE_API_URL=https://app.tolgee.io
-NEXT_PUBLIC_TOLGEE_API_KEY=your-tolgee-api-key
 ```
 
 ## GitHub CI/CD Environment Configuration
@@ -36,10 +33,6 @@ NEXT_PUBLIC_TOLGEE_API_KEY=your-tolgee-api-key
 The following secrets / variables must be set within github
 
 ```dotenv
-# secrets
-TOLGEE_HOST=https://app.tolgee.io
-TOLGEE_API_KEY=your-tolgee-api-key
-
 # variables
 NODE_LTS_VERSION=24
 ```

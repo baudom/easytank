@@ -14,7 +14,6 @@
         "lint": "next lint --max-warnings=0",
         "prettify": "prettier --write .",
         "gen:docker-compose": "sed -e \"s/{IMAGE_NAME}/$npm_package_name/g\" -e \"s/{IMAGE_VERSION}/$npm_package_version/g\" docker-compose.template.yaml > docker-compose.yaml",
-        "pull:translations": "tolgee pull --path ./i18n --api-url $TOLGEE_HOST --api-key $TOLGEE_API_KEY",
         "postversion": "yarn gen:docker-compose"
     },
     "dependencies": {
@@ -23,8 +22,6 @@
         "@mantine/hooks": "^7.17.8",
         "@mantine/notifications": "^7.17.8",
         "@tabler/icons-react": "3.34.1",
-        "@tolgee/format-icu": "5.17.0",
-        "@tolgee/react": "5.17.0",
         "next": "14.2.35",
         "next-intl": "3.3.1",
         "react": "^18",
@@ -37,7 +34,6 @@
         "@semantic-release/github": "^12.0.2",
         "@semantic-release/npm": "^13.1.3",
         "@semantic-release/release-notes-generator": "^14.1.0",
-        "@tolgee/cli": "^2.14.0",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",

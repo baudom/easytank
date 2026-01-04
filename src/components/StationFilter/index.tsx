@@ -10,7 +10,7 @@ import {
     radiusTypes,
 } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
-import { useTranslate } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import useTracking from "@/hooks/useTracking";
 
 type StationFilterProps = {};
@@ -18,7 +18,7 @@ type StationFilterProps = {};
 const StationFilter: FC<StationFilterProps> = () => {
     const { stationConfig, setStationConfig } = useStationsContext();
     const { trackFuelTypeChange, trackRadiusChange } = useTracking();
-    const { t } = useTranslate();
+    const t = useTranslations();
 
     const onFuelTypeChange = useCallback(
         (fuelType: string | null) => {
