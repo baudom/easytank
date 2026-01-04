@@ -1,6 +1,7 @@
 .footer {
     padding: var(--mantine-spacing-xl);
-    border-top: rem(1px) solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+    border-top: rem(1px) solid
+        light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
 
     @media (max-width: $ mantine-breakpoint-xs) {
         flex-direction: column;

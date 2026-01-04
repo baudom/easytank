@@ -5,14 +5,14 @@ import { ActionIcon, Modal, rem, Text, Tooltip } from "@mantine/core";
 import { IconFilterDown } from "@tabler/icons-react";
 import { useStationsContext } from "@/context/StationsContext";
 import { useDisclosure } from "@mantine/hooks";
-import { T, useTranslate } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import StationFilterForm, {
     StationFilterFormFields,
 } from "@/components/StationFilter/Button/Form";
 import useTracking from "@/hooks/useTracking";
 
 const StationFilterButton: FC = () => {
-    const { t } = useTranslate();
+    const t = useTranslations();
     const { setStationConfig } = useStationsContext();
     const [showModal, { open, close }] = useDisclosure(false);
     const { trackEvent } = useTracking();
@@ -42,11 +42,7 @@ const StationFilterButton: FC = () => {
             <Modal
                 opened={showModal}
                 onClose={close}
-                title={
-                    <Text size="xl">
-                        <T keyName="label.search-settings" />
-                    </Text>
-                }
+                title={<Text size="xl">{t("label.search-settings")}</Text>}
             >
                 <StationFilterForm
                     onSubmit={onSubmit}

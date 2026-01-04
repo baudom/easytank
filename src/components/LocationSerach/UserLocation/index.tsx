@@ -7,7 +7,7 @@ import {
 import { ActionIcon, rem, Tooltip, useMatches } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import getUserPosition from "@/helper/position";
-import { useTranslate } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import { NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { useHotkeys } from "@mantine/hooks";
 import useTracking from "@/hooks/useTracking";
@@ -21,7 +21,7 @@ type UserLocationProps = {
 const UserLocation = forwardRef<HTMLButtonElement, UserLocationProps>(
     ({ onLocationFound }, ref) => {
         const [loading, setLoading] = useState(false);
-        const { t } = useTranslate();
+        const t = useTranslations();
         useHotkeys([["mod+shift+P", () => onLocationRequest()]], []);
         const { trackEvent } = useTracking();
         const isSmallDevice = useMatches({

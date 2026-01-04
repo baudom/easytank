@@ -1,11 +1,11 @@
 import { FC, memo, ReactNode } from "react";
 import { Card, Text } from "@mantine/core";
-import { T, TranslationKey } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 
 export type FeatureSectionCardProps = {
     icon: ReactNode;
-    titleKey: TranslationKey;
-    contentKey: TranslationKey;
+    titleKey: string;
+    contentKey: string;
 };
 
 const FeatureSectionCard: FC<FeatureSectionCardProps> = ({
@@ -13,6 +13,7 @@ const FeatureSectionCard: FC<FeatureSectionCardProps> = ({
     titleKey,
     contentKey,
 }) => {
+    const t = useTranslations();
     return (
         <Card
             shadow="sm"
@@ -24,14 +25,9 @@ const FeatureSectionCard: FC<FeatureSectionCardProps> = ({
                 fw="bold"
                 mt="md"
             >
-                <T keyName={titleKey} />
+                {t(titleKey)}
             </Text>
-            <Text size="sm">
-                <T
-                    keyName={contentKey}
-                    params={{ br: <br /> }}
-                />
-            </Text>
+            <Text size="sm">{t.rich(contentKey, { br: () => <br /> })}</Text>
         </Card>
     );
 };
