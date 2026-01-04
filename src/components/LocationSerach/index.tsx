@@ -160,12 +160,16 @@ const LocationSearch: FC = () => {
             stationConfig.lastSearchTerm?.latitude &&
             stationConfig.lastSearchTerm?.longitude
         ) {
-            // TODO set value but dont trigger update. Current: Does not set value
-            inputRef.current.value = stationConfig.lastSearchTerm.input;
             setCoords({
                 latitude: stationConfig.lastSearchTerm.latitude,
                 longitude: stationConfig.lastSearchTerm.longitude,
             });
+            setTimeout(() => {
+                if (inputRef.current && stationConfig.lastSearchTerm?.input) {
+                    inputRef.current.value = stationConfig.lastSearchTerm.input;
+                    inputRef.current.blur();
+                }
+            }, 250);
         }
     }, [
         onSearchLocations,
