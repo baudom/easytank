@@ -5,6 +5,7 @@ import {
     Anchor,
     Avatar,
     Badge,
+    Button,
     Card,
     Divider,
     Group,
@@ -15,7 +16,7 @@ import {
 import { createGoogleMapsLink, getStationThumb } from "@/helper/station";
 import classes from "./index.module.css";
 import PriceSection from "@/components/StationCard/PriceSection";
-import { IconMapSearch } from "@tabler/icons-react";
+import { IconExternalLink, IconMapSearch } from "@tabler/icons-react";
 import { mapFuelTypeToString } from "@/helper/mappings";
 import EfficiencySection from "@/components/StationCard/EfficiencySection";
 import { T } from "@tolgee/react";
@@ -43,16 +44,18 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
         const baseProps = {
             color: RYD_COLOR_KEY,
             variant: "light",
-            children: "Ryd",
+            children: "ryd",
         };
         return process.env.NEXT_PUBLIC_RYD_LINK ? (
-            <Badge
+            <Button
                 {...baseProps}
+                variant="light"
+                size="compact-xs"
                 component={Link}
                 href={process.env.NEXT_PUBLIC_RYD_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ cursor: "pointer" }}
+                rightSection={<IconExternalLink size={10} />}
             />
         ) : (
             <Badge {...baseProps} />
