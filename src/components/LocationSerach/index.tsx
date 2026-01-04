@@ -171,12 +171,7 @@ const LocationSearch: FC = () => {
                 }
             }, 250);
         }
-    }, [
-        onSearchLocations,
-        searchParams,
-        setCoords,
-        stationConfig.lastSearchTerm,
-    ]);
+    }, [searchParams, stationConfig.lastSearchTerm]);
 
     return (
         <Group>
@@ -223,6 +218,7 @@ const LocationSearch: FC = () => {
                     // cancel debounce after setting value to input
                     setTimeout(cancelDebounce, DEBOUNCE_TIMEOUT / 2);
                 }}
+                onClick={() => inputRef.current?.select()}
                 onKeyDownCapture={(ev) => {
                     if (ev.key !== "Enter") return;
                     return onSearchLocations();
