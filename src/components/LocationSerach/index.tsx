@@ -41,7 +41,7 @@ const DEBOUNCE_TIMEOUT = 500;
 
 const LocationSearch: FC = () => {
     const { primaryColor } = useMantineTheme();
-    const { setCoords } = useStationsContext();
+    const { setCoords, stationConfig, setStationConfig } = useStationsContext();
     const { t } = useTranslate();
     const { trackEvent } = useTracking();
     const userLocationRef = useRef<HTMLButtonElement>(null);
@@ -112,10 +112,7 @@ const LocationSearch: FC = () => {
             } else {
                 setLocations(
                     res.map((e) => ({
-                        value: JSON.stringify({
-                            lat: e.lat,
-                            lon: e.lon,
-                        }),
+                        value: JSON.stringify(e),
                         label: e.display_name,
                     })),
                 );
@@ -155,10 +152,27 @@ const LocationSearch: FC = () => {
     }, [debouncedInput, onSearchLocations]);
 
     useEffect(() => {
-        if (!searchParams.has("search-now")) return;
-
-        userLocationRef?.current?.click?.();
-    }, [searchParams]);
+        if (searchParams.has("search-now")) {
+            userLocationRef?.current?.click?.();
+        } else if (
+            inputRef.current &&
+            stationConfig.lastSearchTerm?.input &&
+            stationConfig.lastSearchTerm?.latitude &&
+            stationConfig.lastSearchTerm?.longitude
+        ) {
+            // TODO set value but dont trigger update. Current: Does not set value
+            inputRef.current.value = stationConfig.lastSearchTerm.input;
+            setCoords({
+                latitude: stationConfig.lastSearchTerm.latitude,
+                longitude: stationConfig.lastSearchTerm.longitude,
+            });
+        }
+    }, [
+        onSearchLocations,
+        searchParams,
+        setCoords,
+        stationConfig.lastSearchTerm,
+    ]);
 
     return (
         <Group>
@@ -190,6 +204,13 @@ const LocationSearch: FC = () => {
                 onOptionSubmit={(value) => {
                     inputRef.current?.blur();
                     const location = JSON.parse(value) as Location;
+                    setStationConfig({
+                        lastSearchTerm: {
+                            input: location.display_name,
+                            latitude: Number(location.lat),
+                            longitude: Number(location.lon),
+                        },
+                    });
                     setCoords({
                         latitude: Number(location.lat),
                         longitude: Number(location.lon),

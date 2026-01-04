@@ -40,6 +40,7 @@ const DEFAULT_STATION_CONFIG: StationFilter = {
     onlyAvailable: true,
     onlyRydSupported: false,
     order: "refillPrice",
+    lastSearchTerm: null,
 };
 
 type ContextType = {
@@ -61,7 +62,7 @@ const Context = createContext<ContextType>({
     stations: undefined,
     stationConfig: DEFAULT_STATION_CONFIG,
     setCoords: () => {},
-    setStationConfig: (config: Partial<StationFilter>) => {},
+    setStationConfig: () => {},
 });
 
 const iconStyle = { width: rem(18), height: rem(18) };
@@ -205,7 +206,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
 
     useEffect(() => {
         if (!coords) return;
-        onFetchStations(coords, stationConfig);
+        void onFetchStations(coords, stationConfig);
         // re-render due onFetchStations not needed
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [coords, stationConfig.type, stationConfig.radius]);
