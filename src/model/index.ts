@@ -42,6 +42,10 @@ export type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;
 export const stationOrderTypes = ["price", "refillPrice", "distance"] as const;
 export type StationOrderType = (typeof stationOrderTypes)[number];
 
+type LastSearchTermType = Coords & {
+    input: string;
+};
+
 export type StationFilter = {
     radius: RadiusType;
     type: FuelType;
@@ -49,6 +53,7 @@ export type StationFilter = {
     onlyOpen: boolean;
     onlyAvailable: boolean;
     onlyRydSupported: boolean;
+    lastSearchTerm: Partial<LastSearchTermType> | null;
     order: StationOrderType;
 };
 

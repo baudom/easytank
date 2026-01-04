@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
     url.searchParams.append(PARAM_FORMAT, PARAM_FORMAT_TYPE);
 
     // Query only places in DE since tankerkoenig only supports germany places
-    url.searchParams.append(PARAM_SEARCH, requestedLocation);
+    url.searchParams.append(PARAM_SEARCH, `${requestedLocation} Deutschland`);
 
     try {
         const response = await fetch(url.toString(), {

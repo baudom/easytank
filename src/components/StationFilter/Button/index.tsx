@@ -19,7 +19,14 @@ const StationFilterButton: FC = () => {
 
     const onSubmit = useCallback(
         (values: StationFilterFormFields) => {
-            setStationConfig(values);
+            const result: Parameters<typeof setStationConfig>[0] = values;
+            result.lastSearchTerm = values.keepLastSearchTerm ? {} : null;
+
+            if ("keepLastSearchTerm" in result) {
+                delete result.keepLastSearchTerm;
+            }
+
+            setStationConfig(result);
             close();
         },
         [close, setStationConfig],
@@ -37,7 +44,7 @@ const StationFilterButton: FC = () => {
                 onClose={close}
                 title={
                     <Text size="xl">
-                        <T keyName="label.sort-and-filter" />
+                        <T keyName="label.search-settings" />
                     </Text>
                 }
             >
@@ -46,7 +53,7 @@ const StationFilterButton: FC = () => {
                     onCancel={close}
                 />
             </Modal>
-            <Tooltip label={t("label.sort-and-filter")}>
+            <Tooltip label={t("label.search-settings")}>
                 <ActionIcon
                     size="xl"
                     onClick={onOpenFilter}
