@@ -11,7 +11,7 @@ import {
     Stack,
     Text,
 } from "@mantine/core";
-import { T, useTranslate } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import menu from "@/components/StationFilter/Button/Form/menu";
 import { sortByStringAsc } from "@/helper/sortings";
 
@@ -28,7 +28,7 @@ type StationFilterFormProps = {
 };
 
 const StationFilterForm: FC<StationFilterFormProps> = (props) => {
-    const { t } = useTranslate();
+    const t = useTranslations();
     const { stationConfig, stations } = useStationsContext();
     const form = useForm<StationFilterFormFields>({
         initialValues: {
@@ -53,9 +53,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
     return (
         <form onSubmit={form.onSubmit((v) => props.onSubmit(v))}>
             <Stack mb="sm">
-                <Text>
-                    <T keyName="text.sorting-order-ascending" />
-                </Text>
+                <Text>{t("text.sorting-order-ascending")}</Text>
                 <SegmentedControl
                     withItemsBorders={false}
                     data={menu.map((e) => ({ ...e, label: t(e.label) }))}
@@ -64,9 +62,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
             </Stack>
 
             <Stack mb="sm">
-                <Text>
-                    <T keyName="label.filter" />
-                </Text>
+                <Text>{t("label.filter")}</Text>
                 <Checkbox
                     label={t("label.only-open-stations")}
                     {...form.getInputProps("onlyOpen", { type: "checkbox" })}
@@ -96,9 +92,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
             </Stack>
 
             <Stack mb="sm">
-                <Text>
-                    <T keyName="label.search" />
-                </Text>
+                <Text>{t("label.search")}</Text>
                 <Checkbox
                     label={t("label.keep-last-search-term")}
                     {...form.getInputProps("keepLastSearchTerm", {
@@ -113,11 +107,9 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
                     color="red"
                     onClick={props.onCancel}
                 >
-                    <T keyName="action.cancel" />
+                    {t("action.cancel")}
                 </Button>
-                <Button type="submit">
-                    <T keyName="action.save" />
-                </Button>
+                <Button type="submit">{t("action.save")}</Button>
             </Group>
         </form>
     );

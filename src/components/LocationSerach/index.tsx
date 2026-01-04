@@ -28,7 +28,7 @@ import { PARAM_SEARCH } from "@/model/nominatim";
 import { Location } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
 import CarConfigurationButton from "@/components/CarConfiguration/Button";
-import { useTranslate } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import StationFilterButton from "@/components/StationFilter/Button";
 import { notifications } from "@mantine/notifications";
 import { useDebouncedValue, useHotkeys } from "@mantine/hooks";
@@ -42,7 +42,7 @@ const DEBOUNCE_TIMEOUT = 500;
 const LocationSearch: FC = () => {
     const { primaryColor } = useMantineTheme();
     const { setCoords, stationConfig, setStationConfig } = useStationsContext();
-    const { t } = useTranslate();
+    const t = useTranslations();
     const { trackEvent } = useTracking();
     const userLocationRef = useRef<HTMLButtonElement>(null);
 

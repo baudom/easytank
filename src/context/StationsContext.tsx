@@ -29,7 +29,7 @@ import {
     LS_STATION_CONFIGURATION_KEY,
     NOTIFICATION_TIMEOUT,
 } from "@/model/constants";
-import { useTranslate } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import { calculateDiscount } from "@/model/ryd";
 
 const DEFAULT_STATION_CONFIG: StationFilter = {
@@ -68,7 +68,7 @@ const Context = createContext<ContextType>({
 const iconStyle = { width: rem(18), height: rem(18) };
 
 const StationsContext: FC<StationsContextProps> = ({ children }) => {
-    const { t } = useTranslate();
+    const t = useTranslations();
     const [loading, { open, close }] = useDisclosure(false);
     const [coords, setCoords] = useState<Coords | undefined>(undefined);
     const [stations, setStations] = useState<CalculatedStation[] | undefined>(

@@ -1,12 +1,14 @@
+"use client";
+
 import { FC } from "react";
 import { IconCar } from "@tabler/icons-react";
 import { ActionIcon, Tooltip, rem } from "@mantine/core";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
-import { useTranslate } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 
 const CarConfigurationButton: FC = () => {
     const { showModal } = useCarConfiguration();
-    const { t } = useTranslate();
+    const t = useTranslations();
 
     return (
         <Tooltip label={t("label.configure-car")}>

@@ -6,7 +6,7 @@ import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { Modal, Text } from "@mantine/core";
 import CarConfigurationForm from "@/components/CarConfiguration/Form";
 import { LS_CAR_CONFIGURATION_KEY } from "@/model/constants";
-import { T } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import useTracking from "@/hooks/useTracking";
 
 type CarConfigurationContextProps = {
@@ -36,6 +36,7 @@ const Context = createContext<ContextType>({
 const CarConfigurationContext: FC<CarConfigurationContextProps> = ({
     children,
 }) => {
+    const t = useTranslations();
     const { trackEvent } = useTracking();
     const [carConfig, setCarConfig, resetCarConfig] = useLocalStorage({
         key: LS_CAR_CONFIGURATION_KEY,
@@ -66,11 +67,7 @@ const CarConfigurationContext: FC<CarConfigurationContextProps> = ({
             <Modal
                 opened={configModalShown}
                 onClose={close}
-                title={
-                    <Text size="xl">
-                        <T keyName="label.configure-car" />
-                    </Text>
-                }
+                title={<Text size="xl">{t("label.configure-car")}</Text>}
             >
                 <CarConfigurationForm
                     onSubmit={(v) => {

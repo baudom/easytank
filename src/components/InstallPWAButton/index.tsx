@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useState } from "react";
 import { Anchor } from "@mantine/core";
-import { T } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import useTracking from "@/hooks/useTracking";
 
 type BeforeInstallPromptEvent = Event & {
@@ -14,6 +14,7 @@ type BeforeInstallPromptEvent = Event & {
 let pwaPromptRef: BeforeInstallPromptEvent | null = null;
 
 const InstallPWAButton: FC = () => {
+    const t = useTranslations();
     const { trackEvent } = useTracking();
     const [supportsPwa, setSupportsPwa] = useState(false);
 
@@ -37,7 +38,7 @@ const InstallPWAButton: FC = () => {
                 void trackEvent("install-pwa");
             }}
         >
-            <T keyName="action.install-app" />
+            {t("action.install-app")}
         </Anchor>
     ) : null;
 };

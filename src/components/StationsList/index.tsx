@@ -5,10 +5,11 @@ import { useStationsContext } from "@/context/StationsContext";
 import { Box, Grid, Loader, Stack, Text } from "@mantine/core";
 import FeatureSection from "@/components/FeatureSection";
 import StationCard from "@/components/StationCard";
-import { T } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import { sortByNumberAsc } from "@/helper/sortings";
 
 const StationsList: FC = () => {
+    const t = useTranslations();
     const { stations, loading, stationConfig } = useStationsContext();
 
     const filteredStations = useMemo(
@@ -74,9 +75,7 @@ const StationsList: FC = () => {
                     gap="xs"
                 >
                     <Loader type="dots" />
-                    <Text>
-                        <T keyName="notification.station-search-in-progress" />
-                    </Text>
+                    <Text>{t("notification.station-search-in-progress")}</Text>
                 </Stack>
             );
         } else if (!stations) {
@@ -109,13 +108,10 @@ const StationsList: FC = () => {
                     ta="center"
                     c="dimmed"
                 >
-                    <T
-                        keyName="text.n-stations-shown"
-                        params={{
-                            total: stations.length ?? 0,
-                            count: filteredStations.length ?? 0,
-                        }}
-                    />
+                    {t("text.n-stations-shown", {
+                        total: stations.length ?? 0,
+                        count: filteredStations.length ?? 0,
+                    })}
                 </Text>
             </Box>
         ) : (
@@ -123,13 +119,10 @@ const StationsList: FC = () => {
                 ta="center"
                 size="lg"
             >
-                <T
-                    keyName="text.n-stations-found"
-                    params={{ count: 0 }}
-                />
+                {t("text.n-stations-found", { count: 0 })}
             </Text>
         );
-    }, [filteredStations, loading, stations]);
+    }, [filteredStations, loading, stations, t]);
 };
 
 export default StationsList;

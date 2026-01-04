@@ -19,7 +19,7 @@ import PriceSection from "@/components/StationCard/PriceSection";
 import { IconExternalLink, IconMapSearch } from "@tabler/icons-react";
 import { mapFuelTypeToString } from "@/helper/mappings";
 import EfficiencySection from "@/components/StationCard/EfficiencySection";
-import { T } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import { RYD_COLOR_KEY } from "@/model/constants";
 import Link from "next/link";
 
@@ -28,6 +28,7 @@ type StationCardProps = {
 };
 
 const StationCard: FC<StationCardProps> = ({ station }) => {
+    const t = useTranslations();
     const { primaryColor } = useMantineTheme();
 
     const priceList = useMemo(
@@ -90,9 +91,7 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                     color={station.isOpen ? "green" : "red"}
                     variant="light"
                 >
-                    <T
-                        keyName={station.isOpen ? "label.open" : "label.closed"}
-                    />
+                    {t(station.isOpen ? "label.open" : "label.closed")}
                 </Badge>
                 {station.isRydSupportedBrand ? rydBadgeComponent : null}
             </Group>

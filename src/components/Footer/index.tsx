@@ -4,11 +4,11 @@ import { FC } from "react";
 import links from "./links";
 import Link from "./Link";
 import InstallPWAButton from "@/components/InstallPWAButton";
-import { getTranslate } from "@/tolgee/server";
+import { getTranslations } from "next-intl/server";
 import TrackingConfiguration from "@/components/TrackingConfiguration";
 
 const Footer: FC = async () => {
-    const t = await getTranslate();
+    const t = await getTranslations();
 
     return (
         <footer className={classes.footer}>

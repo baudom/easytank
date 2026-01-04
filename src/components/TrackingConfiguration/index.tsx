@@ -3,11 +3,12 @@
 import { FC, memo, useCallback, useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import useTracking from "@/hooks/useTracking";
-import { T } from "@tolgee/react";
+import { useTranslations } from "next-intl";
 import { Anchor, Button, Group, Modal, Text } from "@mantine/core";
 import { LS_ALLOW_TRACKING_OLD } from "@/model/constants";
 
 const TrackingConfiguration: FC = () => {
+    const t = useTranslations();
     const { trackEvent, allowTracking, setAllowTracking } = useTracking();
     const [showModal, { open, close }] = useDisclosure(
         typeof allowTracking !== "boolean",
@@ -33,11 +34,7 @@ const TrackingConfiguration: FC = () => {
     return (
         <>
             <Modal
-                title={
-                    <Text size="xl">
-                        <T keyName="label.manage-tracking" />
-                    </Text>
-                }
+                title={<Text size="xl">{t("label.manage-tracking")}</Text>}
                 opened={showModal}
                 onClose={close}
             >
@@ -45,28 +42,25 @@ const TrackingConfiguration: FC = () => {
                     size="sm"
                     component="span"
                 >
-                    <T
-                        keyName="text.tracking-note"
-                        params={{
-                            b: <b />,
-                            br: <br />,
-                            ul: <ul />,
-                            li: <li />,
-                        }}
-                    />
+                    {t.rich("text.tracking-note", {
+                        b: (chunks) => <b>{chunks}</b>,
+                        br: () => <br />,
+                        ul: (chunks) => <ul>{chunks}</ul>,
+                        li: (chunks) => <li>{chunks}</li>,
+                    })}
                 </Text>
                 <Group grow>
                     <Button
                         variant="subtle"
                         onClick={() => changeTrackingAgreement(false)}
                     >
-                        <T keyName={"label.disallow"} />
+                        {t("label.disallow")}
                     </Button>
                     <Button
                         variant="gradient"
                         onClick={() => changeTrackingAgreement(true)}
                     >
-                        <T keyName={"label.allow"} />
+                        {t("label.allow")}
                     </Button>
                 </Group>
             </Modal>
@@ -75,7 +69,7 @@ const TrackingConfiguration: FC = () => {
                 size="xs"
                 onClick={open}
             >
-                <T keyName="label.manage-tracking" />
+                {t("label.manage-tracking")}
             </Anchor>
         </>
     );
