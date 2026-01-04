@@ -18,7 +18,9 @@ import { sortByStringAsc } from "@/helper/sortings";
 export type StationFilterFormFields = Pick<
     StationFilter,
     "onlyRydSupported" | "onlyAvailable" | "onlyOpen" | "order" | "brands"
->;
+> & {
+    keepLastSearchTerm: boolean;
+};
 
 type StationFilterFormProps = {
     onSubmit: (values: StationFilterFormFields) => void;
@@ -32,6 +34,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
         initialValues: {
             onlyAvailable: stationConfig.onlyAvailable,
             onlyRydSupported: stationConfig.onlyRydSupported,
+            keepLastSearchTerm: stationConfig.lastSearchTerm !== null,
             onlyOpen: stationConfig.onlyOpen,
             order: stationConfig.order,
             brands: stationConfig.brands,
@@ -60,7 +63,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
                 />
             </Stack>
 
-            <Stack>
+            <Stack mb="sm">
                 <Text>
                     <T keyName="label.filter" />
                 </Text>
@@ -90,19 +93,32 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
                     clearable
                     {...form.getInputProps("brands", { type: "input" })}
                 />
-                <Group justify="space-between">
-                    <Button
-                        variant="transparent"
-                        color="red"
-                        onClick={props.onCancel}
-                    >
-                        <T keyName="action.cancel" />
-                    </Button>
-                    <Button type="submit">
-                        <T keyName="action.save" />
-                    </Button>
-                </Group>
             </Stack>
+
+            <Stack mb="sm">
+                <Text>
+                    <T keyName="label.search" />
+                </Text>
+                <Checkbox
+                    label={t("label.keep-last-search-term")}
+                    {...form.getInputProps("keepLastSearchTerm", {
+                        type: "checkbox",
+                    })}
+                />
+            </Stack>
+
+            <Group justify="space-between">
+                <Button
+                    variant="transparent"
+                    color="red"
+                    onClick={props.onCancel}
+                >
+                    <T keyName="action.cancel" />
+                </Button>
+                <Button type="submit">
+                    <T keyName="action.save" />
+                </Button>
+            </Group>
         </form>
     );
 };
