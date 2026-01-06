@@ -2,6 +2,7 @@
     "name": "easytank",
     "version": "1.9.1",
     "private": true,
+    "homepage": "https://easytank.baudom.de/",
     "repositoryUrl": "https://github.com/baudom/easytank",
     "author": {
         "name": "baudom",

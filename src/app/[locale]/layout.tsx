@@ -11,16 +11,26 @@ import { notFound } from "next/navigation";
 import { DEFAULT_LOCALE, NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { LocaleType, localeTypes } from "@/model";
 import AppSettings from "@/components/AppSettings";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+    params: { locale = DEFAULT_LOCALE },
+}: Props): Promise<Metadata> {
+    const t = await getTranslations({ locale, namespace: "metadata" });
+
     return {
-        metadataBase: new URL("https://easytank.baudom.de"),
+        metadataBase: new URL(process.env.NEXT_PUBLIC_HOMEPAGE),
+        alternates: {
+            canonical: `/${locale}`,
+            languages: {
+                de: "/de",
+                en: "/en",
+            },
+        },
         title: `${process.env.NEXT_PUBLIC_NAME} | ${process.env.NEXT_PUBLIC_AUTHOR}`,
-        description:
-            "Smarte Tankstellensuche, unterstützt durch Tankerkoenig und OpenStreetMap",
+        description: t("description"),
         authors: [
             {
                 name: process.env.NEXT_PUBLIC_AUTHOR,
@@ -28,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
             },
         ],
         openGraph: {
-            locale: "de_DE",
+            locale: locale === "de" ? "de_DE" : "en_US",
             type: "website",
             images: ["/icon-512-maskable.png"],
         },
@@ -39,8 +49,23 @@ export async function generateMetadata(): Promise<Metadata> {
             "Tankstellen",
             "Tankerkoenig",
         ],
+        robots: {
+            index: true,
+            follow: true,
+        },
+        icons: {
+            icon: "/favicon.ico",
+            apple: "/apple-touch-icon.png",
+        },
+        verification: {
+            google: process.env.GOOGLE_VERIFICATION_ID,
+        },
     };
 }
+
+export const viewport: Viewport = {
+    themeColor: "#1864AB",
+};
 
 const font = Font({
     subsets: ["latin"],
@@ -75,18 +100,6 @@ const Layout: FC<Props> = async ({
                     src={process.env.TRACKING_API_HOST}
                     data-website-id={process.env.TRACKING_API_KEY}
                     data-auto-track="false"
-                />
-                <link
-                    rel="icon"
-                    href="/favicon.ico"
-                />
-                <link
-                    rel="apple-touch-icon"
-                    href="/apple-touch-icon.png"
-                />
-                <meta
-                    name="theme-color"
-                    content="#1864AB"
                 />
             </head>
             <body style={{ minHeight: "100vh" }}>
