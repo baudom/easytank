@@ -18,7 +18,7 @@ const EfficiencySection: FC<EfficiencySectionProps> = ({
     const { colors } = useMantineTheme();
 
     return (
-        <Box ta="center">
+        <Box style={{ justifyItems: "center" }}>
             <Group gap="xs">
                 <IconReceipt2
                     style={{
