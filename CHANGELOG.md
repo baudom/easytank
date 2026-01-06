@@ -1,3 +1,19 @@
+## [1.10.0](https://github.com/baudom/easytank/compare/v1.9.1...v1.10.0) (2026-01-06)
+
+### 🚀 Features
+
+* Remember last location input ([#97](https://github.com/baudom/easytank/issues/97)) ([138efb5](https://github.com/baudom/easytank/commit/138efb50976d5eb2c859d081fa61804c82a0bfdf))
+* Replace tolgee with next-intl ([#98](https://github.com/baudom/easytank/issues/98)) ([8ffb979](https://github.com/baudom/easytank/commit/8ffb97944995276653711fc24f105a51cdff528f))
+* SEO improvements ([190684a](https://github.com/baudom/easytank/commit/190684a1ce0deb98fa677b555a88eff718643f2f))
+
+### 💡 Improvements
+
+* Improve general ui/ux of StationCard ([bc1741e](https://github.com/baudom/easytank/commit/bc1741e4624fd5536d4e3ef19bfca909a18f6ae6))
+
+### 🏗️ Build System
+
+* use conventionalcommits preset ([5518fd0](https://github.com/baudom/easytank/commit/5518fd0793f9e753dbc9afa31ed9d431a5b4cebd))
+
 ## [1.9.1](https://github.com/baudom/easytank/compare/v1.9.0...v1.9.1) (2025-12-15)
 
 
