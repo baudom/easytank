@@ -1,8 +1,56 @@
 {
     "branches": ["main"],
     "plugins": [
-        "@semantic-release/commit-analyzer",
-        "@semantic-release/release-notes-generator",
+        [
+            "@semantic-release/commit-analyzer",
+            {
+                "preset": "angular",
+                "releaseRules": [
+                    {
+                        "type": "refactor",
+                        "release": "patch"
+                    },
+                    {
+                        "type": "imp",
+                        "release": "patch"
+                    },
+                    {
+                        "type": "build",
+                        "release": "patch"
+                    }
+                ]
+            }
+        ],
+        [
+            "@semantic-release/release-notes-generator",
+            {
+                "preset": "conventionalcommits",
+                "presetConfig": {
+                    "types": [
+                        {
+                            "type": "feat",
+                            "section": "🚀 Features"
+                        },
+                        {
+                            "type": "fix",
+                            "section": "🪲 Bug Fixes"
+                        },
+                        {
+                            "type": "refactor",
+                            "section": "⚒️ Refactoring"
+                        },
+                        {
+                            "type": "imp",
+                            "section": "💡 Improvements"
+                        },
+                        {
+                            "type": "build",
+                            "section": "🏗️ Build System"
+                        }
+                    ]
+                }
+            }
+        ],
         "@semantic-release/changelog",
         [
             "@semantic-release/npm",
@@ -16,8 +64,7 @@
                 "assets": [
                     "CHANGELOG.md",
                     "package.json",
-                    "docker-compose.yaml",
-                    "i18n/*.json"
+                    "docker-compose.yaml"
                 ]
             }
         ],

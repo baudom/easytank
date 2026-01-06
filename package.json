@@ -37,6 +37,7 @@
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
+        "conventional-changelog-conventionalcommits": "^9.1.0",
         "eslint": "^8",
         "eslint-config-mantine": "^3.0.0",
         "eslint-config-next": "14.0.2",
