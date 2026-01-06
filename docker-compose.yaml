@@ -6,7 +6,7 @@ networks:
 services:
   app:
     container_name: easytank
-    image: easytank:1.9.1
+    image: easytank:1.10.0
     mem_limit: 512m
     pull_policy: build
     restart: always
@@ -23,7 +23,7 @@ services:
       args:
         NEXT_PUBLIC_RYD_LINK: ${NEXT_PUBLIC_RYD_LINK}
       tags:
-        - easytank:1.9.1
+        - easytank:1.10.0
         - easytank:latest
     networks:
       - proxynet
