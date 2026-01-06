@@ -2,11 +2,18 @@
 
 import { FC, useMemo } from "react";
 import { useStationsContext } from "@/context/StationsContext";
-import { Box, Grid, Loader, Stack, Text } from "@mantine/core";
+import { Box, Grid, Text } from "@mantine/core";
 import FeatureSection from "@/components/FeatureSection";
 import StationCard from "@/components/StationCard";
+import StationCardSkeleton from "@/components/StationCard/Skeleton";
 import { useTranslations } from "next-intl";
 import { sortByNumberAsc } from "@/helper/sortings";
+
+const baseGrid = {
+    base: 12,
+    sm: 6,
+    md: 4,
+};
 
 const StationsList: FC = () => {
     const t = useTranslations();
@@ -70,13 +77,20 @@ const StationsList: FC = () => {
     return useMemo(() => {
         if (loading) {
             return (
-                <Stack
-                    align="center"
-                    gap="xs"
+                <Grid
+                    mb={0}
+                    pb="sm"
                 >
-                    <Loader type="dots" />
-                    <Text>{t("notification.station-search-in-progress")}</Text>
-                </Stack>
+                    {Array.from({ length: 6 }).map((_, i) => (
+                        <Grid.Col
+                            // eslint-disable-next-line react/no-array-index-key
+                            key={i}
+                            span={baseGrid}
+                        >
+                            <StationCardSkeleton />
+                        </Grid.Col>
+                    ))}
+                </Grid>
             );
         } else if (!stations) {
             return <FeatureSection />;
@@ -91,13 +105,7 @@ const StationsList: FC = () => {
                     {filteredStations.map((s) => (
                         <Grid.Col
                             key={s.id}
-                            span={{
-                                xl: 4,
-                                lg: 4,
-                                md: 4,
-                                sm: 6,
-                                xs: 6,
-                            }}
+                            span={baseGrid}
                         >
                             <StationCard station={s} />
                         </Grid.Col>

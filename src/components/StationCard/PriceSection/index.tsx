@@ -9,13 +9,20 @@ type PriceSectionProps = {
 };
 
 const PriceSection: FC<PriceSectionProps> = ({ label, value }) => (
-    <Box>
-        <Text size="sm">{label}</Text>
+    <Box ta="center">
         <Text
-            size="lg"
+            size="xs"
+            c="dimmed"
+            style={{ textTransform: "uppercase" }}
             fw="bold"
         >
-            {value ? mapPrice(value) : "n. V."}
+            {label}
+        </Text>
+        <Text
+            size="lg"
+            fw="bolder"
+        >
+            {value ? mapPrice(value) : "-"}
         </Text>
     </Box>
 );

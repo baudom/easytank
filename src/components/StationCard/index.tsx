@@ -1,5 +1,5 @@
 import { FC, Fragment, memo, useMemo } from "react";
-import { CalculatedStation } from "@/model";
+import { CalculatedStation, fuelTypesWithTranslations } from "@/model";
 import {
     ActionIcon,
     Anchor,
@@ -17,7 +17,6 @@ import { createGoogleMapsLink, getStationThumb } from "@/helper/station";
 import classes from "./index.module.css";
 import PriceSection from "@/components/StationCard/PriceSection";
 import { IconExternalLink, IconMapSearch } from "@tabler/icons-react";
-import { mapFuelTypeToString } from "@/helper/mappings";
 import EfficiencySection from "@/components/StationCard/EfficiencySection";
 import { useTranslations } from "next-intl";
 import { RYD_COLOR_KEY } from "@/model/constants";
@@ -34,9 +33,18 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
     const priceList = useMemo(
         () =>
             [
-                { label: mapFuelTypeToString("diesel"), value: station.diesel },
-                { label: mapFuelTypeToString("e5"), value: station.e5 },
-                { label: mapFuelTypeToString("e10"), value: station.e10 },
+                {
+                    translationKey: fuelTypesWithTranslations.get("diesel"),
+                    value: station.diesel,
+                },
+                {
+                    translationKey: fuelTypesWithTranslations.get("e5"),
+                    value: station.e5,
+                },
+                {
+                    translationKey: fuelTypesWithTranslations.get("e10"),
+                    value: station.e10,
+                },
             ].filter((e) => e.value !== undefined),
         [station.diesel, station.e10, station.e5],
     );
@@ -65,7 +73,6 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
 
     return (
         <Card
-            shadow="sm"
             pt={0}
             withBorder
         >
@@ -101,8 +108,10 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
                 mb="xs"
                 ta="left"
                 size="sm"
+                c="dimmed"
             >
-                {station.name} &#x2022; {station.dist}km
+                {station.dist}km &middot;&nbsp;
+                {station.name}
             </Text>
 
             <Card.Section
@@ -112,9 +121,9 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
             >
                 <Group justify="space-evenly">
                     {priceList.map((price, index, self) => (
-                        <Fragment key={price.label}>
+                        <Fragment key={price.translationKey}>
                             <PriceSection
-                                label={price.label}
+                                label={t(price.translationKey)}
                                 value={price.value}
                             />
                             {index !== self.length - 1 ? (
