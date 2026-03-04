@@ -69,7 +69,7 @@ const StationsList: FC = () => {
             stationConfig.onlyAvailable,
             stationConfig.type,
             stationConfig.brands,
-            stationConfig?.onlyRydSupported,
+            stationConfig.onlyRydSupported,
             stationConfig.order,
         ],
     );

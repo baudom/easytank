@@ -6,9 +6,10 @@ import Link from "./Link";
 import InstallPWAButton from "@/components/InstallPWAButton";
 import { getTranslations } from "next-intl/server";
 import TrackingConfiguration from "@/components/TrackingConfiguration";
+import { LocaleType } from "@/model";
 
-const Footer: FC = async () => {
-    const t = await getTranslations();
+const Footer: FC<{ locale: LocaleType }> = async ({ locale }) => {
+    const t = await getTranslations({ locale });
 
     return (
         <footer className={classes.footer}>

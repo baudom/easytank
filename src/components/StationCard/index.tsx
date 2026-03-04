@@ -34,15 +34,15 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
         () =>
             [
                 {
-                    translationKey: fuelTypesWithTranslations.get("diesel"),
+                    translationKey: fuelTypesWithTranslations.get("diesel")!,
                     value: station.diesel,
                 },
                 {
-                    translationKey: fuelTypesWithTranslations.get("e5"),
+                    translationKey: fuelTypesWithTranslations.get("e5")!,
                     value: station.e5,
                 },
                 {
-                    translationKey: fuelTypesWithTranslations.get("e10"),
+                    translationKey: fuelTypesWithTranslations.get("e10")!,
                     value: station.e10,
                 },
             ].filter((e) => e.value !== undefined),
