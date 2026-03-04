@@ -74,7 +74,7 @@ const font = Font({
 
 type Props = {
     children: ReactNode;
-    params: Promise<{ locale?: LocaleType }>;
+    params: Promise<{ locale?: string }>;
 };
 
 const Layout: FC<Props> = async ({ children, params }) => {
@@ -117,7 +117,7 @@ const Layout: FC<Props> = async ({ children, params }) => {
                             transitionDuration={500}
                         />
                         {children}
-                        <Footer locale={locale} />
+                        <Footer locale={locale as LocaleType} />
                     </MantineProvider>
                 </NextIntlClientProvider>
             </body>
