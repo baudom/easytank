@@ -27,7 +27,7 @@ type ContextType = {
 
 const Context = createContext<ContextType>({
     carConfig: DEFAULT_CAR_CONFIGURATION,
-    setCarConfig: (config: CarConfiguration) => {},
+    setCarConfig: (_config: CarConfiguration) => {},
     resetCarConfig: () => {},
     showModal: () => {},
     hideModal: () => {},
@@ -52,7 +52,7 @@ const CarConfigurationContext: FC<CarConfigurationContextProps> = ({
     const [configModalShown, { open, close }] = useDisclosure(false);
 
     return (
-        <Context.Provider
+        <Context
             value={{
                 carConfig,
                 setCarConfig,
@@ -77,7 +77,7 @@ const CarConfigurationContext: FC<CarConfigurationContextProps> = ({
                 />
             </Modal>
             {children}
-        </Context.Provider>
+        </Context>
     );
 };
 

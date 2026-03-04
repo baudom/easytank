@@ -1,5 +1,4 @@
 {
-    "plugins": ["eslint-config-mantine"],
     "trailingComma": "all",
     "tabWidth": 4,
     "semi": true,

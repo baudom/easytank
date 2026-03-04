@@ -15,9 +15,8 @@ import { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 
-export async function generateMetadata({
-    params: { locale = DEFAULT_LOCALE },
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { locale = DEFAULT_LOCALE } = await params;
     const t = await getTranslations({ locale, namespace: "metadata" });
 
     return {
@@ -75,23 +74,22 @@ const font = Font({
 
 type Props = {
     children: ReactNode;
-    params: { locale?: string };
+    params: Promise<{ locale?: LocaleType }>;
 };
 
-const Layout: FC<Props> = async ({
-    children,
-    params: { locale = DEFAULT_LOCALE },
-}) => {
+const Layout: FC<Props> = async ({ children, params }) => {
+    const { locale = DEFAULT_LOCALE } = await params;
     if (!localeTypes.includes(locale as LocaleType)) {
         notFound();
     }
 
-    const messages = await getMessages();
+    const messages = await getMessages({ locale });
 
     return (
         <html
             lang={locale}
             className={font.variable}
+            suppressHydrationWarning
         >
             <head>
                 <ColorSchemeScript defaultColorScheme="dark" />
@@ -119,7 +117,7 @@ const Layout: FC<Props> = async ({
                             transitionDuration={500}
                         />
                         {children}
-                        <Footer />
+                        <Footer locale={locale} />
                     </MantineProvider>
                 </NextIntlClientProvider>
             </body>
