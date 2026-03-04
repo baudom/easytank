@@ -7,35 +7,36 @@ export const createGoogleMapsLink = ({ lat, lng, ...rest }: Station) => {
     return url.toString();
 };
 
-export const getStationThumb = ({ brand }: Station) => {
-    // TODO: copyright?
-    return null;
+export const getStationBrandColor = (brand: string) => {
+    const brandLower = brand.toLowerCase();
+    if (brandLower.includes("aral")) return "#005096";
+    if (brandLower.includes("shell")) return "#fbce07";
+    if (brandLower.includes("total")) return "#ed1c24";
+    if (brandLower.includes("esso")) return "#ee2b2b";
+    if (brandLower.includes("jet")) return "#ffd300";
+    if (brandLower.includes("avia")) return "#e4002b";
+    if (brandLower.includes("omv")) return "#006fb4";
+    if (brandLower.includes("baywa")) return "#008c4f";
+    if (brandLower.includes("hem")) return "#00af3f";
+    if (brandLower.includes("star")) return "#e30613";
+    if (brandLower.includes("edeka")) return "#ffed00";
+    if (brandLower.includes("ran")) return "#e30613";
+    if (brandLower.includes("agip") || brandLower.includes("eni"))
+        return "#ffd800";
+    if (brandLower.includes("raiffeisen")) return "#00843d";
+    if (brandLower.includes("westfalen")) return "#004b90";
+    if (brandLower.includes("q1")) return "#e30613";
+    if (brandLower.includes("tamoil")) return "#e2001a";
+    if (brandLower.includes("orlen")) return "#e2001a";
+    if (brandLower.includes("globus")) return "#ef7d00";
+    if (brandLower.includes("sprint")) return "#005cb9";
+    if (brandLower.includes("hoyer")) return "#e30613";
+    if (brandLower.includes("markant")) return "#e30613";
+    if (brandLower.includes("bft")) return "#00539c";
+    if (brandLower.includes("team")) return "#e30613";
+    if (brandLower.includes("calpam")) return "#004f9f";
+    if (brandLower.includes("mundorf")) return "#e30613";
+    if (brandLower.includes("pinoil")) return "#2b7d2b";
 
-    if (brand.startsWith("EDEKA")) {
-        return "https://verbund.edeka/verbund/presse/mediathek/edeka_preview-logo.jpg?impolicy=4x3";
-    }
-
-    switch (brand) {
-        case "AVIA":
-        case "AVIA XPress":
-            return "https://www.avia.de/favicon.ico";
-        case "OMV":
-            return "https://www.omv.de/favicon.ico";
-        case "ESSO":
-            return "https://www.esso.de/-/media/favicons/brands/esso/esso_favicon_16x16px_144dpi.png";
-        case "RAN":
-            return "https://www.ran-tankstellen.de/favicon.ico";
-        case "JET":
-            return "https://www.jet.de/favicon.ico";
-        case "ARAL":
-            return "https://www.aral.de/apps/settings/wcm/designs/refresh/aral/favicon.ico";
-        case "Shell":
-            return "https://www.shell.de/favicon.ico";
-        case "BayWa":
-            return "https://www.baywa-mobility.de/images/icons/apple-touch-icon.png";
-        case "TotalEnergies":
-            return "https://totalenergies.de/sites/all/themes/custom/totalenergy_theme/favicon.ico";
-    }
-
-    return null;
+    return "gray";
 };
