@@ -13,7 +13,7 @@ import {
     Text,
     useMantineTheme,
 } from "@mantine/core";
-import { createGoogleMapsLink, getStationThumb } from "@/helper/station";
+import { createGoogleMapsLink, getStationBrandColor } from "@/helper/station";
 import classes from "./index.module.css";
 import PriceSection from "@/components/StationCard/PriceSection";
 import { IconExternalLink, IconMapSearch } from "@tabler/icons-react";
@@ -78,9 +78,8 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
         >
             <Group my="xs">
                 <Avatar
-                    src={getStationThumb(station)}
-                    alt={`${station.name} thumbnail`}
                     size="sm"
+                    color={getStationBrandColor(station.brand || station.name)}
                 >
                     {(station.brand || station.name).toUpperCase().slice(0, 2)}
                 </Avatar>
