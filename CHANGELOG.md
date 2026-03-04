@@ -1,3 +1,20 @@
+## [1.11.0](https://github.com/baudom/easytank/compare/v1.10.0...v1.11.0) (2026-03-04)
+
+### ⚠ BREAKING CHANGES
+
+* **#104:** upgrade to Next.js 16 and React 19 (#106)
+
+### 🚀 Features
+
+* **#103:** Brand-like colors ([#105](https://github.com/baudom/easytank/issues/105)) ([a895310](https://github.com/baudom/easytank/commit/a895310e1e50be4735cff90891ee111674b4aed2)), closes [#103](https://github.com/baudom/easytank/issues/103)
+* **#104:** upgrade to Next.js 16 and React 19 ([#106](https://github.com/baudom/easytank/issues/106)) ([46e2210](https://github.com/baudom/easytank/commit/46e2210cea8e1da6878b045fc66b67b2a047e7ce)), closes [#104](https://github.com/baudom/easytank/issues/104)
+
+### 🏗️ Build System
+
+* **deps:** bump tar from 7.5.2 to 7.5.3 in the npm_and_yarn group across 1 directory ([#100](https://github.com/baudom/easytank/issues/100)) ([86bb372](https://github.com/baudom/easytank/commit/86bb3723e89637f05e9dbab11dd591e08f0652a1))
+* **deps:** bump tar from 7.5.3 to 7.5.6 in the npm_and_yarn group across 1 directory ([#101](https://github.com/baudom/easytank/issues/101)) ([d365c93](https://github.com/baudom/easytank/commit/d365c93da2ba0b510254dd4221ef1e096ee19143))
+* **deps:** bump the npm_and_yarn group across 1 directory with 3 updates ([#102](https://github.com/baudom/easytank/issues/102)) ([fbe3383](https://github.com/baudom/easytank/commit/fbe33838e38c6396bb5d8ae74118718d42e062b1))
+
 ## [1.10.0](https://github.com/baudom/easytank/compare/v1.9.1...v1.10.0) (2026-01-06)
 
 ### 🚀 Features
