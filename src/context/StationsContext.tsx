@@ -226,7 +226,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     }, [calculateStationEfficiency, carConfig]);
 
     return (
-        <Context.Provider
+        <Context
             value={{
                 loading,
                 coords,
@@ -237,7 +237,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
             }}
         >
             {children}
-        </Context.Provider>
+        </Context>
     );
 };
 

@@ -1,6 +1,10 @@
 import { Station } from "@/model/tankerkoenig";
 
-export const createGoogleMapsLink = ({ lat, lng, ...rest }: Station) => {
+export const createGoogleMapsLink = ({
+    lat: _lat,
+    lng: _lng,
+    ...rest
+}: Station) => {
     const queryStr = `${rest.name} ${rest.street} ${rest.houseNumber} ${rest.postCode} ${rest.place}`;
     const url = new URL("https://www.google.com/maps/search/?api=1");
     url.searchParams.append("query", queryStr);
