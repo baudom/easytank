@@ -5,6 +5,7 @@ import {
     Button,
     Modal,
     ScrollArea,
+    Text,
     TypographyStylesProvider,
 } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
@@ -58,7 +59,7 @@ const ReleaseNotesModal: FC = () => {
         <Modal
             opened={opened}
             onClose={handleClose}
-            title={t("label.whats-new")}
+            title={<Text size="xl">{t("label.whats-new")}</Text>}
             size="lg"
             scrollAreaComponent={ScrollArea.Autosize}
         >
