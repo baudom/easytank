@@ -18,11 +18,18 @@ import {
 import { FuelType, fuelTypes, RadiusType, radiusTypes } from "@/model";
 import { isRydSupportedBrand } from "@/model/ryd";
 
+export const revalidate = 60 * 5; // Cache same requests for 5 minutes
+
 export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams;
 
-    const latitude = params.get(PARAM_LATITUDE);
-    const longitude = params.get(PARAM_LONGITUDE);
+    const rawLat = params.get(PARAM_LATITUDE);
+    const rawLon = params.get(PARAM_LONGITUDE);
+
+    // Round coordinates to 3 decimal places to improve cache hit rate (accuracy ~110m)
+    const latitude = rawLat ? Number.parseFloat(rawLat).toFixed(3) : null;
+    const longitude = rawLon ? Number.parseFloat(rawLon).toFixed(3) : null;
+
     const radius =
         (Number.parseInt(params.get(PARAM_RADIUS) || "") as RadiusType) || 10;
     const fuelType = (params.get(PARAM_FUEL_TYPE) as FuelType | null) || "all";
@@ -57,11 +64,7 @@ export async function GET(request: NextRequest) {
     url.searchParams.append(PARAM_API_KEY, process.env.TANKERKOENIG_API_KEY);
 
     try {
-        const response = await fetch(url.toString(), {
-            next: {
-                revalidate: 60 * 5, // Cache same requests for 5 minutes
-            },
-        });
+        const response = await fetch(url.toString());
 
         const results: StationsResponse = await response.json();
         if (!results.ok) {
