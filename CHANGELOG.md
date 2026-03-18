@@ -1,3 +1,19 @@
+## [1.12.0](https://github.com/baudom/easytank/compare/v1.11.0...v1.12.0) (2026-03-18)
+
+### 🚀 Features
+
+* **#114:** Modal with recently added features ([#115](https://github.com/baudom/easytank/issues/115)) ([b4aa2e2](https://github.com/baudom/easytank/commit/b4aa2e282b25ae085403ff6fb941fa9b3dfc4a94)), closes [#114](https://github.com/baudom/easytank/issues/114)
+
+### 🪲 Bug Fixes
+
+* **#110:** Remove duplicate locations ([#112](https://github.com/baudom/easytank/issues/112)) ([49ce2eb](https://github.com/baudom/easytank/commit/49ce2ebc39f2a3f7fbce8a5b01f027eb8db8e696)), closes [#110](https://github.com/baudom/easytank/issues/110)
+* **#111:** Fix setting last search input ([#113](https://github.com/baudom/easytank/issues/113)) ([b5e098d](https://github.com/baudom/easytank/commit/b5e098d316f6eb6afc404f66542f246845ff5208))
+
+### 🏗️ Build System
+
+* **deps:** bump tar from 7.5.9 to 7.5.10 in the npm_and_yarn group across 1 directory ([#108](https://github.com/baudom/easytank/issues/108)) ([1ab9331](https://github.com/baudom/easytank/commit/1ab93313c557a32a33685e1ceb2ebb93c1329c9d))
+* **deps:** bump the npm_and_yarn group across 1 directory with 2 updates ([#109](https://github.com/baudom/easytank/issues/109)) ([f6c9d23](https://github.com/baudom/easytank/commit/f6c9d238f38fe95e83213ea5bbfa401489b16460))
+
 ## [1.11.0](https://github.com/baudom/easytank/compare/v1.10.0...v1.11.0) (2026-03-04)
 
 ### ⚠ BREAKING CHANGES
