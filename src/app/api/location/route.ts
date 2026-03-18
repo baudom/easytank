@@ -48,7 +48,14 @@ export async function GET(request: NextRequest) {
 
         // TODO: Include only type=village?
         const results: NominatimLocation[] = await response.json();
-        return createSuccessResponse(results.map(toMinified));
+        const minified = results.map(toMinified);
+        const unique = minified.filter(
+            (loc, index, self) =>
+                index ===
+                self.findIndex((l) => l.display_name === loc.display_name),
+        );
+
+        return createSuccessResponse(unique);
     } catch (e: any) {
         console.error(e?.message || JSON.stringify(e));
         return createErrorResponse("A error occurred.");
