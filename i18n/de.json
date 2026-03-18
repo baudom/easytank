@@ -3,7 +3,8 @@
     "cancel": "Abbrechen",
     "install-app": "Als App installieren",
     "reset": "Zurücksetzen",
-    "save": "Speichern"
+    "save": "Speichern",
+    "ok": "Alles klar"
   },
   "fuel": {
     "diesel": "Diesel",
@@ -41,7 +42,8 @@
     "value-greater-than-zero": "Wert muss größer als 0 sein!",
     "your-car": "Dein Auto",
     "your-location": "Dein Standort",
-    "your-search": "Wonach suchst du?"
+    "your-search": "Wonach suchst du?",
+    "whats-new": "Was ist neu?"
   },
   "notification": {
     "coordinates-detail": "Koordinaten: {latitude}, {longitude}",

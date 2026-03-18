@@ -47,6 +47,12 @@
                             "type": "build",
                             "section": "🏗️ Build System"
                         }
+                    ],
+                    "noteGroups": [
+                        {
+                            "type": "BREAKING CHANGE",
+                            "title": "🚨 BREAKING CHANGES"
+                        }
                     ]
                 }
             }
