@@ -10,6 +10,7 @@ import StationFilterForm, {
     StationFilterFormFields,
 } from "@/components/StationFilter/Button/Form";
 import useTracking from "@/hooks/useTracking";
+import { StationFilter } from "@/model";
 
 const StationFilterButton: FC = () => {
     const t = useTranslations();
@@ -19,14 +20,13 @@ const StationFilterButton: FC = () => {
 
     const onSubmit = useCallback(
         (values: StationFilterFormFields) => {
-            const result: Parameters<typeof setStationConfig>[0] = values;
-            result.lastSearchTerm = values.keepLastSearchTerm ? {} : null;
+            const { keepLastSearchTerm, ...rest } = values;
+            const config: Partial<StationFilter> = {
+                ...rest,
+                lastSearchTerm: keepLastSearchTerm ? {} : null,
+            };
 
-            if ("keepLastSearchTerm" in result) {
-                delete result.keepLastSearchTerm;
-            }
-
-            setStationConfig(result);
+            setStationConfig(config);
             close();
         },
         [close, setStationConfig],
