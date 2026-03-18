@@ -5,6 +5,7 @@ import {
     memo,
     useCallback,
     useEffect,
+    useLayoutEffect,
     useMemo,
     useRef,
     useState,
@@ -52,6 +53,7 @@ const LocationSearch: FC = () => {
     const [loading, setLoading] = useState(false);
 
     const searchParams = useSearchParams();
+    const isRestored = useRef(false);
 
     const [debouncedInput, cancelDebounce] = useDebouncedValue(
         input,
@@ -72,6 +74,14 @@ const LocationSearch: FC = () => {
         md: false,
     });
 
+    useEffect(() => {
+        setTimeout(() => {
+            if (!isRestored.current) {
+                inputRef.current?.focus();
+            }
+        }, 100);
+    }, []);
+
     const userLocation = useMemo(
         () => (
             <UserLocation
@@ -84,92 +94,105 @@ const LocationSearch: FC = () => {
         [setCoords],
     );
 
-    const onSearchLocations = useCallback(async () => {
-        if (!debouncedInput || !debouncedInput.trim()) return;
+    const onSearchLocations = useCallback(
+        async (manual = false) => {
+            if (!debouncedInput || !debouncedInput.trim()) return;
 
-        void trackEvent("manual-search");
-        const params = new URLSearchParams({ [PARAM_SEARCH]: debouncedInput });
-        setLoading(true);
-        const notificationId = notifications.show({
-            loading: true,
-            title: t("notification.location-search-in-progress"),
-            message: undefined,
-            autoClose: false,
-            withCloseButton: false,
-        });
+            if (manual) void trackEvent("manual-search");
+            setLoading(true);
 
-        try {
-            inputRef.current?.focus();
-            const response = await fetch(`/api/location?${params}`, {});
-            if (!response.ok) {
-                const res: Response = await response.json();
-                throw new Error(JSON.stringify(res));
+            let notificationId: string | undefined;
+            if (manual) {
+                notificationId = notifications.show({
+                    loading: true,
+                    title: t("notification.location-search-in-progress"),
+                    message: undefined,
+                    autoClose: false,
+                    withCloseButton: false,
+                });
             }
 
-            const res: Location[] = await response.json();
-            if (!res || !res.length) {
-                setLocations([]);
-            } else {
-                setLocations(
-                    res.map((e) => ({
-                        value: JSON.stringify(e),
-                        label: e.display_name,
-                    })),
-                );
-            }
+            try {
+                if (manual) inputRef.current?.focus();
+                const params = new URLSearchParams({
+                    [PARAM_SEARCH]: debouncedInput,
+                });
+                const response = await fetch(`/api/location?${params}`, {});
+                if (!response.ok) {
+                    const res: Response = await response.json();
+                    throw new Error(JSON.stringify(res));
+                }
 
-            notifications.update({
-                id: notificationId,
-                color: "green",
-                title: t("notification.search-successful"),
-                message: t("text.n-places-found", {
-                    count: res.length,
-                }),
-                icon: <IconCheck style={iconStyle} />,
-                loading: false,
-                autoClose: NOTIFICATION_TIMEOUT,
-                withCloseButton: true,
-            });
-        } catch (e) {
-            console.error(e);
-            notifications.update({
-                id: notificationId,
-                color: "red",
-                title: t("notification.search-failed"),
-                message: t("text.please-retry"),
-                icon: <IconCurrentLocationOff style={iconStyle} />,
-                loading: false,
-                autoClose: NOTIFICATION_TIMEOUT,
-                withCloseButton: true,
-            });
-        } finally {
-            setLoading(false);
-        }
-    }, [debouncedInput, t, trackEvent]);
+                const res: Location[] = await response.json();
+                if (!res || !res.length) {
+                    setLocations([]);
+                } else {
+                    setLocations(
+                        res.map((cur) => ({
+                            value: JSON.stringify(cur),
+                            label: cur.display_name,
+                        })),
+                    );
+                }
+
+                if (notificationId) {
+                    notifications.update({
+                        id: notificationId,
+                        color: "green",
+                        title: t("notification.search-successful"),
+                        message: t("text.n-places-found", {
+                            count: res.length,
+                        }),
+                        icon: <IconCheck style={iconStyle} />,
+                        loading: false,
+                        autoClose: NOTIFICATION_TIMEOUT,
+                        withCloseButton: true,
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+                if (notificationId) {
+                    notifications.update({
+                        id: notificationId,
+                        color: "red",
+                        title: t("notification.search-failed"),
+                        message: t("text.please-retry"),
+                        icon: <IconCurrentLocationOff style={iconStyle} />,
+                        loading: false,
+                        autoClose: NOTIFICATION_TIMEOUT,
+                        withCloseButton: true,
+                    });
+                }
+            } finally {
+                setLoading(false);
+            }
+        },
+        [debouncedInput, t, trackEvent],
+    );
 
     useEffect(() => {
-        void onSearchLocations();
+        void onSearchLocations(false);
     }, [debouncedInput, onSearchLocations]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        if (isRestored.current) return;
+
         if (searchParams.has("search-now")) {
             userLocationRef?.current?.click?.();
+            isRestored.current = true;
         } else if (
-            inputRef.current &&
             stationConfig.lastSearchTerm?.input &&
             stationConfig.lastSearchTerm?.latitude &&
             stationConfig.lastSearchTerm?.longitude
         ) {
-            setCoords({
-                latitude: stationConfig.lastSearchTerm.latitude,
-                longitude: stationConfig.lastSearchTerm.longitude,
-            });
-            setTimeout(() => {
-                if (inputRef.current && stationConfig.lastSearchTerm?.input) {
-                    inputRef.current.value = stationConfig.lastSearchTerm.input;
-                    inputRef.current.blur();
-                }
-            }, 250);
+            const {
+                input: lastInput,
+                latitude,
+                longitude,
+            } = stationConfig.lastSearchTerm;
+            setInput(lastInput);
+            setCoords({ latitude, longitude });
+            isRestored.current = true;
         }
     }, [searchParams, setCoords, stationConfig.lastSearchTerm]);
 
@@ -178,8 +201,8 @@ const LocationSearch: FC = () => {
             {!isSmallDevice ? userLocation : null}
             <Autocomplete
                 style={{ flex: 1 }}
-                autoFocus
                 ref={inputRef}
+                value={input}
                 size="lg"
                 placeholder={t("label.search-placeholder")}
                 leftSection={isSmallDevice ? userLocation : null}
@@ -189,7 +212,7 @@ const LocationSearch: FC = () => {
                         size="lg"
                         color={primaryColor}
                         variant="transparent"
-                        onClick={onSearchLocations}
+                        onClick={() => onSearchLocations(true)}
                     >
                         <IconSearch
                             style={{ width: rem(18), height: rem(18) }}
@@ -203,6 +226,7 @@ const LocationSearch: FC = () => {
                 onOptionSubmit={(value) => {
                     inputRef.current?.blur();
                     const location = JSON.parse(value) as Location;
+                    setInput(location.display_name);
                     setStationConfig({
                         lastSearchTerm: {
                             input: location.display_name,
@@ -221,7 +245,7 @@ const LocationSearch: FC = () => {
                 onClick={() => inputRef.current?.select()}
                 onKeyDownCapture={(ev) => {
                     if (ev.key !== "Enter") return;
-                    return onSearchLocations();
+                    return onSearchLocations(true);
                 }}
             />
             <StationFilterButton />
