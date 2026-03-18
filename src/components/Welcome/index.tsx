@@ -5,11 +5,13 @@ import StationsContext from "@/context/StationsContext";
 import StationsList from "@/components/StationsList";
 import StationFilter from "@/components/StationFilter";
 import CarConfigurationContext from "@/context/CarConfigurationContext";
+import ReleaseNotesModal from "@/components/ReleaseNotesModal";
 
 const Welcome: FC = () => {
     return (
         <CarConfigurationContext>
             <StationsContext>
+                <ReleaseNotesModal />
                 <Stack>
                     <Box ta="center">
                         <Title>
