@@ -18,8 +18,6 @@ import {
 import { FuelType, fuelTypes, RadiusType, radiusTypes } from "@/model";
 import { isRydSupportedBrand } from "@/model/ryd";
 
-export const revalidate = 60 * 5; // Cache same requests for 5 minutes
-
 export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams;
 
@@ -64,7 +62,9 @@ export async function GET(request: NextRequest) {
     url.searchParams.append(PARAM_API_KEY, process.env.TANKERKOENIG_API_KEY);
 
     try {
-        const response = await fetch(url.toString());
+        const response = await fetch(url.toString(), {
+            next: { revalidate: 60 * 5 },
+        });
 
         const results: StationsResponse = await response.json();
         if (!results.ok) {
