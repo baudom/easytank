@@ -5,6 +5,7 @@ export const LS_CAR_CONFIGURATION_KEY = "car-configuration";
 export const LS_STATION_CONFIGURATION_KEY = "station-configuration";
 export const LS_ALLOW_TRACKING_OLD = "allow-tracking";
 export const LS_TRACKING_AGREEMENT = "tracking-agreement";
+export const LS_LAST_VISITED_VERSION = "last-visited-version";
 
 export const DEFAULT_LOCALE: LocaleType = "de";
 
