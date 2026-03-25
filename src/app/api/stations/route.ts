@@ -6,6 +6,8 @@ import {
     PARAM_LATITUDE,
     PARAM_LONGITUDE,
     PARAM_RADIUS,
+    PARAM_REFRESH,
+    PARAM_REFRESH_VALUE_TRUE,
     PARAM_SORT,
     StationsResponse,
     StationSuccessResponse,
@@ -31,6 +33,7 @@ export async function GET(request: NextRequest) {
     const radius =
         (Number.parseInt(params.get(PARAM_RADIUS) || "") as RadiusType) || 10;
     const fuelType = (params.get(PARAM_FUEL_TYPE) as FuelType | null) || "all";
+    const forceRefresh = params.get(PARAM_REFRESH) === PARAM_REFRESH_VALUE_TRUE;
 
     if (!fuelTypes.includes(fuelType)) {
         return createErrorResponse(
@@ -63,7 +66,9 @@ export async function GET(request: NextRequest) {
 
     try {
         const response = await fetch(url.toString(), {
-            next: { revalidate: 60 * 5 },
+            ...(forceRefresh
+                ? { cache: "no-store" }
+                : { next: { revalidate: 60 * 5 } }),
         });
 
         const results: StationsResponse = await response.json();
