@@ -17,10 +17,13 @@ import { sortByStringAsc } from "@/helper/sortings";
 
 export type StationFilterFormFields = Pick<
     StationFilter,
-    "onlyRydSupported" | "onlyAvailable" | "onlyOpen" | "order" | "brands"
-> & {
-    keepLastSearchTerm: boolean;
-};
+    | "onlyRydSupported"
+    | "onlyAvailable"
+    | "onlyOpen"
+    | "order"
+    | "brands"
+    | "appStartAction"
+>;
 
 type StationFilterFormProps = {
     onSubmit: (values: StationFilterFormFields) => void;
@@ -34,7 +37,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
         initialValues: {
             onlyAvailable: stationConfig.onlyAvailable,
             onlyRydSupported: stationConfig.onlyRydSupported,
-            keepLastSearchTerm: stationConfig.lastSearchTerm !== null,
+            appStartAction: stationConfig.appStartAction,
             onlyOpen: stationConfig.onlyOpen,
             order: stationConfig.order,
             brands: stationConfig.brands,
@@ -92,12 +95,25 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
             </Stack>
 
             <Stack mb="sm">
-                <Text>{t("label.search")}</Text>
-                <Checkbox
-                    label={t("label.keep-last-search-term")}
-                    {...form.getInputProps("keepLastSearchTerm", {
-                        type: "checkbox",
-                    })}
+                <Text>{t("label.app-start-action")}</Text>
+                <SegmentedControl
+                    withItemsBorders={false}
+                    fullWidth
+                    data={[
+                        {
+                            label: t("label.app-start-action-none"),
+                            value: "none",
+                        },
+                        {
+                            label: t("label.app-start-action-current-location"),
+                            value: "currentLocation",
+                        },
+                        {
+                            label: t("label.app-start-action-last-search-term"),
+                            value: "lastSearchTerm",
+                        },
+                    ]}
+                    {...form.getInputProps("appStartAction", { type: "input" })}
                 />
             </Stack>
 

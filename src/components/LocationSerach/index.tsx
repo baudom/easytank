@@ -179,8 +179,10 @@ const LocationSearch: FC = () => {
 
         if (searchParams.has("search-now")) {
             userLocationRef?.current?.click?.();
-            isRestored.current = true;
+        } else if (stationConfig.appStartAction === "currentLocation") {
+            userLocationRef?.current?.click?.();
         } else if (
+            stationConfig.appStartAction === "lastSearchTerm" &&
             stationConfig.lastSearchTerm?.input &&
             stationConfig.lastSearchTerm?.latitude &&
             stationConfig.lastSearchTerm?.longitude
@@ -192,9 +194,15 @@ const LocationSearch: FC = () => {
             } = stationConfig.lastSearchTerm;
             setInput(lastInput);
             setCoords({ latitude, longitude });
-            isRestored.current = true;
         }
-    }, [searchParams, setCoords, stationConfig.lastSearchTerm]);
+
+        isRestored.current = true;
+    }, [
+        searchParams,
+        setCoords,
+        stationConfig.lastSearchTerm,
+        stationConfig.appStartAction,
+    ]);
 
     return (
         <Group>
