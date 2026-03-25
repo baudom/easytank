@@ -2,7 +2,7 @@
 
 import { FC, memo, useCallback } from "react";
 import { ActionIcon, Modal, rem, Text, Tooltip } from "@mantine/core";
-import { IconFilterDown } from "@tabler/icons-react";
+import { IconSettingsSearch } from "@tabler/icons-react";
 import { useStationsContext } from "@/context/StationsContext";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslations } from "next-intl";
@@ -10,7 +10,6 @@ import StationFilterForm, {
     StationFilterFormFields,
 } from "@/components/StationFilter/Button/Form";
 import useTracking from "@/hooks/useTracking";
-import { StationFilter } from "@/model";
 
 const StationFilterButton: FC = () => {
     const t = useTranslations();
@@ -20,13 +19,7 @@ const StationFilterButton: FC = () => {
 
     const onSubmit = useCallback(
         (values: StationFilterFormFields) => {
-            const { keepLastSearchTerm, ...rest } = values;
-            const config: Partial<StationFilter> = {
-                ...rest,
-                lastSearchTerm: keepLastSearchTerm ? {} : null,
-            };
-
-            setStationConfig(config);
+            setStationConfig(values);
             close();
         },
         [close, setStationConfig],
@@ -54,7 +47,7 @@ const StationFilterButton: FC = () => {
                     size="xl"
                     onClick={onOpenFilter}
                 >
-                    <IconFilterDown
+                    <IconSettingsSearch
                         style={{ width: rem(18), height: rem(18) }}
                         stroke={1.5}
                     />

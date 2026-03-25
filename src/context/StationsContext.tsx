@@ -16,6 +16,8 @@ import {
     PARAM_LATITUDE,
     PARAM_LONGITUDE,
     PARAM_RADIUS,
+    PARAM_REFRESH,
+    PARAM_REFRESH_VALUE_TRUE,
     Station,
     StationSuccessResponse,
 } from "@/model/tankerkoenig";
@@ -41,6 +43,7 @@ const DEFAULT_STATION_CONFIG: StationFilter = {
     onlyRydSupported: false,
     order: "refillPrice",
     lastSearchTerm: null,
+    appStartAction: "none",
 };
 
 type ContextType = {
@@ -78,8 +81,18 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     const [stationConfig, setStationConfig] = useLocalStorage({
         key: LS_STATION_CONFIGURATION_KEY,
         defaultValue: DEFAULT_STATION_CONFIG,
+        getInitialValueInEffect: false,
         deserialize: (v) => {
             const parsed = v ? JSON.parse(v) : {};
+
+            if (
+                parsed.appStartAction === undefined &&
+                parsed.lastSearchTerm !== undefined
+            ) {
+                parsed.appStartAction =
+                    parsed.lastSearchTerm !== null ? "lastSearchTerm" : "none";
+            }
+
             return { ...DEFAULT_STATION_CONFIG, ...parsed } as StationFilter;
         },
     });
@@ -141,19 +154,17 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
             params.append(PARAM_RADIUS, `${config.radius}`);
             params.append(PARAM_FUEL_TYPE, config.type);
 
-            open();
-            const notificationId = notifications.show({
-                loading: true,
-                title: t("notification.station-search-in-progress"),
-                message: undefined,
-                autoClose: false,
-                withCloseButton: false,
-            });
+            const performFetch = async (isRefresh = false) => {
+                const fetchParams = new URLSearchParams(params);
+                if (isRefresh) {
+                    fetchParams.append(PARAM_REFRESH, PARAM_REFRESH_VALUE_TRUE);
+                }
 
-            try {
-                const response = await fetch(`/api/stations?${params}`, {});
+                const response = await fetch(
+                    `/api/stations?${fetchParams.toString()}`,
+                );
                 if (!response.ok) {
-                    const res: Response = await response.json();
+                    const res = await response.json();
                     throw new Error(JSON.stringify(res));
                 }
 
@@ -172,6 +183,24 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
                               )
                         : [],
                 );
+                return res;
+            };
+
+            open();
+            const notificationId = notifications.show({
+                loading: true,
+                title: t("notification.station-search-in-progress"),
+                message: undefined,
+                autoClose: false,
+                withCloseButton: false,
+            });
+
+            try {
+                // Prefetch from cache
+                await performFetch().catch(console.error);
+
+                // Fetch latest data
+                const res = await performFetch(true);
 
                 notifications.update({
                     id: notificationId,

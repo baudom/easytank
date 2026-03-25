@@ -42,6 +42,13 @@ export type Coords = Pick<GeolocationCoordinates, "latitude" | "longitude">;
 export const stationOrderTypes = ["price", "refillPrice", "distance"] as const;
 export type StationOrderType = (typeof stationOrderTypes)[number];
 
+export const appStartActions = [
+    "none",
+    "currentLocation",
+    "lastSearchTerm",
+] as const;
+export type AppStartAction = (typeof appStartActions)[number];
+
 type LastSearchTermType = Coords & {
     input: string;
 };
@@ -55,6 +62,7 @@ export type StationFilter = {
     onlyRydSupported: boolean;
     lastSearchTerm: Partial<LastSearchTermType> | null;
     order: StationOrderType;
+    appStartAction: AppStartAction;
 };
 
 export type CarConfiguration = {
