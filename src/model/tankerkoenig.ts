@@ -5,6 +5,8 @@ export const PARAM_LATITUDE = "lat";
 export const PARAM_LONGITUDE = "lng";
 export const PARAM_RADIUS = "rad";
 
+export const PARAM_REFRESH = "refresh";
+export const PARAM_REFRESH_VALUE_TRUE = "true";
 export const PARAM_FUEL_TYPE = "type";
 export const PARAM_SORT = "sort";
 export const PARAM_API_KEY = "apikey";
