@@ -1,3 +1,17 @@
+## [1.13.0](https://github.com/baudom/easytank/compare/v1.12.0...v1.13.0) (2026-03-25)
+
+### 🚀 Features
+
+* **#118:** Add App-Start actions ([#120](https://github.com/baudom/easytank/issues/120)) ([4674fc5](https://github.com/baudom/easytank/commit/4674fc5d8eac5fc3d59e1e1247116868beb74315)), closes [#118](https://github.com/baudom/easytank/issues/118)
+
+### 🪲 Bug Fixes
+
+* add parameter to dismiss cache ([#119](https://github.com/baudom/easytank/issues/119)) ([ebf0157](https://github.com/baudom/easytank/commit/ebf015719c57840337b4067367f10b3d71ce8dac))
+
+### 🏗️ Build System
+
+* **deps:** bump flatted from 3.2.9 to 3.4.2 in the npm_and_yarn group across 1 directory ([#117](https://github.com/baudom/easytank/issues/117)) ([f7a322e](https://github.com/baudom/easytank/commit/f7a322e7b406a0a69efb7bb544d4fb8253b9d9b0))
+
 ## [1.12.0](https://github.com/baudom/easytank/compare/v1.11.0...v1.12.0) (2026-03-18)
 
 ### 🚀 Features
