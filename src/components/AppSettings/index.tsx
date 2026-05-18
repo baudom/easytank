@@ -1,15 +1,17 @@
-import { FC } from "react";
-import { Stack } from "@mantine/core";
+"use client";
+
+import { FC, memo } from "react";
+import { Group } from "@mantine/core";
 import ColorSchemeToggle from "@/components/ColorSchemeToggle";
 import LanguageToggle from "@/components/LanguageToggle";
 
 const AppSettings: FC = () => {
     return (
-        <Stack style={{ position: "absolute", top: "2vw", right: "2vw" }}>
+        <Group gap="xs">
             <ColorSchemeToggle />
             <LanguageToggle />
-        </Stack>
+        </Group>
     );
 };
 
-export default AppSettings;
+export default memo(AppSettings);

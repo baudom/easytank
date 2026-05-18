@@ -7,7 +7,7 @@ import {
     rem,
     useMantineColorScheme,
 } from "@mantine/core";
-import { FC, useCallback } from "react";
+import { FC, memo, useCallback } from "react";
 import { IconMoon, IconSun } from "@tabler/icons-react";
 import useTracking from "@/hooks/useTracking";
 
@@ -29,9 +29,8 @@ const ColorSchemeToggle: FC = () => {
     return (
         <ActionIcon
             onClick={() => onToggleColorScheme(colorScheme)}
-            style={{ cursor: "pointer" }}
-            variant="light"
-            size="lg"
+            variant="subtle"
+            size="md"
         >
             <Box darkHidden>
                 <IconSun style={iconStyle} />
@@ -43,4 +42,4 @@ const ColorSchemeToggle: FC = () => {
     );
 };
 
-export default ColorSchemeToggle;
+export default memo(ColorSchemeToggle);
