@@ -17,7 +17,7 @@ import {
     Group,
     rem,
     useMantineTheme,
-    useMatches,
+    Box,
 } from "@mantine/core";
 import {
     IconCheck,
@@ -28,9 +28,9 @@ import UserLocation from "@/components/LocationSerach/UserLocation";
 import { PARAM_SEARCH } from "@/model/nominatim";
 import { Location } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
-import CarConfigurationButton from "@/components/CarConfiguration/Button";
 import { useTranslations } from "next-intl";
 import StationFilterButton from "@/components/StationFilter/Button";
+import CarConfigurationButton from "@/components/CarConfiguration/Button";
 import { notifications } from "@mantine/notifications";
 import { useDebouncedValue, useHotkeys } from "@mantine/hooks";
 import { NOTIFICATION_TIMEOUT } from "@/model/constants";
@@ -69,10 +69,6 @@ const LocationSearch: FC = () => {
             },
         ],
     ]);
-    const isSmallDevice = useMatches({
-        base: true,
-        md: false,
-    });
 
     useEffect(() => {
         setTimeout(() => {
@@ -206,14 +202,13 @@ const LocationSearch: FC = () => {
 
     return (
         <Group>
-            {!isSmallDevice ? userLocation : null}
+            {userLocation}
             <Autocomplete
                 style={{ flex: 1 }}
                 ref={inputRef}
                 value={input}
                 size="lg"
                 placeholder={t("label.search-placeholder")}
-                leftSection={isSmallDevice ? userLocation : null}
                 rightSection={
                     <ActionIcon
                         loading={loading}
@@ -256,8 +251,12 @@ const LocationSearch: FC = () => {
                     return onSearchLocations(true);
                 }}
             />
-            <StationFilterButton />
-            <CarConfigurationButton />
+            <Box visibleFrom="md">
+                <StationFilterButton />
+            </Box>
+            <Box visibleFrom="md">
+                <CarConfigurationButton />
+            </Box>
         </Group>
     );
 };

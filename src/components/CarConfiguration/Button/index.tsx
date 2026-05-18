@@ -6,14 +6,20 @@ import { ActionIcon, Tooltip, rem } from "@mantine/core";
 import { useCarConfiguration } from "@/context/CarConfigurationContext";
 import { useTranslations } from "next-intl";
 
-const CarConfigurationButton: FC = () => {
+type CarConfigurationButtonProps = {
+    size?: string | number;
+};
+
+const CarConfigurationButton: FC<CarConfigurationButtonProps> = ({
+    size = "xl",
+}) => {
     const { showModal } = useCarConfiguration();
     const t = useTranslations();
 
     return (
         <Tooltip label={t("label.configure-car")}>
             <ActionIcon
-                size="xl"
+                size={size}
                 variant="gradient"
                 onClick={showModal}
             >

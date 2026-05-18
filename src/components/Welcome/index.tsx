@@ -6,12 +6,14 @@ import StationsList from "@/components/StationsList";
 import StationFilter from "@/components/StationFilter";
 import CarConfigurationContext from "@/context/CarConfigurationContext";
 import ReleaseNotesModal from "@/components/ReleaseNotesModal";
+import MobileActions from "@/components/MobileActions";
 
 const Welcome: FC = () => {
     return (
         <CarConfigurationContext>
             <StationsContext>
                 <ReleaseNotesModal />
+                <MobileActions />
                 <Stack>
                     <Box ta="center">
                         <Title>
