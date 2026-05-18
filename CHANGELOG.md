@@ -1,3 +1,20 @@
+## [1.14.0](https://github.com/baudom/easytank/compare/v1.13.0...v1.14.0) (2026-05-18)
+
+### 🚀 Features
+
+* **#128:** Overhaul mobile navigation ([#129](https://github.com/baudom/easytank/issues/129)) ([117b45b](https://github.com/baudom/easytank/commit/117b45b662cb677cedf5716449c82f2b4eadac6c)), closes [#128](https://github.com/baudom/easytank/issues/128)
+* **#130:** Clipboard and sharing button ([#131](https://github.com/baudom/easytank/issues/131)) ([08ecfbd](https://github.com/baudom/easytank/commit/08ecfbd9f7a9ddd2c6f2391347bc3c8ee17776e0)), closes [#130](https://github.com/baudom/easytank/issues/130)
+
+### 🏗️ Build System
+
+* **deps-dev:** bump postcss from 8.5.13 to 8.5.14 in the npm_and_yarn group across 1 directory ([#132](https://github.com/baudom/easytank/issues/132)) ([ccb12ca](https://github.com/baudom/easytank/commit/ccb12ca5d5d7e070e0d0c4b93508f075d63c0e44))
+* **deps-dev:** bump postcss from 8.5.8 to 8.5.10 in the npm_and_yarn group across 1 directory ([#124](https://github.com/baudom/easytank/issues/124)) ([65dbeb5](https://github.com/baudom/easytank/commit/65dbeb53d50e7aeda925053539c0b3db873b481c))
+* **deps:** bump handlebars from 4.7.8 to 4.7.9 in the npm_and_yarn group across 1 directory ([#122](https://github.com/baudom/easytank/issues/122)) ([3d14ad7](https://github.com/baudom/easytank/commit/3d14ad71c0a7e4723d6fe7c51276971797e61384))
+* **deps:** bump ip-address from 10.1.0 to 10.2.0 in the npm_and_yarn group across 1 directory ([#125](https://github.com/baudom/easytank/issues/125)) ([075e1d5](https://github.com/baudom/easytank/commit/075e1d55da67eb75bb3313688b09d843874a20ab))
+* **deps:** bump next from 16.2.3 to 16.2.6 in the npm_and_yarn group across 1 directory ([#127](https://github.com/baudom/easytank/issues/127)) ([d54be22](https://github.com/baudom/easytank/commit/d54be22cb6e83722715645042f4c90337cd84f6a))
+* **deps:** bump the npm_and_yarn group across 1 directory with 2 updates ([#126](https://github.com/baudom/easytank/issues/126)) ([8a38d5f](https://github.com/baudom/easytank/commit/8a38d5f90e305071731bfe57da272786e1624a1f))
+* **deps:** bump the npm_and_yarn group across 1 directory with 3 updates ([#123](https://github.com/baudom/easytank/issues/123)) ([480e77f](https://github.com/baudom/easytank/commit/480e77f9044ec6cedb45a3042556e8283e0eee9c))
+
 ## [1.13.0](https://github.com/baudom/easytank/compare/v1.12.0...v1.13.0) (2026-03-25)
 
 ### 🚀 Features
