@@ -1,7 +1,9 @@
 {
   "action": {
     "cancel": "Abbrechen",
+    "copy-info": "Informationen kopieren",
     "install-app": "Als App installieren",
+    "share": "Teilen",
     "reset": "Zurücksetzen",
     "save": "Speichern",
     "ok": "Alles klar"
