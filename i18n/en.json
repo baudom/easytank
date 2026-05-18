@@ -1,7 +1,9 @@
 {
   "action": {
     "cancel": "Cancel",
+    "copy-info": "Copy Information",
     "install-app": "Install as app",
+    "share": "Share",
     "reset": "Reset",
     "save": "Save",
     "ok": "Got it"

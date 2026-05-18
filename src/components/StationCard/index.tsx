@@ -1,4 +1,4 @@
-import { FC, Fragment, memo, useMemo } from "react";
+import { FC, Fragment, memo, useCallback, useMemo } from "react";
 import { CalculatedStation, fuelTypesWithTranslations } from "@/model";
 import {
     ActionIcon,
@@ -9,18 +9,26 @@ import {
     Card,
     Divider,
     Group,
-    rem,
     Text,
+    Tooltip,
     useMantineTheme,
 } from "@mantine/core";
 import { createGoogleMapsLink, getStationBrandColor } from "@/helper/station";
 import classes from "./index.module.css";
 import PriceSection from "@/components/StationCard/PriceSection";
-import { IconExternalLink, IconMapSearch } from "@tabler/icons-react";
+import {
+    IconCheck,
+    IconCopy,
+    IconExternalLink,
+    IconMapSearch,
+    IconShare,
+} from "@tabler/icons-react";
 import EfficiencySection from "@/components/StationCard/EfficiencySection";
 import { useTranslations } from "next-intl";
 import { RYD_COLOR_KEY } from "@/model/constants";
 import Link from "next/link";
+import { useClipboard } from "@mantine/hooks";
+import { useStationsContext } from "@/context/StationsContext";
 
 type StationCardProps = {
     station: CalculatedStation;
@@ -29,6 +37,54 @@ type StationCardProps = {
 const StationCard: FC<StationCardProps> = ({ station }) => {
     const t = useTranslations();
     const { primaryColor } = useMantineTheme();
+    const { stationConfig } = useStationsContext();
+    const clipboard = useClipboard({ timeout: 2000 });
+
+    const stationInfoText = useMemo(() => {
+        const address = `${station.street} ${station.houseNumber}, ${station.postCode} ${station.place}`;
+        const brand = station.brand || station.name;
+
+        const details: string[] = [];
+
+        if (stationConfig.type !== "all") {
+            const price =
+                station[stationConfig.type as keyof CalculatedStation];
+            if (typeof price === "number") {
+                details.push(`${t(`fuel.${stationConfig.type}`)}: ${price}€`);
+            }
+        } else {
+            if (typeof station.diesel === "number")
+                details.push(`${t("fuel.diesel")}: ${station.diesel}€`);
+            if (typeof station.e5 === "number")
+                details.push(`${t("fuel.e5")}: ${station.e5}€`);
+            if (typeof station.e10 === "number")
+                details.push(`${t("fuel.e10")}: ${station.e10}€`);
+        }
+
+        if (typeof station.refillPrice === "number") {
+            details.push(`${t("label.total-cost")}: ${station.refillPrice}€`);
+        }
+
+        const detailsStr = details.length > 0 ? `${details.join(" | ")}\n` : "";
+
+        return `${brand}\n${detailsStr}${address}`;
+    }, [station, stationConfig.type, t]);
+
+    const handleShare = useCallback(async () => {
+        if (typeof navigator !== "undefined" && !!navigator.share) {
+            try {
+                await navigator.share({
+                    title: station.brand || station.name,
+                    text: stationInfoText,
+                    url: createGoogleMapsLink(station),
+                });
+            } catch (e) {
+                if ((e as Error).name !== "AbortError") {
+                    console.error("Sharing failed", e);
+                }
+            }
+        }
+    }, [station, stationInfoText]);
 
     const priceList = useMemo(
         () =>
@@ -140,34 +196,74 @@ const StationCard: FC<StationCardProps> = ({ station }) => {
             </Card.Section>
 
             <Card.Section inheritPadding>
-                <Anchor
-                    href={createGoogleMapsLink(station)}
-                    target="_blank"
+                <Group
+                    wrap="nowrap"
+                    gap="xs"
                 >
-                    <Group>
-                        <ActionIcon
-                            size="md"
-                            color={primaryColor}
-                            variant="transparent"
+                    <Anchor
+                        href={createGoogleMapsLink(station)}
+                        target="_blank"
+                        style={{ flex: 1, minWidth: 0 }}
+                        c="dimmed"
+                    >
+                        <Group
+                            gap="xs"
+                            wrap="nowrap"
                         >
-                            <IconMapSearch
-                                style={{
-                                    width: rem(16),
-                                    height: rem(16),
-                                }}
-                                stroke={1.5}
-                            />
-                        </ActionIcon>
-                        <Text
-                            style={{ flex: 1 }}
-                            className={classes.truncateText}
-                            ta="left"
-                            size="xs"
-                        >
-                            {`${station.street} ${station.houseNumber}, ${station.postCode} ${station.place}`}
-                        </Text>
+                            <ActionIcon
+                                size="md"
+                                color={primaryColor}
+                                variant="transparent"
+                            >
+                                <IconMapSearch
+                                    size={16}
+                                    stroke={1.5}
+                                />
+                            </ActionIcon>
+                            <Text
+                                style={{ flex: 1 }}
+                                className={classes.truncateText}
+                                ta="left"
+                                size="xs"
+                            >
+                                {`${station.street} ${station.houseNumber}, ${station.postCode} ${station.place}`}
+                            </Text>
+                        </Group>
+                    </Anchor>
+
+                    <Group
+                        gap={0}
+                        wrap="nowrap"
+                    >
+                        <Tooltip label={t("action.copy-info")}>
+                            <ActionIcon
+                                size="md"
+                                variant="subtle"
+                                color={clipboard.copied ? "green" : "dimmed"}
+                                onClick={() => clipboard.copy(stationInfoText)}
+                            >
+                                {clipboard.copied ? (
+                                    <IconCheck size={16} />
+                                ) : (
+                                    <IconCopy size={16} />
+                                )}
+                            </ActionIcon>
+                        </Tooltip>
+                        {typeof navigator !== "undefined" &&
+                            !!navigator.share && (
+                                <Tooltip label={t("action.share")}>
+                                    <ActionIcon
+                                        size="md"
+                                        variant="subtle"
+                                        color="dimmed"
+                                        onClick={handleShare}
+                                    >
+                                        <IconShare size={16} />
+                                    </ActionIcon>
+                                </Tooltip>
+                            )}
                     </Group>
-                </Anchor>
+                </Group>
             </Card.Section>
         </Card>
     );
