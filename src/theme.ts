@@ -20,5 +20,16 @@ export const theme = createTheme({
         ],
     },
     defaultGradient: { from: "pink", to: "yellow" },
-    /* Put your mantine theme override here */
+    components: {
+        SegmentedControl: {
+            defaultProps: {
+                withItemsBorders: false,
+            },
+        },
+        Modal: {
+            defaultProps: {
+                centered: true,
+            },
+        },
+    },
 });

@@ -58,7 +58,6 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
             <Stack mb="sm">
                 <Text>{t("text.sorting-order-ascending")}</Text>
                 <SegmentedControl
-                    withItemsBorders={false}
                     data={menu.map((e) => ({ ...e, label: t(e.label) }))}
                     {...form.getInputProps("order", { type: "input" })}
                 />
@@ -97,7 +96,6 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
             <Stack mb="sm">
                 <Text>{t("label.app-start-action")}</Text>
                 <SegmentedControl
-                    withItemsBorders={false}
                     fullWidth
                     data={[
                         {

@@ -7,6 +7,7 @@ import InstallPWAButton from "@/components/InstallPWAButton";
 import { getTranslations } from "next-intl/server";
 import TrackingConfiguration from "@/components/TrackingConfiguration";
 import { LocaleType } from "@/model";
+import AppSettings from "@/components/AppSettings";
 
 const Footer: FC<{ locale: LocaleType }> = async ({ locale }) => {
     const t = await getTranslations({ locale });
@@ -27,6 +28,7 @@ const Footer: FC<{ locale: LocaleType }> = async ({ locale }) => {
                 <TrackingConfiguration />
                 <InstallPWAButton />
             </Group>
+            <AppSettings />
         </footer>
     );
 };

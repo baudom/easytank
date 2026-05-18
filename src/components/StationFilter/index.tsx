@@ -1,7 +1,7 @@
 "use client";
 
-import { FC, memo, useCallback } from "react";
-import { Select, SimpleGrid } from "@mantine/core";
+import { FC, memo, useCallback, useMemo } from "react";
+import { Group, SegmentedControl, Select, SimpleGrid } from "@mantine/core";
 import {
     FuelType,
     fuelTypes,
@@ -42,27 +42,64 @@ const StationFilter: FC<StationFilterProps> = () => {
         [setStationConfig, trackRadiusChange],
     );
 
+    const fuelData = useMemo(
+        () =>
+            fuelTypes.map((type) => ({
+                label: t(fuelTypesWithTranslations.get(type)!),
+                value: type,
+            })),
+        [t],
+    );
+
+    const radiusData = useMemo(
+        () =>
+            radiusTypes.map((rad) => ({
+                label: `${rad}km`,
+                value: `${rad}`,
+            })),
+        [],
+    );
+
     return (
-        <SimpleGrid cols={{ base: 2, md: 4 }}>
-            <Select
-                size="lg"
-                data={fuelTypes.map((type) => ({
-                    label: t(fuelTypesWithTranslations.get(type)!),
-                    value: type,
-                }))}
-                value={stationConfig.type}
-                onChange={onFuelTypeChange}
-            />
-            <Select
-                size="lg"
-                data={radiusTypes.map((rad) => ({
-                    label: `${rad}km`,
-                    value: `${rad}`,
-                }))}
-                value={`${stationConfig.radius}`}
-                onChange={onRadiusChange}
-            />
-        </SimpleGrid>
+        <>
+            <SimpleGrid
+                cols={2}
+                hiddenFrom="md"
+            >
+                <Select
+                    size="lg"
+                    data={fuelData}
+                    value={stationConfig.type}
+                    onChange={onFuelTypeChange}
+                />
+                <Select
+                    size="lg"
+                    data={radiusData}
+                    value={`${stationConfig.radius}`}
+                    onChange={onRadiusChange}
+                />
+            </SimpleGrid>
+
+            <Group
+                grow
+                visibleFrom="md"
+            >
+                <SegmentedControl
+                    fullWidth
+                    size="lg"
+                    data={fuelData}
+                    value={stationConfig.type}
+                    onChange={onFuelTypeChange}
+                />
+                <SegmentedControl
+                    fullWidth
+                    size="lg"
+                    data={radiusData}
+                    value={`${stationConfig.radius}`}
+                    onChange={onRadiusChange}
+                />
+            </Group>
+        </>
     );
 };
 

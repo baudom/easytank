@@ -4,7 +4,7 @@ import {
     IconCurrentLocation,
     IconCurrentLocationOff,
 } from "@tabler/icons-react";
-import { ActionIcon, rem, Tooltip, useMatches } from "@mantine/core";
+import { ActionIcon, rem, Tooltip } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import getUserPosition from "@/helper/position";
 import { useTranslations } from "next-intl";
@@ -17,17 +17,18 @@ const iconStyle = { width: rem(18), height: rem(18) };
 type UserLocationProps = {
     onLocationFound: (coords: GeolocationCoordinates) => void;
     ref?: Ref<HTMLButtonElement>;
+    size?: string | number;
 };
 
-const UserLocation: FC<UserLocationProps> = ({ onLocationFound, ref }) => {
+const UserLocation: FC<UserLocationProps> = ({
+    onLocationFound,
+    ref,
+    size = "xl",
+}) => {
     const [loading, setLoading] = useState(false);
     const t = useTranslations();
     useHotkeys([["mod+shift+P", () => onLocationRequest()]], []);
     const { trackEvent } = useTracking();
-    const isSmallDevice = useMatches({
-        base: true,
-        md: false,
-    });
 
     const onLocationRequest = useCallback(async () => {
         void trackEvent("detect-position");
@@ -103,9 +104,9 @@ const UserLocation: FC<UserLocationProps> = ({ onLocationFound, ref }) => {
         <Tooltip label={t("label.use-current-location")}>
             <ActionIcon
                 ref={ref}
-                size={isSmallDevice ? "lg" : "xl"}
+                size={size}
                 loading={loading}
-                variant={isSmallDevice ? "transparent" : "light"}
+                variant="light"
                 onClick={onLocationRequest}
             >
                 <IconCurrentLocation
