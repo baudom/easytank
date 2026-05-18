@@ -1,19 +1,22 @@
 .footer {
     padding: var(--mantine-spacing-xl);
-    border-top: rem(1px) solid
-        light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+    border-top: rem(1px) solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    @media (max-width: $ mantine-breakpoint-xs) {
+    @media (max-width: $mantine-breakpoint-xs) {
         flex-direction: column;
+        gap: var(--mantine-spacing-md);
     }
 }
 
 .links {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    gap: var(--mantine-spacing-md);
+    flex-wrap: wrap;
 
-    @media (max-width: $ mantine-breakpoint-xs) {
-        margin-top: var(--mantine-spacing-md);
+    @media (max-width: $mantine-breakpoint-xs) {
+        justify-content: center;
     }
 }

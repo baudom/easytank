@@ -10,7 +10,6 @@ import { theme } from "@/theme";
 import { notFound } from "next/navigation";
 import { DEFAULT_LOCALE, NOTIFICATION_TIMEOUT } from "@/model/constants";
 import { LocaleType, localeTypes } from "@/model";
-import AppSettings from "@/components/AppSettings";
 import { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
@@ -109,7 +108,6 @@ const Layout: FC<Props> = async ({ children, params }) => {
                         theme={theme}
                         defaultColorScheme="dark"
                     >
-                        <AppSettings />
                         <Notifications
                             position="top-right"
                             autoClose={NOTIFICATION_TIMEOUT}

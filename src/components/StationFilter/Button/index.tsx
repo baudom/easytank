@@ -11,7 +11,11 @@ import StationFilterForm, {
 } from "@/components/StationFilter/Button/Form";
 import useTracking from "@/hooks/useTracking";
 
-const StationFilterButton: FC = () => {
+type StationFilterButtonProps = {
+    size?: string | number;
+};
+
+const StationFilterButton: FC<StationFilterButtonProps> = ({ size = "xl" }) => {
     const t = useTranslations();
     const { setStationConfig } = useStationsContext();
     const [showModal, { open, close }] = useDisclosure(false);
@@ -44,7 +48,7 @@ const StationFilterButton: FC = () => {
             </Modal>
             <Tooltip label={t("label.search-settings")}>
                 <ActionIcon
-                    size="xl"
+                    size={size}
                     onClick={onOpenFilter}
                 >
                     <IconSettingsSearch

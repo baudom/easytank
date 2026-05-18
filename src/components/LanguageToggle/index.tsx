@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useCallback, useTransition } from "react";
+import { FC, memo, useCallback, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 import { ActionIcon } from "@mantine/core";
@@ -12,7 +12,7 @@ const LanguageToggle: FC = () => {
     const locale = useLocale();
     const router = useRouter();
     const { trackLanguageSelect } = useTracking();
-    const [, startTransition] = useTransition();
+    const [isPending, startTransition] = useTransition();
 
     const toggleLanguage = useCallback(() => {
         const nextLocale: LocaleType =
@@ -27,13 +27,13 @@ const LanguageToggle: FC = () => {
     return (
         <ActionIcon
             onClick={toggleLanguage}
-            style={{ cursor: "pointer" }}
-            variant="light"
-            size="lg"
+            loading={isPending}
+            variant="subtle"
+            size="md"
         >
             {locale === "de" ? "🇩🇪" : "🇺🇸"}
         </ActionIcon>
     );
 };
 
-export default LanguageToggle;
+export default memo(LanguageToggle);
