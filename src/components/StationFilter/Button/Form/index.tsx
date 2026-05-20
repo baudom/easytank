@@ -23,6 +23,7 @@ export type StationFilterFormFields = Pick<
     | "order"
     | "brands"
     | "appStartAction"
+    | "saveSearchHistory"
 >;
 
 type StationFilterFormProps = {
@@ -41,6 +42,7 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
             onlyOpen: stationConfig.onlyOpen,
             order: stationConfig.order,
             brands: stationConfig.brands,
+            saveSearchHistory: stationConfig.saveSearchHistory,
         },
         validateInputOnChange: true,
     });
@@ -78,6 +80,12 @@ const StationFilterForm: FC<StationFilterFormProps> = (props) => {
                 <Checkbox
                     label={t("label.only-ryd-supported-stations")}
                     {...form.getInputProps("onlyRydSupported", {
+                        type: "checkbox",
+                    })}
+                />
+                <Checkbox
+                    label={t("label.save-search-history")}
+                    {...form.getInputProps("saveSearchHistory", {
                         type: "checkbox",
                     })}
                 />
