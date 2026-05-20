@@ -44,6 +44,8 @@ const DEFAULT_STATION_CONFIG: StationFilter = {
     order: "refillPrice",
     lastSearchTerm: null,
     appStartAction: "none",
+    saveSearchHistory: true,
+    searchHistory: [],
 };
 
 type ContextType = {

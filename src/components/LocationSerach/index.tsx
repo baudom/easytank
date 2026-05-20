@@ -1,22 +1,16 @@
 "use client";
 
-import {
-    FC,
-    memo,
-    useCallback,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-} from "react";
+import { FC, memo, useCallback, useEffect, useRef, useState } from "react";
 import {
     ActionIcon,
     Autocomplete,
+    Box,
     ComboboxData,
     Group,
+    Pill,
     rem,
+    Stack,
     useMantineTheme,
-    Box,
 } from "@mantine/core";
 import {
     IconCheck,
@@ -25,7 +19,7 @@ import {
 } from "@tabler/icons-react";
 import UserLocation from "@/components/LocationSerach/UserLocation";
 import { PARAM_SEARCH } from "@/model/nominatim";
-import { Location } from "@/model";
+import { LastSearchTermType, Location } from "@/model";
 import { useStationsContext } from "@/context/StationsContext";
 import { useTranslations } from "next-intl";
 import StationFilterButton from "@/components/StationFilter/Button";
@@ -78,18 +72,6 @@ const LocationSearch: FC = () => {
             }
         }, 100);
     }, []);
-
-    const userLocation = useMemo(
-        () => (
-            <UserLocation
-                ref={userLocationRef}
-                onLocationFound={({ latitude, longitude }) =>
-                    setCoords({ latitude, longitude })
-                }
-            />
-        ),
-        [setCoords],
-    );
 
     const onSearchLocations = useCallback(
         async (manual = false) => {
@@ -203,64 +185,141 @@ const LocationSearch: FC = () => {
         stationConfig.appStartAction,
     ]);
 
-    return (
-        <Group>
-            {userLocation}
-            <Autocomplete
-                style={{ flex: 1 }}
-                ref={inputRef}
-                value={input}
-                size="lg"
-                placeholder={t("label.search-placeholder")}
-                rightSection={
-                    <ActionIcon
-                        loading={loading}
-                        size="lg"
-                        color={primaryColor}
-                        variant="transparent"
-                        onClick={() => onSearchLocations(true)}
-                    >
-                        <IconSearch
-                            style={{ width: rem(18), height: rem(18) }}
-                            stroke={1.5}
-                        />
-                    </ActionIcon>
-                }
-                onChange={setInput}
-                data={locations}
-                selectFirstOptionOnChange
-                onOptionSubmit={(value) => {
-                    inputRef.current?.blur();
-                    const location = JSON.parse(value) as Location;
-                    setInput(location.display_name);
-                    setStationConfig({
-                        lastSearchTerm: {
-                            input: location.display_name,
-                            latitude: Number(location.lat),
-                            longitude: Number(location.lon),
-                        },
-                    });
-                    setCoords({
-                        latitude: Number(location.lat),
-                        longitude: Number(location.lon),
-                    });
+    const handleSelectLocation = useCallback(
+        (locationName: string, lat: number, lon: number) => {
+            inputRef.current?.blur();
+            setInput(locationName);
 
-                    // cancel debounce after setting value to input
-                    setTimeout(cancelDebounce, DEBOUNCE_TIMEOUT / 2);
-                }}
-                onClick={() => inputRef.current?.select()}
-                onKeyDownCapture={(ev) => {
-                    if (ev.key !== "Enter") return;
-                    return onSearchLocations(true);
-                }}
-            />
-            <Box visibleFrom="md">
-                <StationFilterButton />
-            </Box>
-            <Box visibleFrom="md">
-                <CarConfigurationButton />
-            </Box>
-        </Group>
+            let newHistory = stationConfig.searchHistory || [];
+            if (stationConfig.saveSearchHistory) {
+                const newEntry: LastSearchTermType = {
+                    input: locationName,
+                    latitude: lat,
+                    longitude: lon,
+                };
+                newHistory = [
+                    newEntry,
+                    ...newHistory.filter((e) => e.input !== newEntry.input),
+                ].slice(0, 5);
+            }
+
+            setStationConfig({
+                lastSearchTerm: {
+                    input: locationName,
+                    latitude: lat,
+                    longitude: lon,
+                },
+                searchHistory: newHistory,
+            });
+            setCoords({
+                latitude: lat,
+                longitude: lon,
+            });
+
+            // cancel debounce after setting value to input
+            setTimeout(cancelDebounce, DEBOUNCE_TIMEOUT / 2);
+        },
+        [
+            cancelDebounce,
+            setCoords,
+            setStationConfig,
+            stationConfig.saveSearchHistory,
+            stationConfig.searchHistory,
+        ],
+    );
+
+    const handleRemoveHistoryItem = useCallback(
+        (input: string) => {
+            setStationConfig({
+                searchHistory: (stationConfig.searchHistory || []).filter(
+                    (e) => e.input !== input,
+                ),
+            });
+        },
+        [setStationConfig, stationConfig.searchHistory],
+    );
+
+    return (
+        <Stack gap="xs">
+            <Group>
+                <UserLocation
+                    ref={userLocationRef}
+                    onLocationFound={({ latitude, longitude }) =>
+                        setCoords({ latitude, longitude })
+                    }
+                />
+                <Autocomplete
+                    style={{ flex: 1 }}
+                    ref={inputRef}
+                    value={input}
+                    size="lg"
+                    placeholder={t("label.search-placeholder")}
+                    rightSection={
+                        <ActionIcon
+                            loading={loading}
+                            size="lg"
+                            color={primaryColor}
+                            variant="transparent"
+                            onClick={() => onSearchLocations(true)}
+                        >
+                            <IconSearch
+                                style={{ width: rem(18), height: rem(18) }}
+                                stroke={1.5}
+                            />
+                        </ActionIcon>
+                    }
+                    onChange={setInput}
+                    data={locations}
+                    selectFirstOptionOnChange
+                    onOptionSubmit={(value) => {
+                        const location = JSON.parse(value) as Location;
+                        handleSelectLocation(
+                            location.display_name,
+                            Number(location.lat),
+                            Number(location.lon),
+                        );
+                    }}
+                    onClick={() => inputRef.current?.select()}
+                    onKeyDownCapture={(ev) => {
+                        if (ev.key !== "Enter") return;
+                        return onSearchLocations(true);
+                    }}
+                />
+                <Box visibleFrom="md">
+                    <StationFilterButton />
+                </Box>
+                <Box visibleFrom="md">
+                    <CarConfigurationButton />
+                </Box>
+            </Group>
+
+            {stationConfig.saveSearchHistory &&
+                stationConfig.searchHistory?.length > 0 && (
+                    <Pill.Group>
+                        {stationConfig.searchHistory.map((item) => (
+                            <Pill
+                                size="md"
+                                key={item.input}
+                                withRemoveButton
+                                onRemove={() =>
+                                    handleRemoveHistoryItem(item.input)
+                                }
+                                onClick={() =>
+                                    handleSelectLocation(
+                                        item.input,
+                                        item.latitude,
+                                        item.longitude,
+                                    )
+                                }
+                                style={{ cursor: "pointer" }}
+                                bg="var(--mantine-color-gray-light)"
+                            >
+                                {item.input.split(",")[0]}
+                            </Pill>
+                        ))}
+                    </Pill.Group>
+                )}
+        </Stack>
     );
 };
 

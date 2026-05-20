@@ -1,7 +1,14 @@
 "use client";
 
-import { FC, memo, useCallback, useMemo } from "react";
-import { Group, SegmentedControl, Select, SimpleGrid } from "@mantine/core";
+import { FC, memo, useCallback, useEffect, useMemo, useState } from "react";
+import {
+    Group,
+    rem,
+    SegmentedControl,
+    Select,
+    SimpleGrid,
+    Skeleton,
+} from "@mantine/core";
 import {
     FuelType,
     fuelTypes,
@@ -19,6 +26,12 @@ const StationFilter: FC<StationFilterProps> = () => {
     const { stationConfig, setStationConfig } = useStationsContext();
     const { trackFuelTypeChange, trackRadiusChange } = useTracking();
     const t = useTranslations();
+    const [hydrated, setHydrated] = useState(false);
+
+    useEffect(() => {
+        const id = requestAnimationFrame(() => setHydrated(true));
+        return () => cancelAnimationFrame(id);
+    }, []);
 
     const onFuelTypeChange = useCallback(
         (fuelType: string | null) => {
@@ -59,6 +72,27 @@ const StationFilter: FC<StationFilterProps> = () => {
             })),
         [],
     );
+
+    if (!hydrated) {
+        return (
+            <>
+                <SimpleGrid
+                    cols={2}
+                    hiddenFrom="md"
+                >
+                    <Skeleton height={rem(50)} />
+                    <Skeleton height={rem(50)} />
+                </SimpleGrid>
+                <Group
+                    grow
+                    visibleFrom="md"
+                >
+                    <Skeleton height={rem(50)} />
+                    <Skeleton height={rem(50)} />
+                </Group>
+            </>
+        );
+    }
 
     return (
         <>
