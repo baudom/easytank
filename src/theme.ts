@@ -31,5 +31,10 @@ export const theme = createTheme({
                 centered: true,
             },
         },
+        Affix: {
+            defaultProps: {
+                zIndex: 199,
+            },
+        },
     },
 });

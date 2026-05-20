@@ -75,12 +75,14 @@ const MobileActions: FC = () => {
                             <Transition
                                 transition="pop"
                                 mounted={fabOpened}
+                                keepMounted
                             >
                                 {(popStyles) => (
                                     <Stack
                                         style={popStyles}
                                         gap="xs"
                                         mb="xs"
+                                        onClick={() => setFabOpened(false)}
                                     >
                                         <UserLocation
                                             size={ACTION_SIZE}
