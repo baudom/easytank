@@ -6,6 +6,7 @@ import { IconSettingsSearch } from "@tabler/icons-react";
 import { useStationsContext } from "@/context/StationsContext";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslations } from "next-intl";
+import { StationFilter } from "@/model";
 import StationFilterForm, {
     StationFilterFormFields,
 } from "@/components/StationFilter/Button/Form";
@@ -23,7 +24,11 @@ const StationFilterButton: FC<StationFilterButtonProps> = ({ size = "xl" }) => {
 
     const onSubmit = useCallback(
         (values: StationFilterFormFields) => {
-            setStationConfig(values);
+            const config: Partial<StationFilter> = { ...values };
+            if (!values.saveSearchHistory) {
+                config.searchHistory = [];
+            }
+            setStationConfig(config);
             close();
         },
         [close, setStationConfig],

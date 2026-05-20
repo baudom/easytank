@@ -49,7 +49,7 @@ export const appStartActions = [
 ] as const;
 export type AppStartAction = (typeof appStartActions)[number];
 
-type LastSearchTermType = Coords & {
+export type LastSearchTermType = Coords & {
     input: string;
 };
 
@@ -63,6 +63,8 @@ export type StationFilter = {
     lastSearchTerm: Partial<LastSearchTermType> | null;
     order: StationOrderType;
     appStartAction: AppStartAction;
+    saveSearchHistory: boolean;
+    searchHistory: LastSearchTermType[];
 };
 
 export type CarConfiguration = {
