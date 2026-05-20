@@ -55,7 +55,7 @@ const useTracking = () => {
                 version: LATEST_TRACKING_VERSION,
                 agreement,
             } as TrackingAgreement),
-        getInitialValueInEffect: false, // prevent setting default value even if value is present
+        getInitialValueInEffect: true,
     });
 
     const track = useCallback(

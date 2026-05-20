@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, memo, useCallback, useEffect } from "react";
+import { FC, memo, useCallback, useEffect, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import useTracking from "@/hooks/useTracking";
 import { useTranslations } from "next-intl";
@@ -10,15 +10,21 @@ import { LS_ALLOW_TRACKING_OLD } from "@/model/constants";
 const TrackingConfiguration: FC = () => {
     const t = useTranslations();
     const { trackEvent, allowTracking, setAllowTracking } = useTracking();
-    const [showModal, { open, close }] = useDisclosure(
-        typeof allowTracking !== "boolean",
-    );
+    const [showModal, { open, close }] = useDisclosure(false);
+    const [hydrated, setHydrated] = useState(false);
 
     useEffect(() => {
+        setHydrated(true);
         localStorage.removeItem(LS_ALLOW_TRACKING_OLD); // TODO remove in upcoming changes
         trackEvent();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        if (hydrated && typeof allowTracking !== "boolean") {
+            open();
+        }
+    }, [hydrated, allowTracking, open]);
 
     const changeTrackingAgreement = useCallback(
         (allowed: boolean) => {

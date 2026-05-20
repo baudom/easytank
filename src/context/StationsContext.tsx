@@ -81,6 +81,7 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
     const [stationConfig, setStationConfig] = useLocalStorage({
         key: LS_STATION_CONFIGURATION_KEY,
         defaultValue: DEFAULT_STATION_CONFIG,
+        getInitialValueInEffect: true,
         deserialize: (v) => {
             const parsed = v ? JSON.parse(v) : {};
 

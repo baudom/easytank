@@ -41,6 +41,7 @@ const CarConfigurationContext: FC<CarConfigurationContextProps> = ({
     const [carConfig, setCarConfig, resetCarConfig] = useLocalStorage({
         key: LS_CAR_CONFIGURATION_KEY,
         defaultValue: DEFAULT_CAR_CONFIGURATION,
+        getInitialValueInEffect: true,
         deserialize: (v) => {
             const parsed = v ? JSON.parse(v) : {};
             return {
