@@ -50,6 +50,14 @@ const ReleaseNotesModal: FC = () => {
         }
     }, [lastVisitedVersion, currentVersion, fetchLatestRelease]);
 
+    useEffect(() => {
+        const handleOpen = () => {
+            void fetchLatestRelease();
+        };
+        window.addEventListener("openReleaseNotes", handleOpen);
+        return () => window.removeEventListener("openReleaseNotes", handleOpen);
+    }, [fetchLatestRelease]);
+
     const handleClose = useCallback(() => {
         setLastVisitedVersion(currentVersion);
         setOpened(false);

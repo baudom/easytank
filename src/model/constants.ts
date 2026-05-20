@@ -11,3 +11,5 @@ export const DEFAULT_LOCALE: LocaleType = "de";
 
 export const NOTIFICATION_TIMEOUT = 2500;
 export const RYD_COLOR_KEY: DefaultMantineColor = "blue";
+
+export const ACTION_RELEASE_NOTES = "release-notes";
