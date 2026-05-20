@@ -298,6 +298,7 @@ const LocationSearch: FC = () => {
                     <Pill.Group>
                         {stationConfig.searchHistory.map((item) => (
                             <Pill
+                                size="md"
                                 key={item.input}
                                 withRemoveButton
                                 onRemove={() =>
