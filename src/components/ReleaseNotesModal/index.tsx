@@ -21,7 +21,7 @@ const ReleaseNotesModal: FC = () => {
         string | undefined
     >({
         key: LS_LAST_VISITED_VERSION,
-        getInitialValueInEffect: false,
+        getInitialValueInEffect: true,
     });
 
     const [opened, setOpened] = useState(false);

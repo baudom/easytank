@@ -5,7 +5,6 @@ import {
     memo,
     useCallback,
     useEffect,
-    useLayoutEffect,
     useMemo,
     useRef,
     useState,
@@ -54,6 +53,7 @@ const LocationSearch: FC = () => {
 
     const searchParams = useSearchParams();
     const isRestored = useRef(false);
+    const [hydrated, setHydrated] = useState(false);
 
     const [debouncedInput, cancelDebounce] = useDebouncedValue(
         input,
@@ -71,6 +71,7 @@ const LocationSearch: FC = () => {
     ]);
 
     useEffect(() => {
+        setHydrated(true);
         setTimeout(() => {
             if (!isRestored.current) {
                 inputRef.current?.focus();
@@ -170,7 +171,8 @@ const LocationSearch: FC = () => {
         void onSearchLocations(false);
     }, [debouncedInput, onSearchLocations]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
+        if (!hydrated) return;
         if (isRestored.current) return;
 
         if (searchParams.has("search-now")) {
@@ -194,6 +196,7 @@ const LocationSearch: FC = () => {
 
         isRestored.current = true;
     }, [
+        hydrated,
         searchParams,
         setCoords,
         stationConfig.lastSearchTerm,
