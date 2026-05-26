@@ -1,3 +1,15 @@
+## [1.15.0](https://github.com/baudom/easytank/compare/v1.14.0...v1.15.0) (2026-05-26)
+
+### 🚀 Features
+
+* **#134:** Store last search inputs ([22cb395](https://github.com/baudom/easytank/commit/22cb39549d073a566aff3aa24cc9e77b06e81363)), closes [#134](https://github.com/baudom/easytank/issues/134)
+* **#135:** Show latest release notes ([#138](https://github.com/baudom/easytank/issues/138)) ([f9dc301](https://github.com/baudom/easytank/commit/f9dc301e32beee0a5b66b126b8940cdae2d43e43)), closes [#135](https://github.com/baudom/easytank/issues/135)
+
+### 🪲 Bug Fixes
+
+* burger menu z-index, close on click ([6fcee5a](https://github.com/baudom/easytank/commit/6fcee5a0e0a4263c7771d840ee1dd67042c6d4ec))
+* ssr hydration ([c3a5432](https://github.com/baudom/easytank/commit/c3a54325c8046b7c7f9a99637c806554cc80b793))
+
 ## [1.14.0](https://github.com/baudom/easytank/compare/v1.13.0...v1.14.0) (2026-05-18)
 
 ### 🚀 Features
