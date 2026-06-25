@@ -33,14 +33,15 @@ const MobileActions: FC = () => {
     useEffect(() => {
         // Hide on scroll down, show on scroll up
         if (scroll.y > lastScrollY && scroll.y > 100) {
-            setVisible(false);
-            setFabOpened(false);
+            setTimeout(() => {
+                setVisible(false);
+                setFabOpened(false);
+            }, 0);
         } else {
-            setVisible(true);
+            setTimeout(() => setVisible(true), 0);
         }
-        setLastScrollY(scroll.y);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [scroll.y]);
+        setTimeout(() => setLastScrollY(scroll.y), 0);
+    }, [lastScrollY, scroll.y]);
 
     return (
         <Affix

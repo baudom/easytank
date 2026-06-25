@@ -14,11 +14,10 @@ const TrackingConfiguration: FC = () => {
     const [hydrated, setHydrated] = useState(false);
 
     useEffect(() => {
-        setHydrated(true);
+        setTimeout(() => setHydrated(true), 0);
         localStorage.removeItem(LS_ALLOW_TRACKING_OLD); // TODO remove in upcoming changes
         trackEvent();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [trackEvent]);
 
     useEffect(() => {
         if (hydrated && typeof allowTracking !== "boolean") {

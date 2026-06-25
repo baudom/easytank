@@ -239,8 +239,13 @@ const StationsContext: FC<StationsContextProps> = ({ children }) => {
         if (!coords) return;
         void onFetchStations(coords, stationConfig);
         // re-render due onFetchStations not needed
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [coords, stationConfig.type, stationConfig.radius]);
+    }, [
+        coords,
+        stationConfig.type,
+        stationConfig.radius,
+        onFetchStations,
+        stationConfig,
+    ]);
 
     useEffect(() => {
         setStations((prev) =>
