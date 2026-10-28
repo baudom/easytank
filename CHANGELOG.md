@@ -1,3 +1,19 @@
+## [1.15.1](https://github.com/baudom/easytank/compare/v1.15.0...v1.15.1) (2026-10-28)
+
+### 🪲 Bug Fixes
+
+* upgrade dependencies ([#148](https://github.com/baudom/easytank/issues/148)) ([3cc5916](https://github.com/baudom/easytank/commit/3cc591659b6002c132f4c4a4a6157037697172c8))
+
+### 🏗️ Build System
+
+* **deps-dev:** bump postcss from 8.5.18 to 8.5.23 in the npm_and_yarn group across 1 directory ([#143](https://github.com/baudom/easytank/issues/143)) ([0a2ad71](https://github.com/baudom/easytank/commit/0a2ad71cdee24696a2c58f5b095e7a2b70280f2c))
+* **deps:** bump ip-address from 10.2.0 to 10.4.0 in the npm_and_yarn group across 1 directory ([#144](https://github.com/baudom/easytank/issues/144)) ([57065da](https://github.com/baudom/easytank/commit/57065da08526ab780efaceb086026833b586e768))
+* **deps:** bump nanoid from 3.3.17 to 3.3.18 in the npm_and_yarn group across 1 directory ([#145](https://github.com/baudom/easytank/issues/145)) ([66aea1c](https://github.com/baudom/easytank/commit/66aea1cc8ba3b6dc3ab44ce343d140e67576b6dc))
+* **deps:** bump postcss-selector-parser from 7.1.1 to 7.1.5 in the npm_and_yarn group across 1 directory ([#146](https://github.com/baudom/easytank/issues/146)) ([33aeac3](https://github.com/baudom/easytank/commit/33aeac3fb960399fba54c02bec1c8e39d8ccc1f6))
+* **deps:** bump tar from 7.5.11 to 7.5.16 in the npm_and_yarn group across 1 directory ([3dea488](https://github.com/baudom/easytank/commit/3dea4889650b68c3870d11b29ef449d3c2b3918c))
+* **deps:** bump the npm_and_yarn group across 1 directory with 2 updates ([#141](https://github.com/baudom/easytank/issues/141)) ([e117a1c](https://github.com/baudom/easytank/commit/e117a1c0f8c0fdf94db0467f3245413f284c8372))
+* **deps:** bump the npm_and_yarn group across 1 directory with 6 updates ([#142](https://github.com/baudom/easytank/issues/142)) ([693085c](https://github.com/baudom/easytank/commit/693085c10063e77153e6631914b1d00148e6775e))
+
 ## [1.15.0](https://github.com/baudom/easytank/compare/v1.14.0...v1.15.0) (2026-05-26)
 
 ### 🚀 Features
